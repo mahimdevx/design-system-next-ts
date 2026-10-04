@@ -2,22 +2,22 @@
 
 import { type ReactNode } from "react";
 
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-type ProvidersProps = {
+type ThemeProviderProps = {
   children: ReactNode;
 };
 
-// App-wide client providers, configured in one place
-export function Providers({ children }: ProvidersProps) {
+// Theme setup for the whole app, configured in one place
+export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
-    <ThemeProvider
+    <NextThemesProvider
       attribute="class"
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
     >
       {children}
-    </ThemeProvider>
+    </NextThemesProvider>
   );
 }
