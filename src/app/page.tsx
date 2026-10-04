@@ -1,3 +1,23 @@
+import { ArrowRight, Plus } from "lucide-react";
+
+import { Button } from "@components/elements/button";
+import { Icon } from "@components/elements/icon";
+import { ThemeToggle } from "@components/layouts/theme-toggle";
+
+const buttonVariantNames = [
+  "primary",
+  "secondary",
+  "accent",
+  "soft",
+  "outline",
+  "muted",
+  "ghost",
+  "destructive",
+  "link"
+] as const;
+
+const buttonSizes = ["xxs", "xs", "sm", "base", "lg", "xl"] as const;
+
 const colorTokens = [
   { name: "background", swatch: "bg-background text-foreground" },
   { name: "primary", swatch: "bg-primary text-primary-foreground" },
@@ -34,11 +54,15 @@ export default function FoundationsPage() {
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
-      <header className="flex flex-col gap-2">
-        <h1 className="text-4xl font-extrabold tracking-tight">Foundations</h1>
-        <p className="text-muted-foreground">
-          Design tokens for color and type. Switch your OS theme to preview dark mode.
-        </p>
+      <header className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2">
+          <h1 className="text-4xl font-extrabold tracking-tight">Foundations</h1>
+          <p className="text-muted-foreground">
+            Design tokens, type and core components, in light and dark mode.
+          </p>
+        </div>
+
+        <ThemeToggle />
       </header>
 
       <section className={sectionClasses} aria-labelledby="colors">
@@ -81,6 +105,46 @@ export default function FoundationsPage() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className={sectionClasses} aria-labelledby="buttons">
+        <h2 id="buttons" className={headingClasses}>
+          Buttons
+        </h2>
+
+        <div className="flex flex-wrap items-center gap-3">
+          {buttonVariantNames.map((variant) => (
+            <Button key={variant} variant={variant}>
+              {variant}
+            </Button>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          {buttonSizes.map((size) => (
+            <Button key={size} size={size}>
+              {size}
+            </Button>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-3">
+          <Button>
+            <Icon icon={Plus} />
+            With icon
+          </Button>
+          <Button variant="outline" rounded>
+            Rounded
+            <Icon icon={ArrowRight} />
+          </Button>
+          <Button variant="accent" iconOnly rounded aria-label="Add item">
+            <Icon icon={Plus} />
+          </Button>
+          <Button disabled>Disabled</Button>
+          <Button variant="soft" asChild>
+            <a href="#buttons">Link as button</a>
+          </Button>
+        </div>
       </section>
     </main>
   );
