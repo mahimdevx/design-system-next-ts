@@ -30,9 +30,9 @@ const config = {
   importOrderTypeScriptVersion: "6.0.0",
 
   // Tailwind v4: the CSS entry point that defines the theme
-  tailwindStylesheet: "./src/app/globals.css",
+  tailwindStylesheet: "./src/styles/globals.css",
   // Also sort classes inside these function calls
-  tailwindFunctions: ["tv", "cn", "clsx"]
+  tailwindFunctions: ["tv", "cn"]
 };
 
 export default config;

@@ -1,69 +1,87 @@
-import Image from "next/image";
+const colorTokens = [
+  { name: "background", swatch: "bg-background text-foreground" },
+  { name: "primary", swatch: "bg-primary text-primary-foreground" },
+  { name: "secondary", swatch: "bg-secondary text-secondary-foreground" },
+  { name: "muted", swatch: "bg-muted text-muted-foreground" },
+  { name: "accent", swatch: "bg-accent text-accent-foreground" },
+  { name: "destructive", swatch: "bg-destructive text-destructive-foreground" },
+  { name: "success", swatch: "bg-success text-success-foreground" },
+  { name: "warning", swatch: "bg-warning text-warning-foreground" },
+  { name: "card", swatch: "bg-card text-card-foreground" },
+  { name: "popover", swatch: "bg-popover text-popover-foreground" }
+];
 
-export default function Home() {
+const chartTokens = [
+  "bg-chart-1",
+  "bg-chart-2",
+  "bg-chart-3",
+  "bg-chart-4",
+  "bg-chart-5"
+];
+
+const typeScale = [
+  { name: "text-5xl / extrabold", sample: "text-5xl font-extrabold tracking-tight" },
+  { name: "text-3xl / bold", sample: "text-3xl font-bold tracking-tight" },
+  { name: "text-xl / semibold", sample: "text-xl font-semibold" },
+  { name: "text-base / regular", sample: "text-base" },
+  { name: "text-sm / medium", sample: "text-sm font-medium" },
+  { name: "font-mono", sample: "font-mono text-sm" }
+];
+
+export default function FoundationsPage() {
+  const sectionClasses = "flex flex-col gap-4";
+  const headingClasses = "text-2xl font-bold tracking-tight";
+
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex w-full max-w-3xl flex-1 flex-col items-center justify-between bg-white px-16 py-32 sm:items-start dark:bg-black">
-        <Image
-          className="h-5 w-[100px] dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl leading-10 font-semibold tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-4xl font-extrabold tracking-tight">Foundations</h1>
+        <p className="text-muted-foreground">
+          Design tokens for color and type. Switch your OS theme to preview dark mode.
+        </p>
+      </header>
+
+      <section className={sectionClasses} aria-labelledby="colors">
+        <h2 id="colors" className={headingClasses}>
+          Colors
+        </h2>
+
+        <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          {colorTokens.map((token) => (
+            <li
+              key={token.name}
+              className={`${token.swatch} flex h-24 items-end rounded-lg border p-3 text-sm font-medium`}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] md:w-[158px] dark:hover:bg-[#ccc]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="h-[14px] w-4 dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] md:w-[158px] dark:border-white/[.145] dark:hover:bg-[#1a1a1a]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              {token.name}
+            </li>
+          ))}
+        </ul>
+
+        <ul className="flex gap-3" aria-label="Chart colors">
+          {chartTokens.map((swatch, index) => (
+            <li key={swatch} className={`${swatch} size-12 rounded-md`}>
+              <span className="sr-only">chart-{index + 1}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className={sectionClasses} aria-labelledby="typography">
+        <h2 id="typography" className={headingClasses}>
+          Typography
+        </h2>
+
+        <ul className="flex flex-col divide-y">
+          {typeScale.map((step) => (
+            <li key={step.name} className="flex flex-col gap-1 py-4">
+              <span className="font-mono text-xs text-muted-foreground">{step.name}</span>
+              <span className={step.sample}>
+                The quick brown fox jumps over the lazy dog
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }
