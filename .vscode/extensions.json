@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "editorconfig.editorconfig",
+    "yoavbls.pretty-ts-errors",
+    "usernamehw.errorlens",
+    "github.vscode-github-actions"
+  ],
+  "unwantedRecommendations": ["rvest.vs-code-prettier-eslint"]
+}

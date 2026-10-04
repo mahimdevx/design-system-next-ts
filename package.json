@@ -1,7 +1,27 @@
 {
-  "name": "design-system-v2",
+  "name": "design-system-next-ts",
   "version": "0.1.0",
   "private": true,
+  "description": "A design system for React and Next.js: accessible components, design tokens and dark mode, built with Tailwind CSS v4 and Radix UI.",
+  "keywords": [
+    "design-system",
+    "react",
+    "nextjs",
+    "tailwindcss",
+    "radix-ui",
+    "components",
+    "typescript"
+  ],
+  "homepage": "https://github.com/mahimdevx/design-system-next-ts#readme",
+  "bugs": {
+    "url": "https://github.com/mahimdevx/design-system-next-ts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mahimdevx/design-system-next-ts.git"
+  },
+  "license": "MIT",
+  "author": "Mahim Farhad",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
