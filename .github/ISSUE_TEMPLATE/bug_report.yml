@@ -1,0 +1,37 @@
+name: Bug report
+description: Something in a component or the setup does not work as expected
+labels: [bug]
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Component or area
+      placeholder: e.g. Button, dark mode, build
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What you did, what you expected, and what happened instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Render <Button variant="outline" />
+        2. Switch to dark mode
+        3. ...
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: e.g. Chrome 140 on Windows 11
+  - type: textarea
+    id: extra
+    attributes:
+      label: Screenshots or extra context
