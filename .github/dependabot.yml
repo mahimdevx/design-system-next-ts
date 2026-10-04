@@ -24,6 +24,9 @@ updates:
       # typescript-eslint does not support TypeScript 7 yet
       - dependency-name: typescript
         versions: [">=7"]
+      # Types must match the Node runtime in .node-version (24)
+      - dependency-name: "@types/node"
+        versions: [">=25"]
 
   - package-ecosystem: github-actions
     directory: /
