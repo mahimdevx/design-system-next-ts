@@ -1,0 +1,91 @@
+/*
+ * Design tokens
+ *
+ * Semantic colors in OKLCH. Every surface color has a matching -foreground color for text
+ * on top of it. Components use only these tokens (bg-primary, text-muted-foreground...),
+ * never raw palette colors, so the whole system re-themes from this file.
+ */
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.1408 0.0044 285.82);
+
+  --primary: oklch(0.2103 0.0059 285.89);
+  --primary-foreground: oklch(0.9851 0 0);
+
+  --secondary: oklch(0.9674 0.0013 286.37);
+  --secondary-foreground: oklch(0.2103 0.0059 285.89);
+
+  --muted: oklch(0.9674 0.0013 286.37);
+  --muted-foreground: oklch(0.5417 0.0138 285.94);
+
+  --accent: oklch(0.4998 0.2205 266.68);
+  --accent-foreground: oklch(1 0 0);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.9851 0 0);
+
+  --success: oklch(0.527 0.154 150.069);
+  --success-foreground: oklch(0.9851 0 0);
+
+  --warning: oklch(0.769 0.188 70.08);
+  --warning-foreground: oklch(0.2103 0.0059 285.89);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.1408 0.0044 285.82);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.1408 0.0044 285.82);
+
+  --border: oklch(0.9197 0.004 286.32);
+  --input: oklch(0.9197 0.004 286.32);
+  --ring: oklch(0.1408 0.0044 285.82);
+
+  --chart-1: oklch(0.6767 0.1572 35.1);
+  --chart-2: oklch(0.6307 0.1009 183.85);
+  --chart-3: oklch(0.379 0.0438 226.15);
+  --chart-4: oklch(0.833 0.1185 88.35);
+  --chart-5: oklch(0.7843 0.1256 59);
+}
+
+.dark {
+  --background: oklch(0.1408 0.0044 285.82);
+  --foreground: oklch(0.9851 0 0);
+
+  --primary: oklch(0.9851 0 0);
+  --primary-foreground: oklch(0.2103 0.0059 285.89);
+
+  --secondary: oklch(0.2739 0.0055 286.03);
+  --secondary-foreground: oklch(0.9851 0 0);
+
+  --muted: oklch(0.2739 0.0055 286.03);
+  --muted-foreground: oklch(0.7118 0.0129 286.07);
+
+  --accent: oklch(0.4998 0.2205 266.68);
+  --accent-foreground: oklch(0.9851 0 0);
+
+  --destructive: oklch(0.3958 0.1331 25.72);
+  --destructive-foreground: oklch(0.9851 0 0);
+
+  --success: oklch(0.448 0.119 151.328);
+  --success-foreground: oklch(0.9851 0 0);
+
+  --warning: oklch(0.828 0.189 84.429);
+  --warning-foreground: oklch(0.2103 0.0059 285.89);
+
+  --card: oklch(0.2103 0.0059 285.89);
+  --card-foreground: oklch(0.9851 0 0);
+
+  --popover: oklch(0.2103 0.0059 285.89);
+  --popover-foreground: oklch(0.9851 0 0);
+
+  --border: oklch(0.2739 0.0055 286.03);
+  --input: oklch(0.2739 0.0055 286.03);
+  --ring: oklch(0.8711 0.0055 286.29);
+
+  --chart-1: oklch(0.5298 0.1932 262.05);
+  --chart-2: oklch(0.6994 0.1339 165.46);
+  --chart-3: oklch(0.7227 0.1502 60.58);
+  --chart-4: oklch(0.6193 0.2029 312.74);
+  --chart-5: oklch(0.6118 0.2093 6.14);
+}

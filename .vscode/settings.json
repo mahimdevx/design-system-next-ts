@@ -12,8 +12,8 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "tailwindCSS.experimental.configFile": "src/app/globals.css",
-  "tailwindCSS.classFunctions": ["tv", "cn", "clsx"],
+  "tailwindCSS.experimental.configFile": "src/styles/globals.css",
+  "tailwindCSS.classFunctions": ["tv", "cn"],
   "search.exclude": {
     "**/.next": true,
     "pnpm-lock.yaml": true
