@@ -5,11 +5,22 @@ import type { VariantProps } from "tailwind-variants";
 
 import { buttonVariants } from "@styles/elements/button";
 
+type ButtonVariantProps = Omit<VariantProps<typeof buttonVariants>, "iconOnly">;
+
+// An icon-only button has no visible text, so it must have an accessible name
+type IconOnlyProps =
+  | { iconOnly: true; "aria-label": string }
+  | { iconOnly: true; "aria-labelledby": string }
+  | { iconOnly?: false };
+
+// asChild renders the child element (e.g. a link) with button styles. A link cannot be
+// disabled, so `disabled` is only allowed on a real <button>
+type AsChildProps = { asChild: true; disabled?: never } | { asChild?: false };
+
 type ButtonProps = ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    // Render the child element (e.g. a link) with button styles instead of a <button>
-    asChild?: boolean;
-  };
+  ButtonVariantProps &
+  IconOnlyProps &
+  AsChildProps;
 
 export function Button({
   size = "base",

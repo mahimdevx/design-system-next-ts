@@ -4,12 +4,13 @@ export const buttonVariants = tv({
   base: [
     "relative inline-flex shrink-0 items-center justify-center gap-2",
     "text-center font-medium whitespace-nowrap uppercase",
-    "border border-transparent outline-none select-none",
-    "focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50",
+    "border border-transparent outline-hidden select-none",
+    "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
     "aria-invalid:border-destructive aria-invalid:ring-destructive/20",
     "active:not-aria-[haspopup]:translate-y-px",
     "disabled:pointer-events-none disabled:opacity-50",
-    "transition-all duration-200 ease-in-out",
+    "transition-[color,background-color,border-color,box-shadow,translate]",
+    "duration-200 ease-in-out",
     "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
   ],
   variants: {
