@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 
 import { firaCode, poppins } from "@libs/fonts";
-import { Providers } from "@libs/providers";
+import { ThemeProvider } from "@libs/providers";
 import { cn } from "@utils/cn";
 
 import "@styles/globals.css";
@@ -29,7 +29,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // next-themes sets the theme class on <html> before React hydrates
     <html lang="en" className={htmlClasses} suppressHydrationWarning>
       <body>
-        <Providers>{children}</Providers>
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
