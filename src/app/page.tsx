@@ -1,7 +1,8 @@
-import { ArrowRight, Plus } from "lucide-react";
+import { ArrowRight, Check, Plus, Star } from "lucide-react";
 
 import { Button } from "@components/elements/button";
 import { Icon } from "@components/elements/icon";
+import { LogoMark } from "@components/icons/logo-mark";
 import { ThemeToggle } from "@components/layouts/theme-toggle";
 
 const buttonVariantNames = [
@@ -17,6 +18,8 @@ const buttonVariantNames = [
 ] as const;
 
 const buttonSizes = ["xxs", "xs", "sm", "base", "lg", "xl"] as const;
+
+const iconSizes = ["xs", "sm", "base", "lg", "xl"] as const;
 
 const colorTokens = [
   { name: "background", swatch: "bg-background text-foreground" },
@@ -144,6 +147,45 @@ export default function FoundationsPage() {
           <Button variant="soft" asChild>
             <a href="#buttons">Link as button</a>
           </Button>
+        </div>
+      </section>
+
+      <section className={sectionClasses} aria-labelledby="icons">
+        <h2 id="icons" className={headingClasses}>
+          Icons
+        </h2>
+
+        <ul className="flex flex-wrap items-end gap-6" aria-label="Icon sizes">
+          {iconSizes.map((size) => (
+            <li key={size} className="flex flex-col items-center gap-2">
+              <Icon icon={Star} size={size} />
+              <span className="font-mono text-xs text-muted-foreground">{size}</span>
+            </li>
+          ))}
+        </ul>
+
+        <p className="text-sm text-muted-foreground">
+          Without a size, icons follow their container: each button sets its own icon
+          size.
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          {buttonSizes.map((size) => (
+            <Button key={size} size={size} variant="outline">
+              <Icon icon={Plus} />
+              {size}
+            </Button>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-6">
+          <span className="flex items-center gap-2 text-sm">
+            <Icon icon={LogoMark} size="lg" />
+            Custom SVG icon
+          </span>
+          <span className="flex items-center gap-2 text-sm">
+            <Icon icon={Check} label="Completed" className="text-success" />
+            Labelled icon (announced as &ldquo;Completed&rdquo;)
+          </span>
         </div>
       </section>
     </main>

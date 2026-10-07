@@ -11,16 +11,16 @@ export const buttonVariants = tv({
     "disabled:pointer-events-none disabled:opacity-50",
     "transition-[color,background-color,border-color,box-shadow,translate]",
     "duration-200 ease-in-out",
-    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+    "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-(--icon-size)"
   ],
   variants: {
     size: {
-      xxs: "h-6 px-2 text-xs leading-4",
-      xs: "h-8 px-4 text-xs leading-4",
-      sm: "h-10 px-5 text-sm leading-4",
-      base: "h-12 px-6 text-sm leading-4",
-      lg: "h-14 px-7 text-base leading-4",
-      xl: "h-16 px-8 text-lg leading-4"
+      xxs: "h-6 px-2 text-xs leading-4 [--icon-size:0.75rem]",
+      xs: "h-8 px-4 text-xs leading-4 [--icon-size:0.875rem]",
+      sm: "h-10 px-5 text-sm leading-4 [--icon-size:1rem]",
+      base: "h-12 px-6 text-sm leading-4 [--icon-size:1rem]",
+      lg: "h-14 px-7 text-base leading-4 [--icon-size:1.25rem]",
+      xl: "h-16 px-8 text-lg leading-4 [--icon-size:1.5rem]"
     },
     variant: {
       primary: "bg-primary text-primary-foreground hover:bg-primary/90",
