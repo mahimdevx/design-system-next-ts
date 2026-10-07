@@ -1,7 +1,9 @@
 import { tv } from "tailwind-variants";
 
 export const iconVariants = tv({
-  base: "pointer-events-none shrink-0",
+  // Without a size prop the icon uses --icon-size, which parents (Button, Badge...) set
+  // to match their own size. Falls back to 1rem (16px).
+  base: "pointer-events-none size-[var(--icon-size,1rem)] shrink-0",
   variants: {
     size: {
       xs: "size-3",
@@ -10,8 +12,5 @@ export const iconVariants = tv({
       lg: "size-6",
       xl: "size-8"
     }
-  },
-  defaultVariants: {
-    size: "sm"
   }
 });
