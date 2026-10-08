@@ -13,8 +13,8 @@ type IconOnlyProps =
   | { iconOnly: true; "aria-labelledby": string }
   | { iconOnly?: false };
 
-// asChild renders the child element (e.g. a link) with button styles. A link cannot be
-// disabled, so `disabled` is only allowed on a real <button>
+// asChild renders the child element (e.g. a link) with button styles.
+// A link cannot be disabled, so `disabled` is only allowed on a real <button>
 type AsChildProps = { asChild: true; disabled?: never } | { asChild?: false };
 
 type ButtonProps = ComponentProps<"button"> &
@@ -28,8 +28,8 @@ export function Button({
   iconOnly,
   rounded,
   asChild = false,
-  type = "button",
   className,
+  type = "button",
   ...props
 }: ButtonProps) {
   const Component = asChild ? Slot.Root : "button";

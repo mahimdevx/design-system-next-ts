@@ -16,7 +16,8 @@ type IconProps = ComponentProps<"svg"> &
 export function Icon({ as: Component, size, className, ...props }: IconProps) {
   const iconClasses = iconVariants({ size, className });
 
-  // aria-label / aria-labelledby make the icon meaningful; without them it is decorative
+  // aria-label / aria-labelledby make the icon meaningful;
+  // without them it is decorative
   const isLabelled = Boolean(props["aria-label"] ?? props["aria-labelledby"]);
 
   return (
