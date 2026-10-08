@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Plus, Star } from "lucide-react";
+import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
 import { Button } from "@components/elements/button";
 import { Icon } from "@components/elements/icon";
@@ -133,15 +133,15 @@ export default function FoundationsPage() {
 
         <div className="flex flex-wrap items-center gap-3">
           <Button>
-            <Icon icon={Plus} />
+            <Icon as={Plus} />
             With icon
           </Button>
           <Button variant="outline" rounded>
             Rounded
-            <Icon icon={ArrowRight} />
+            <Icon as={ArrowRight} />
           </Button>
           <Button variant="accent" iconOnly rounded aria-label="Add item">
-            <Icon icon={Plus} />
+            <Icon as={Plus} />
           </Button>
           <Button disabled>Disabled</Button>
           <Button variant="soft" asChild>
@@ -158,7 +158,7 @@ export default function FoundationsPage() {
         <ul className="flex flex-wrap items-end gap-6" aria-label="Icon sizes">
           {iconSizes.map((size) => (
             <li key={size} className="flex flex-col items-center gap-2">
-              <Icon icon={Star} size={size} />
+              <Icon as={Search} size={size} />
               <span className="font-mono text-xs text-muted-foreground">{size}</span>
             </li>
           ))}
@@ -171,7 +171,7 @@ export default function FoundationsPage() {
         <div className="flex flex-wrap items-center gap-3">
           {buttonSizes.map((size) => (
             <Button key={size} size={size} variant="outline">
-              <Icon icon={Plus} />
+              <Icon as={Plus} />
               {size}
             </Button>
           ))}
@@ -179,11 +179,11 @@ export default function FoundationsPage() {
 
         <div className="flex flex-wrap items-center gap-6">
           <span className="flex items-center gap-2 text-sm">
-            <Icon icon={LogoMark} size="lg" />
+            <Icon as={LogoMark} size="lg" />
             Custom SVG icon
           </span>
           <span className="flex items-center gap-2 text-sm">
-            <Icon icon={Check} label="Completed" className="text-success" />
+            <Icon as={Check} aria-label="Completed" className="text-success" />
             Labelled icon (announced as &ldquo;Completed&rdquo;)
           </span>
         </div>
