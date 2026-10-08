@@ -45,16 +45,7 @@ const chartTokens = [
 
 const headingVariants = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
 
-const textVariantNames = [
-  "lead",
-  "body",
-  "small",
-  "caption",
-  "overline",
-  "label"
-] as const;
-
-const textTones = ["foreground", "muted", "accent", "destructive", "success"] as const;
+const textVariantNames = ["lead", "p", "small", "caption", "overline", "label"] as const;
 
 export default function FoundationsPage() {
   const sectionClasses = "flex flex-col gap-4";
@@ -63,7 +54,7 @@ export default function FoundationsPage() {
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <Text variant="h1">Foundations</Text>
+          <Text as="h1">Foundations</Text>
           <Text variant="lead">
             Design tokens, type and core components, in light and dark mode.
           </Text>
@@ -73,7 +64,7 @@ export default function FoundationsPage() {
       </header>
 
       <section className={sectionClasses} aria-labelledby="colors">
-        <Text variant="h3" as="h2" id="colors">
+        <Text as="h2" variant="h3" id="colors">
           Colors
         </Text>
 
@@ -98,23 +89,23 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="typography">
-        <Text variant="h3" as="h2" id="typography">
+        <Text as="h2" variant="h3" id="typography">
           Typography
         </Text>
 
-        <Text variant="body" tone="muted">
+        <Text className="text-muted-foreground">
           Headings are fluid: resize the window to see them scale between mobile and
-          desktop sizes. Samples below use <Text variant="code">as=&quot;p&quot;</Text> so
-          the page keeps a correct heading outline.
+          desktop sizes. Samples below use <Text as="code">as=&quot;p&quot;</Text> so the
+          page keeps a correct heading outline.
         </Text>
 
         <ul className="flex flex-col divide-y">
           {headingVariants.map((variant) => (
             <li key={variant} className="flex flex-col gap-1 py-4">
-              <Text variant="overline" tone="muted">
+              <Text variant="overline" className="text-muted-foreground">
                 {variant}
               </Text>
-              <Text variant={variant} as="p">
+              <Text as="p" variant={variant}>
                 The quick brown fox jumps over the lazy dog
               </Text>
             </li>
@@ -122,25 +113,17 @@ export default function FoundationsPage() {
 
           {textVariantNames.map((variant) => (
             <li key={variant} className="flex flex-col gap-1 py-4">
-              <Text variant="overline" tone="muted">
+              <Text variant="overline" className="text-muted-foreground">
                 {variant}
               </Text>
               <Text variant={variant}>The quick brown fox jumps over the lazy dog</Text>
             </li>
           ))}
         </ul>
-
-        <div className="flex flex-wrap gap-x-6 gap-y-2">
-          {textTones.map((tone) => (
-            <Text key={tone} tone={tone} weight="medium">
-              {tone}
-            </Text>
-          ))}
-        </div>
       </section>
 
       <section className={sectionClasses} aria-labelledby="buttons">
-        <Text variant="h3" as="h2" id="buttons">
+        <Text as="h2" variant="h3" id="buttons">
           Buttons
         </Text>
 
@@ -180,7 +163,7 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="icons">
-        <Text variant="h3" as="h2" id="icons">
+        <Text as="h2" variant="h3" id="icons">
           Icons
         </Text>
 
@@ -195,7 +178,7 @@ export default function FoundationsPage() {
           ))}
         </ul>
 
-        <Text variant="small" tone="muted">
+        <Text variant="small" className="text-muted-foreground">
           Without a size, icons follow their container: each button sets its own icon
           size.
         </Text>

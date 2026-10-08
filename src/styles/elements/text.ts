@@ -2,7 +2,8 @@ import { tv } from "@utils/tv";
 
 export const textVariants = tv({
   variants: {
-    // Visual style. The rendered element is chosen separately with `as`.
+    // Visual style. Defaults to the element's own style (as="h2" → h2); set it to
+    // make an element look different (as="h2" variant="h4").
     variant: {
       h1: "scroll-m-20 text-h1 text-balance",
       h2: "scroll-m-20 text-h2 text-balance",
@@ -11,21 +12,12 @@ export const textVariants = tv({
       h5: "scroll-m-20 text-h5 text-balance",
       h6: "scroll-m-20 text-h6 text-balance",
       lead: "text-lead text-pretty text-muted-foreground",
-      body: "text-base leading-7 text-pretty",
+      p: "text-base leading-7 text-pretty",
       small: "text-sm leading-6",
       caption: "text-xs leading-5 text-muted-foreground",
       overline: "text-xs leading-4 font-semibold tracking-widest uppercase",
       label: "text-sm leading-none font-medium",
       code: "rounded-sm bg-muted px-[0.3em] py-[0.2em] font-mono text-[0.875em]"
-    },
-    // Text colors that pass WCAG AA on the background in both themes (-text tokens are
-    // lighter in dark mode; warning has no text tone, it is a fill color only)
-    tone: {
-      foreground: "text-foreground",
-      muted: "text-muted-foreground",
-      accent: "text-accent-text",
-      destructive: "text-destructive-text",
-      success: "text-success-text"
     },
     // Only the weights loaded in src/libs/fonts.ts
     weight: {
@@ -34,17 +26,6 @@ export const textVariants = tv({
       semibold: "font-semibold",
       bold: "font-bold",
       extrabold: "font-extrabold"
-    },
-    align: {
-      start: "text-start",
-      center: "text-center",
-      end: "text-end"
-    },
-    truncate: {
-      true: "truncate"
     }
-  },
-  defaultVariants: {
-    variant: "body"
   }
 });
