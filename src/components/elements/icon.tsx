@@ -9,27 +9,24 @@ export type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 type IconProps = ComponentProps<"svg"> &
   VariantProps<typeof iconVariants> & {
-    icon: IconComponent;
-    // Makes the icon meaningful to screen readers. Omit it for decorative icons.
-    label?: string;
+    // The icon to render: <Icon as={Check} />
+    as: IconComponent;
   };
 
-export function Icon({ icon: Component, size, label, className, ...props }: IconProps) {
+export function Icon({ as: Component, size, className, ...props }: IconProps) {
   const iconClasses = iconVariants({ size, className });
 
-  const accessibleName = label ?? props["aria-label"];
-  const isLabelled = Boolean(accessibleName ?? props["aria-labelledby"]);
+  // aria-label / aria-labelledby make the icon meaningful; without them it is decorative
+  const isLabelled = Boolean(props["aria-label"] ?? props["aria-labelledby"]);
 
   return (
     <Component
       data-slot="icon"
       data-size={size}
-      // Meaningful icons are announced as images; decorative ones are hidden
       role={isLabelled ? "img" : undefined}
       aria-hidden={isLabelled ? undefined : true}
       className={iconClasses}
       {...props}
-      aria-label={accessibleName}
     />
   );
 }
