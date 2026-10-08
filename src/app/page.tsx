@@ -2,6 +2,7 @@ import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
 import { Button } from "@components/elements/button";
 import { Icon } from "@components/elements/icon";
+import { Text } from "@components/elements/text";
 import { LogoMark } from "@components/icons/logo-mark";
 import { ThemeToggle } from "@components/layouts/theme-toggle";
 
@@ -42,36 +43,39 @@ const chartTokens = [
   "bg-chart-5"
 ];
 
-const typeScale = [
-  { name: "text-5xl / extrabold", sample: "text-5xl font-extrabold tracking-tight" },
-  { name: "text-3xl / bold", sample: "text-3xl font-bold tracking-tight" },
-  { name: "text-xl / semibold", sample: "text-xl font-semibold" },
-  { name: "text-base / regular", sample: "text-base" },
-  { name: "text-sm / medium", sample: "text-sm font-medium" },
-  { name: "font-mono", sample: "font-mono text-sm" }
-];
+const headingVariants = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
+
+const textVariantNames = [
+  "lead",
+  "body",
+  "small",
+  "caption",
+  "overline",
+  "label"
+] as const;
+
+const textTones = ["foreground", "muted", "accent", "destructive", "success"] as const;
 
 export default function FoundationsPage() {
   const sectionClasses = "flex flex-col gap-4";
-  const headingClasses = "text-2xl font-bold tracking-tight";
 
   return (
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <h1 className="text-4xl font-extrabold tracking-tight">Foundations</h1>
-          <p className="text-muted-foreground">
+          <Text variant="h1">Foundations</Text>
+          <Text variant="lead">
             Design tokens, type and core components, in light and dark mode.
-          </p>
+          </Text>
         </div>
 
         <ThemeToggle />
       </header>
 
       <section className={sectionClasses} aria-labelledby="colors">
-        <h2 id="colors" className={headingClasses}>
+        <Text variant="h3" as="h2" id="colors">
           Colors
-        </h2>
+        </Text>
 
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {colorTokens.map((token) => (
@@ -94,26 +98,51 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="typography">
-        <h2 id="typography" className={headingClasses}>
+        <Text variant="h3" as="h2" id="typography">
           Typography
-        </h2>
+        </Text>
+
+        <Text variant="body" tone="muted">
+          Headings are fluid: resize the window to see them scale between mobile and
+          desktop sizes. Samples below use <Text variant="code">as=&quot;p&quot;</Text> so
+          the page keeps a correct heading outline.
+        </Text>
 
         <ul className="flex flex-col divide-y">
-          {typeScale.map((step) => (
-            <li key={step.name} className="flex flex-col gap-1 py-4">
-              <span className="font-mono text-xs text-muted-foreground">{step.name}</span>
-              <span className={step.sample}>
+          {headingVariants.map((variant) => (
+            <li key={variant} className="flex flex-col gap-1 py-4">
+              <Text variant="overline" tone="muted">
+                {variant}
+              </Text>
+              <Text variant={variant} as="p">
                 The quick brown fox jumps over the lazy dog
-              </span>
+              </Text>
+            </li>
+          ))}
+
+          {textVariantNames.map((variant) => (
+            <li key={variant} className="flex flex-col gap-1 py-4">
+              <Text variant="overline" tone="muted">
+                {variant}
+              </Text>
+              <Text variant={variant}>The quick brown fox jumps over the lazy dog</Text>
             </li>
           ))}
         </ul>
+
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          {textTones.map((tone) => (
+            <Text key={tone} tone={tone} weight="medium">
+              {tone}
+            </Text>
+          ))}
+        </div>
       </section>
 
       <section className={sectionClasses} aria-labelledby="buttons">
-        <h2 id="buttons" className={headingClasses}>
+        <Text variant="h3" as="h2" id="buttons">
           Buttons
-        </h2>
+        </Text>
 
         <div className="flex flex-wrap items-center gap-3">
           {buttonVariantNames.map((variant) => (
@@ -151,23 +180,25 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="icons">
-        <h2 id="icons" className={headingClasses}>
+        <Text variant="h3" as="h2" id="icons">
           Icons
-        </h2>
+        </Text>
 
         <ul className="flex flex-wrap items-end gap-6" aria-label="Icon sizes">
           {iconSizes.map((size) => (
             <li key={size} className="flex flex-col items-center gap-2">
               <Icon as={Search} size={size} />
-              <span className="font-mono text-xs text-muted-foreground">{size}</span>
+              <Text variant="caption" className="font-mono">
+                {size}
+              </Text>
             </li>
           ))}
         </ul>
 
-        <p className="text-sm text-muted-foreground">
+        <Text variant="small" tone="muted">
           Without a size, icons follow their container: each button sets its own icon
           size.
-        </p>
+        </Text>
         <div className="flex flex-wrap items-center gap-3">
           {buttonSizes.map((size) => (
             <Button key={size} size={size} variant="outline">
@@ -178,14 +209,14 @@ export default function FoundationsPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-6">
-          <span className="flex items-center gap-2 text-sm">
+          <Text variant="small" as="span" className="flex items-center gap-2">
             <Icon as={LogoMark} size="lg" />
             Custom SVG icon
-          </span>
-          <span className="flex items-center gap-2 text-sm">
-            <Icon as={Check} aria-label="Completed" className="text-success" />
+          </Text>
+          <Text variant="small" as="span" className="flex items-center gap-2">
+            <Icon as={Check} aria-label="Completed" className="text-success-text" />
             Labelled icon (announced as &ldquo;Completed&rdquo;)
-          </span>
+          </Text>
         </div>
       </section>
     </main>

@@ -37,6 +37,11 @@
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.1408 0.0044 285.82);
 
+  /* Colored text on the page background (fills above are for surfaces) */
+  --accent-text: oklch(0.4998 0.2205 266.68);
+  --destructive-text: oklch(0.577 0.245 27.325);
+  --success-text: oklch(0.527 0.154 150.069);
+
   --border: oklch(0.9197 0.004 286.32);
   --input: oklch(0.9197 0.004 286.32);
   --ring: oklch(0.1408 0.0044 285.82);
@@ -78,6 +83,10 @@
 
   --popover: oklch(0.2103 0.0059 285.89);
   --popover-foreground: oklch(0.9851 0 0);
+
+  --accent-text: oklch(0.72 0.15 266.68);
+  --destructive-text: oklch(0.704 0.191 22.216);
+  --success-text: oklch(0.792 0.209 151.711);
 
   --border: oklch(0.2739 0.0055 286.03);
   --input: oklch(0.2739 0.0055 286.03);
