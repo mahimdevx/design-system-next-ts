@@ -1,4 +1,4 @@
-import { tv } from "tailwind-variants";
+import { tv } from "@utils/tv";
 
 export const iconVariants = tv({
   // Without a size prop the icon uses --icon-size, which parents (Button, Badge...) set

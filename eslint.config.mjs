@@ -30,12 +30,31 @@ const eslintConfig = defineConfig([
       ],
       // Leftover console.log calls are mistakes; warn/error logging is fine
       "no-console": ["warn", { allow: ["warn", "error"] }],
+      // tv() and cn() must come from @utils, which knows the custom tokens (text-h1...)
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "tailwind-variants",
+              importNames: ["tv", "cn", "cnMerge", "createTV"],
+              message: "Import tv from @utils/tv and cn from @utils/cn."
+            }
+          ]
+        }
+      ],
       // Every eslint-disable comment must say why: `-- reason`
       "@eslint-community/eslint-comments/require-description": [
         "error",
         { ignore: ["eslint-enable"] }
       ]
     }
+  },
+
+  // The shared tv/cn setup itself is the one place allowed to import them directly
+  {
+    files: ["src/utils/tv.ts", "src/utils/cn.ts"],
+    rules: { "no-restricted-imports": "off" }
   },
 
   // Must be last: turns off every rule that would fight Prettier's formatting
