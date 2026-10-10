@@ -17,7 +17,6 @@ const config = {
     "",
     "<THIRD_PARTY_MODULES>",
     "",
-    "^@libs/(.*)$",
     "^@utils/(.*)$",
     "^@hooks/(.*)$",
     "",

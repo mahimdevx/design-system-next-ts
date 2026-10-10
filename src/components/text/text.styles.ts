@@ -11,7 +11,7 @@ export const textVariants = tv({
       overline: "text-xs leading-4 font-semibold tracking-widest uppercase",
       label: "text-sm leading-none font-medium"
     },
-    // Only the weights loaded in src/libs/fonts.ts
+    // Only the weights loaded in src/styles/fonts.ts
     weight: {
       regular: "font-normal",
       medium: "font-medium",

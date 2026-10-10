@@ -12,7 +12,7 @@ export const headingVariants = tv({
       h5: "text-h5",
       h6: "text-h6"
     },
-    // Only the weights loaded in src/libs/fonts.ts
+    // Only the weights loaded in src/styles/fonts.ts
     weight: {
       regular: "font-normal",
       medium: "font-medium",

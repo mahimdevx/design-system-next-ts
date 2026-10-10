@@ -2,7 +2,7 @@ import type { ComponentProps, ComponentType, SVGProps } from "react";
 
 import type { VariantProps } from "@utils/tv";
 
-import { iconVariants } from "@styles/elements/icon";
+import { iconVariants } from "./icon.styles";
 
 // Any SVG component: lucide icons and the custom icons in @components/icons
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;

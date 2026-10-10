@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 
 import type { VariantProps } from "@utils/tv";
 
-import { textVariants } from "@styles/elements/text";
+import { textVariants } from "./text.styles";
 
 // Running text only: headings use <Heading>, inline code/kbd/quotes are plain HTML
 // Allowed elements. Exported for reuse; a list makes type errors
@@ -25,7 +25,7 @@ type TextProps<T extends (typeof textElements)[number]> = ComponentProps<T> & {
    * @example <Text variant="caption">Photo by …</Text>
    */
   variant?: TextVariantProps["variant"];
-  /** Font weight, limited to the weights loaded in src/libs/fonts.ts. */
+  /** Font weight, limited to the weights loaded in src/styles/fonts.ts. */
   weight?: TextVariantProps["weight"];
 };
 

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@import "./variables.css";
+@import "./tokens.css";
 
 /* dark: utilities follow the .dark class set by next-themes, not only the OS setting */
 @custom-variant dark (&:where(.dark, .dark *));

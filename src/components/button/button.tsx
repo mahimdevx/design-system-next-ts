@@ -4,7 +4,7 @@ import { Slot } from "radix-ui";
 
 import type { VariantProps } from "@utils/tv";
 
-import { buttonVariants } from "@styles/elements/button";
+import { buttonVariants } from "./button.styles";
 
 type ButtonVariantProps = Omit<VariantProps<typeof buttonVariants>, "iconOnly">;
 
