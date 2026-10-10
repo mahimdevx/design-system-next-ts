@@ -3,8 +3,8 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import { Button } from "@components/elements/button";
-import { Icon } from "@components/elements/icon";
+import { Button } from "@components/button";
+import { Icon } from "@components/icon";
 
 // Both icons are always rendered; CSS shows the right one, so the server and client
 // markup match and no "mounted" check is needed

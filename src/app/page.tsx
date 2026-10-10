@@ -1,13 +1,11 @@
 import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
-import { headingVariants } from "@styles/elements/heading";
-
-import { Button } from "@components/elements/button";
-import { Heading, headingElements } from "@components/elements/heading";
-import { Icon } from "@components/elements/icon";
-import { Text } from "@components/elements/text";
+import { Button } from "@components/button";
+import { Heading, headingElements, headingVariants } from "@components/heading";
+import { Icon } from "@components/icon";
 import { LogoMark } from "@components/icons/logo-mark";
-import { ThemeToggle } from "@components/layouts/theme-toggle";
+import { Text } from "@components/text";
+import { ThemeToggle } from "@components/theme-toggle";
 
 const buttonVariantNames = [
   "primary",

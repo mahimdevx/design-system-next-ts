@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 
-import { firaCode, poppins } from "@libs/fonts";
-import { ThemeProvider } from "@libs/providers";
 import { cn } from "@utils/cn";
+
+import { firaCode, poppins } from "@styles/fonts";
+
+import { ThemeProvider } from "@components/theme-provider";
 
 import "@styles/globals.css";
 

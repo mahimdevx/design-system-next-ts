@@ -47,16 +47,21 @@ Open http://localhost:3000.
 
 ```
 src/
-├── app/          # Next.js routes: the component showcase
-├── components/   # Components (elements and layouts)
-├── styles/       # Global CSS and design tokens
-├── libs/         # Fonts, providers
-├── utils/        # Helpers such as cn()
-└── hooks/        # Shared React hooks
+├── app/                    # Next.js routes: the component showcase
+├── components/
+│   ├── button/             # One folder per component:
+│   │   ├── button.tsx      #   the component
+│   │   ├── button.styles.ts#   its variants (tv)
+│   │   └── index.ts        #   public exports
+│   ├── heading/ …          # heading, icon, text, theme-toggle, theme-provider
+│   └── icons/              # Custom SVG icons (imported per file)
+├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
+├── utils/                  # cn() and the shared tv() setup
+└── hooks/                  # Shared React hooks
 ```
 
-Imports use per-folder aliases: `@components/*`, `@styles/*`, `@libs/*`, `@utils/*`,
-`@hooks/*`.
+Imports use per-folder aliases: `@components/*`, `@styles/*`, `@utils/*`, `@hooks/*`.
+Import a component through its folder (`@components/button`), never its internal files.
 
 ## Contributing
 

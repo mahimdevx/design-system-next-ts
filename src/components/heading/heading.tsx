@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 
 import type { VariantProps } from "@utils/tv";
 
-import { headingVariants } from "@styles/elements/heading";
+import { headingVariants } from "./heading.styles";
 
 // Allowed elements. Exported for reuse; a list makes type errors
 // show the allowed values instead of a type name
@@ -24,7 +24,7 @@ type HeadingProps = ComponentProps<"h1"> & {
    * @example <Heading as="h2" size="h4">Smaller section</Heading>
    */
   size?: HeadingVariantProps["size"];
-  /** Font weight, limited to the weights loaded in src/libs/fonts.ts. */
+  /** Font weight, limited to the weights loaded in src/styles/fonts.ts. */
   weight?: HeadingVariantProps["weight"];
 };
 

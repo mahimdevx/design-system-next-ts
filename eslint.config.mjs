@@ -42,9 +42,20 @@ const eslintConfig = defineConfig([
               importNames: ["tv", "cn", "cnMerge", "createTV"],
               message: "Import tv from @utils/tv and cn from @utils/cn."
             }
+          ],
+          // Components are imported through their folder's index, never their internal
+          // files. icons/ is a collection, imported per file.
+          patterns: [
+            {
+              group: ["@components/*/*", "!@components/icons/*"],
+              message:
+                "Import a component through its folder (@components/button), not its internal files."
+            }
           ]
         }
       ],
+      // Circular imports cause undefined values at runtime and grow with project size
+      "import/no-cycle": "error",
       // Every eslint-disable comment must say why: `-- reason`
       "@eslint-community/eslint-comments/require-description": [
         "error",

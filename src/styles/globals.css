@@ -1,7 +1,8 @@
-@import "tailwindcss";
+/* Only scan src/ for class names, so docs and config files cannot add CSS */
+@import "tailwindcss" source("..");
 @import "tw-animate-css";
 
-@import "./variables.css";
+@import "./tokens.css";
 
 /* dark: utilities follow the .dark class set by next-themes, not only the OS setting */
 @custom-variant dark (&:where(.dark, .dark *));
