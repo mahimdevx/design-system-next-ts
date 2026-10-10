@@ -17,7 +17,7 @@ export function ThemeToggle() {
 
   return (
     <Button
-      variant="ghost"
+      variant="soft"
       size="sm"
       iconOnly
       rounded
