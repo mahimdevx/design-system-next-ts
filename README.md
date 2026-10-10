@@ -34,14 +34,14 @@ Open http://localhost:3000.
 
 ## Scripts
 
-| Command          | What it does                                  |
-| ---------------- | --------------------------------------------- |
-| `pnpm dev`       | Start the dev server                          |
-| `pnpm build`     | Production build                              |
-| `pnpm check`     | Typecheck, lint and format check (same as CI) |
-| `pnpm typecheck` | Generate route types, then run `tsc`          |
-| `pnpm lint`      | ESLint, zero warnings allowed                 |
-| `pnpm format`    | Format everything with Prettier               |
+| Command          | What it does                                    |
+| ---------------- | ----------------------------------------------- |
+| `pnpm dev`       | Dev server + live type checking (same terminal) |
+| `pnpm build`     | Production build                                |
+| `pnpm check`     | Typecheck, lint and format check (same as CI)   |
+| `pnpm typecheck` | Generate route types, then run `tsc`            |
+| `pnpm lint`      | ESLint, zero warnings allowed                   |
+| `pnpm format`    | Format everything with Prettier                 |
 
 ## Project structure
 
