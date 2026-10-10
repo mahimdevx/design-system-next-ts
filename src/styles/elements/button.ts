@@ -32,7 +32,6 @@ export const buttonVariants = tv({
         "hover:bg-primary hover:text-primary-foreground"
       ],
       muted: "bg-muted text-muted-foreground hover:bg-muted/80",
-      ghost: "bg-transparent text-foreground hover:bg-muted",
       destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
       link: "h-auto bg-transparent px-0 text-primary underline-offset-4 hover:underline"
     },

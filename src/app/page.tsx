@@ -16,7 +16,6 @@ const buttonVariantNames = [
   "soft",
   "outline",
   "muted",
-  "ghost",
   "destructive",
   "link"
 ] as const;
