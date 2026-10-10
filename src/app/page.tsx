@@ -92,22 +92,18 @@ export default function FoundationsPage() {
         <Text as="h2" variant="h3" id="typography">
           Typography
         </Text>
-
         <Text className="text-muted-foreground">
           Headings are fluid: resize the window to see them scale between mobile and
           desktop sizes. Samples below use <Text as="code">as=&quot;p&quot;</Text> so the
           page keeps a correct heading outline.
         </Text>
-
         <ul className="flex flex-col divide-y">
           {headingVariants.map((variant) => (
             <li key={variant} className="flex flex-col gap-1 py-4">
               <Text variant="overline" className="text-muted-foreground">
                 {variant}
               </Text>
-              <Text as="p" variant={variant}>
-                The quick brown fox jumps over the lazy dog
-              </Text>
+              <Text as={variant}>The quick brown fox jumps over the lazy dog</Text>
             </li>
           ))}
 
@@ -116,7 +112,12 @@ export default function FoundationsPage() {
               <Text variant="overline" className="text-muted-foreground">
                 {variant}
               </Text>
-              <Text variant={variant}>The quick brown fox jumps over the lazy dog</Text>
+              <Text
+                variant={variant}
+                weight={variant === "caption" ? "semibold" : "medium"}
+              >
+                The quick brown fox jumps over the lazy dog
+              </Text>
             </li>
           ))}
         </ul>

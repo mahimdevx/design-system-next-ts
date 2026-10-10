@@ -14,7 +14,6 @@ export const textElements = [
   "h6",
   "p",
   "span",
-  "div",
   "small",
   "strong",
   "em",
@@ -29,8 +28,7 @@ export const textElements = [
   "blockquote",
   "cite",
   "dt",
-  "dd",
-  "li"
+  "dd"
 ] as const;
 
 export type TextElement = (typeof textElements)[number];
@@ -56,6 +54,21 @@ const variantElements = {
 
 const textElementSet = new Set<string>(textElements);
 
+// Invalid elements already reported, so a bad value logs once instead of on every render.
+// Capped, so values from dynamic data cannot grow it without limit.
+const reportedElements = new Set<string>();
+const MAX_REPORTED = 50;
+
+function reportInvalidElement(element: string) {
+  if (reportedElements.has(element) || reportedElements.size >= MAX_REPORTED) return;
+  reportedElements.add(element);
+
+  console.error(
+    `<Text as="${element}">: "${element}" is not a text element, rendering a <span> ` +
+      `instead. Use one of: ${textElements.join(", ")}.`
+  );
+}
+
 function isTextVariant(value: string): value is TextVariant {
   return value in variantElements;
 }
@@ -71,13 +84,10 @@ function isTextVariant(value: string): value is TextVariant {
 function resolveText(as: string | undefined, variant: TextVariant | undefined) {
   const element = as ?? (variant ? variantElements[variant] : "p");
 
+  // Types already reject invalid elements; this guards untyped code and dynamic data.
+  // Same in dev and production: warn and render a safe <span>, never crash the page.
   if (!textElementSet.has(element)) {
-    const message = `<Text as="${element}">: "${element}" is not a text element. Use one of: ${textElements.join(", ")}.`;
-
-    // Fail loudly while developing; in production render a <span> instead of invalid HTML
-    if (process.env.NODE_ENV !== "production") throw new Error(message);
-    console.error(message);
-
+    reportInvalidElement(element);
     return { element: "span", variant };
   }
 
@@ -99,8 +109,9 @@ export function Text<T extends TextElement = "p">({
 }: TextProps<T>) {
   const resolved = resolveText(as, variant);
 
-  // TypeScript cannot check props against a union of 25 elements, so it is checked as a
-  // <span> here. Callers are still fully typed through TextProps<T>.
+  // TypeScript cannot check props against a union of 25 elements,
+  // so it is checked as a <span> here.
+  // Callers are still fully typed through TextProps<T>.
   const Component = resolved.element as "span";
   const elementProps = props as ComponentProps<"span">;
 
