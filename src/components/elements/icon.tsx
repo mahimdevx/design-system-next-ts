@@ -1,11 +1,11 @@
 import type { ComponentProps, ComponentType, SVGProps } from "react";
 
-import type { VariantProps } from "tailwind-variants";
+import type { VariantProps } from "@utils/tv";
 
 import { iconVariants } from "@styles/elements/icon";
 
 // Any SVG component: lucide icons and the custom icons in @components/icons
-export type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
+type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
 type IconProps = ComponentProps<"svg"> &
   VariantProps<typeof iconVariants> & {
