@@ -4,23 +4,41 @@ import type { VariantProps } from "@utils/tv";
 
 import { headingVariants } from "@styles/elements/heading";
 
-type HeadingLevel = 1 | 2 | 3 | 4 | 5 | 6;
+type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
 
-type HeadingProps = ComponentProps<"h1"> &
-  VariantProps<typeof headingVariants> & {
-    // The heading level (h1–h6) sets the document outline; `size` only changes the look
-    level: HeadingLevel;
-  };
+type HeadingVariantProps = VariantProps<typeof headingVariants>;
 
-export function Heading({ level, size, weight, className, ...props }: HeadingProps) {
-  const Component = `h${level}` as const;
+type HeadingProps = ComponentProps<"h1"> & {
+  /**
+   * The heading element. It sets the document outline, so it is required:
+   * keep one h1 per page and do not skip levels. For the look, use `size`.
+   *
+   * @example <Heading as="h2">Section</Heading>
+   */
+  as: HeadingElement;
+  /**
+   * How the heading looks, independent of `as`. Defaults to the size of `as`.
+   *
+   * @example <Heading as="h2" size="h4">Smaller section</Heading>
+   */
+  size?: HeadingVariantProps["size"];
+  /** Font weight, limited to the weights loaded in src/libs/fonts.ts. */
+  weight?: HeadingVariantProps["weight"];
+};
 
-  const headingClasses = headingVariants({ size: size ?? Component, weight, className });
+export function Heading({
+  as: Component,
+  size = Component,
+  weight,
+  className,
+  ...props
+}: HeadingProps) {
+  const headingClasses = headingVariants({ size, weight, className });
 
   return (
     <Component
       data-slot="heading"
-      data-size={size ?? Component}
+      data-size={size}
       className={headingClasses}
       {...props}
     />

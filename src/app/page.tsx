@@ -1,7 +1,5 @@
 import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
-import { headingVariants } from "@styles/elements/heading";
-
 import { Button } from "@components/elements/button";
 import { Heading } from "@components/elements/heading";
 import { Icon } from "@components/elements/icon";
@@ -56,7 +54,7 @@ export default function FoundationsPage() {
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <Heading level={1}>Foundations</Heading>
+          <Heading as="h1">Foundations</Heading>
           <Text variant="lead">
             Design tokens, type and core components, in light and dark mode.
           </Text>
@@ -66,7 +64,7 @@ export default function FoundationsPage() {
       </header>
 
       <section className={sectionClasses} aria-labelledby="colors">
-        <Heading level={2} size="h3" id="colors">
+        <Heading as="h2" size="h3" id="colors">
           Colors
         </Heading>
 
@@ -91,14 +89,13 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="typography">
-        <Heading level={2} size="h3" id="typography">
+        <Heading as="h2" size="h3" id="typography">
           Typography
         </Heading>
 
         <Text className="text-muted-foreground">
           Headings are fluid: resize the window to see them scale between mobile and
-          desktop sizes. Samples below apply the heading styles to a{" "}
-          <code>&lt;p&gt;</code>, so the page keeps a correct heading outline.
+          desktop sizes.
         </Text>
 
         <ul className="flex flex-col divide-y">
@@ -107,9 +104,7 @@ export default function FoundationsPage() {
               <Text variant="overline" className="text-muted-foreground">
                 {size}
               </Text>
-              <p className={headingVariants({ size })}>
-                The quick brown fox jumps over the lazy dog
-              </p>
+              <Heading as={size}>The quick brown fox jumps over the lazy dog</Heading>
             </li>
           ))}
 
@@ -123,7 +118,7 @@ export default function FoundationsPage() {
           ))}
         </ul>
 
-        <Heading level={3} size="h5">
+        <Heading as="h3" size="h5">
           Plain HTML
         </Heading>
         <Text>
@@ -137,7 +132,7 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="buttons">
-        <Heading level={2} size="h3" id="buttons">
+        <Heading as="h2" size="h3" id="buttons">
           Buttons
         </Heading>
 
@@ -177,7 +172,7 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="icons">
-        <Heading level={2} size="h3" id="icons">
+        <Heading as="h2" size="h3" id="icons">
           Icons
         </Heading>
 
