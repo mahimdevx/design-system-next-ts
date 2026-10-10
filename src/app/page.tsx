@@ -1,7 +1,7 @@
 import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
 import { Button } from "@components/elements/button";
-import { Heading } from "@components/elements/heading";
+import { Heading, headingElements } from "@components/elements/heading";
 import { Icon } from "@components/elements/icon";
 import { Text } from "@components/elements/text";
 import { LogoMark } from "@components/icons/logo-mark";
@@ -42,8 +42,6 @@ const chartTokens = [
   "bg-chart-4",
   "bg-chart-5"
 ];
-
-const headingSizes = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
 
 const textVariantNames = ["lead", "p", "small", "caption", "overline", "label"] as const;
 
@@ -99,7 +97,7 @@ export default function FoundationsPage() {
         </Text>
 
         <ul className="flex flex-col divide-y">
-          {headingSizes.map((size) => (
+          {headingElements.map((size) => (
             <li key={size} className="flex flex-col gap-1 py-4">
               <Text variant="overline" className="text-muted-foreground">
                 {size}

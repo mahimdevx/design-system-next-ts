@@ -4,7 +4,9 @@ import type { VariantProps } from "@utils/tv";
 
 import { headingVariants } from "@styles/elements/heading";
 
-type HeadingElement = "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
+// Allowed elements. Exported for reuse; a list (not a named type) makes type errors
+// show the allowed values instead of a type name
+export const headingElements = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
 
 type HeadingVariantProps = VariantProps<typeof headingVariants>;
 
@@ -15,7 +17,7 @@ type HeadingProps = ComponentProps<"h1"> & {
    *
    * @example <Heading as="h2">Section</Heading>
    */
-  as: HeadingElement;
+  as: (typeof headingElements)[number];
   /**
    * How the heading looks, independent of `as`. Defaults to the size of `as`.
    *
