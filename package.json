@@ -23,7 +23,9 @@
   "license": "MIT",
   "author": "Mahim Farhad",
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm run --parallel \"/^dev:/\"",
+    "dev:next": "next dev",
+    "dev:types": "next typegen && tsc --noEmit --watch --preserveWatchOutput",
     "build": "next build",
     "start": "next start",
     "lint": "eslint --max-warnings=0",
