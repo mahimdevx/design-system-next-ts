@@ -28,6 +28,8 @@ const eslintConfig = defineConfig([
         "error",
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_" }
       ],
+      // === instead of == (loose equality converts types silently); x == null is allowed
+      eqeqeq: ["error", "smart"],
       // Leftover console.log calls are mistakes; warn/error logging is fine
       "no-console": ["warn", { allow: ["warn", "error"] }],
       // tv() and cn() must come from @utils, which knows the custom tokens (text-h1...)

@@ -1,6 +1,9 @@
 import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
+import { headingVariants } from "@styles/elements/heading";
+
 import { Button } from "@components/elements/button";
+import { Heading } from "@components/elements/heading";
 import { Icon } from "@components/elements/icon";
 import { Text } from "@components/elements/text";
 import { LogoMark } from "@components/icons/logo-mark";
@@ -43,7 +46,7 @@ const chartTokens = [
   "bg-chart-5"
 ];
 
-const headingVariants = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
+const headingSizes = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
 
 const textVariantNames = ["lead", "p", "small", "caption", "overline", "label"] as const;
 
@@ -54,7 +57,7 @@ export default function FoundationsPage() {
     <main className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 sm:px-6 lg:px-8">
       <header className="flex items-start justify-between gap-4">
         <div className="flex flex-col gap-2">
-          <Text as="h1">Foundations</Text>
+          <Heading level={1}>Foundations</Heading>
           <Text variant="lead">
             Design tokens, type and core components, in light and dark mode.
           </Text>
@@ -64,9 +67,9 @@ export default function FoundationsPage() {
       </header>
 
       <section className={sectionClasses} aria-labelledby="colors">
-        <Text as="h2" variant="h3" id="colors">
+        <Heading level={2} size="h3" id="colors">
           Colors
-        </Text>
+        </Heading>
 
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
           {colorTokens.map((token) => (
@@ -89,25 +92,25 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="typography">
-        <Text as="h2" variant="h3" id="typography">
+        <Heading level={2} size="h3" id="typography">
           Typography
-        </Text>
+        </Heading>
 
         <Text className="text-muted-foreground">
           Headings are fluid: resize the window to see them scale between mobile and
-          desktop sizes. Samples below use <Text as="code">as=&quot;p&quot;</Text> so the
-          page keeps a correct heading outline.
+          desktop sizes. Samples below apply the heading styles to a{" "}
+          <code>&lt;p&gt;</code>, so the page keeps a correct heading outline.
         </Text>
 
         <ul className="flex flex-col divide-y">
-          {headingVariants.map((variant) => (
-            <li key={variant} className="flex flex-col gap-1 py-4">
+          {headingSizes.map((size) => (
+            <li key={size} className="flex flex-col gap-1 py-4">
               <Text variant="overline" className="text-muted-foreground">
-                {variant}
+                {size}
               </Text>
-              <Text as="p" variant={variant}>
+              <p className={headingVariants({ size })}>
                 The quick brown fox jumps over the lazy dog
-              </Text>
+              </p>
             </li>
           ))}
 
@@ -120,12 +123,24 @@ export default function FoundationsPage() {
             </li>
           ))}
         </ul>
+
+        <Heading level={3} size="h5">
+          Plain HTML
+        </Heading>
+        <Text>
+          Inline elements need no component: <strong>strong</strong>, <em>emphasis</em>,{" "}
+          <mark>highlighted</mark>, <code>pnpm dev</code> and <kbd>Ctrl</kbd> +{" "}
+          <kbd>K</kbd>.
+        </Text>
+        <blockquote>
+          Typography is the craft of endowing human language with a durable visual form.
+        </blockquote>
       </section>
 
       <section className={sectionClasses} aria-labelledby="buttons">
-        <Text as="h2" variant="h3" id="buttons">
+        <Heading level={2} size="h3" id="buttons">
           Buttons
-        </Text>
+        </Heading>
 
         <div className="flex flex-wrap items-center gap-3">
           {buttonVariantNames.map((variant) => (
@@ -163,9 +178,9 @@ export default function FoundationsPage() {
       </section>
 
       <section className={sectionClasses} aria-labelledby="icons">
-        <Text as="h2" variant="h3" id="icons">
+        <Heading level={2} size="h3" id="icons">
           Icons
-        </Text>
+        </Heading>
 
         <ul className="flex flex-wrap items-end gap-6" aria-label="Icon sizes">
           {iconSizes.map((size) => (

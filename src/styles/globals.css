@@ -137,6 +137,70 @@
     @apply bg-background font-sans text-foreground antialiased;
   }
 
+  /*
+   * Typography for plain HTML: headings, code, quotes... look right without a component,
+   * including Markdown and CMS content. Utility classes still override these.
+   */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply scroll-m-20 text-balance;
+  }
+
+  h1 {
+    @apply text-h1;
+  }
+
+  h2 {
+    @apply text-h2;
+  }
+
+  h3 {
+    @apply text-h3;
+  }
+
+  h4 {
+    @apply text-h4;
+  }
+
+  h5 {
+    @apply text-h5;
+  }
+
+  h6 {
+    @apply text-h6;
+  }
+
+  p {
+    @apply text-pretty;
+  }
+
+  code,
+  kbd,
+  samp {
+    @apply rounded-sm bg-muted px-[0.3em] py-[0.15em] font-mono text-[0.875em];
+  }
+
+  kbd {
+    @apply border border-b-2 font-medium;
+  }
+
+  /* Code blocks style the <pre>, not every line of code inside it */
+  pre code {
+    @apply rounded-none bg-transparent p-0 text-[1em];
+  }
+
+  blockquote {
+    @apply border-l-2 pl-6 italic;
+  }
+
+  mark {
+    @apply rounded-sm bg-warning px-[0.2em] text-warning-foreground;
+  }
+
   /* Tailwind v4 resets buttons to cursor: default */
   button:not(:disabled),
   [role="button"]:not(:disabled) {
