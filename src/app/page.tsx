@@ -1,5 +1,7 @@
 import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
+import { headingVariants } from "@styles/elements/heading";
+
 import { Button } from "@components/elements/button";
 import { Heading, headingElements } from "@components/elements/heading";
 import { Icon } from "@components/elements/icon";
@@ -102,7 +104,10 @@ export default function FoundationsPage() {
               <Text variant="overline" className="text-muted-foreground">
                 {size}
               </Text>
-              <Heading as={size}>The quick brown fox jumps over the lazy dog</Heading>
+              {/* Visual samples, not page sections: a <p> keeps them out of the outline */}
+              <p className={headingVariants({ size })}>
+                The quick brown fox jumps over the lazy dog
+              </p>
             </li>
           ))}
 
