@@ -1,4 +1,5 @@
-@import "tailwindcss";
+/* Only scan src/ for class names, so docs and config files cannot add CSS */
+@import "tailwindcss" source("..");
 @import "tw-animate-css";
 
 @import "./tokens.css";
