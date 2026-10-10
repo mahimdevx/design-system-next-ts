@@ -5,7 +5,7 @@ import type { VariantProps } from "@utils/tv";
 import { textVariants } from "@styles/elements/text";
 
 // Running text only: headings use <Heading>, inline code/kbd/quotes are plain HTML
-// Allowed elements. Exported for reuse; a list (not a named type) makes type errors
+// Allowed elements. Exported for reuse; a list makes type errors
 // show the allowed values instead of a type name
 export const textElements = ["p", "span", "div"] as const;
 
@@ -36,9 +36,9 @@ export function Text<T extends (typeof textElements)[number] = "p">({
   className,
   ...props
 }: TextProps<T>) {
-  // Checked as a <p> internally; callers are typed for the element they pass in `as`
-  const Component = (as ?? "p") as "p";
+  const Component = as ?? "p";
 
+  // Checked as a <p> internally; callers are typed for the element they pass in `as`
   const elementProps = props as ComponentProps<"p">;
 
   const textClasses = textVariants({ variant, weight, className });

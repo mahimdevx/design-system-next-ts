@@ -1,7 +1,8 @@
 import type { ComponentProps } from "react";
 
 import { Slot } from "radix-ui";
-import type { VariantProps } from "tailwind-variants";
+
+import type { VariantProps } from "@utils/tv";
 
 import { buttonVariants } from "@styles/elements/button";
 

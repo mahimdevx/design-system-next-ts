@@ -1,6 +1,6 @@
 import type { ComponentProps, ComponentType, SVGProps } from "react";
 
-import type { VariantProps } from "tailwind-variants";
+import type { VariantProps } from "@utils/tv";
 
 import { iconVariants } from "@styles/elements/icon";
 

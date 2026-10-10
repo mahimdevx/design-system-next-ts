@@ -4,7 +4,7 @@ import type { VariantProps } from "@utils/tv";
 
 import { headingVariants } from "@styles/elements/heading";
 
-// Allowed elements. Exported for reuse; a list (not a named type) makes type errors
+// Allowed elements. Exported for reuse; a list makes type errors
 // show the allowed values instead of a type name
 export const headingElements = ["h1", "h2", "h3", "h4", "h5", "h6"] as const;
 
