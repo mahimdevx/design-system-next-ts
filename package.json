@@ -32,7 +32,6 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "typecheck": "next typegen && tsc --noEmit",
-    "prepare": "next typegen",
     "check": "pnpm typecheck && pnpm lint && pnpm format:check"
   },
   "dependencies": {

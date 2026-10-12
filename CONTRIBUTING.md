@@ -8,7 +8,9 @@ commit workflow, and what a pull request needs before it can merge.
 1. Install Node.js 24+ (the version is pinned in `.node-version`) and pnpm
    (`npm install -g pnpm`).
 2. Fork and clone the repository, then run `pnpm install`.
-3. Run `pnpm dev` and open http://localhost:3000.
+3. Run `pnpm dev` and open http://localhost:3000. The first run also generates Next.js's
+   route types (`next-env.d.ts`, `.next/types`), which are not committed. Until then the
+   editor may report `Cannot find name 'LayoutProps'`; `pnpm typecheck` generates them too.
 
 Recommended VS Code extensions are listed in `.vscode/extensions.json`. Formatting and
 lint fixes run on save.
