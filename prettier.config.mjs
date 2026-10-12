@@ -23,6 +23,7 @@ const config = {
     "^@styles/(.*)$",
     "",
     "^@components/(.*)$",
+    "^@assets/(.*)$",
     "",
     "^[./]"
   ],

@@ -53,14 +53,16 @@ src/
 │   │   ├── button.tsx      #   the component
 │   │   ├── button.styles.ts#   its variants (tv)
 │   │   └── index.ts        #   public exports
-│   ├── heading/ …          # heading, icon, text, theme-toggle, theme-provider
-│   └── icons/              # Custom SVG icons (imported per file)
+│   └── heading/ …          # heading, icon, text, theme-toggle, theme-provider
+├── assets/
+│   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
 ├── utils/                  # cn() and the shared tv() setup
 └── hooks/                  # Shared React hooks
 ```
 
-Imports use per-folder aliases: `@components/*`, `@styles/*`, `@utils/*`, `@hooks/*`.
+Imports use per-folder aliases: `@components/*`, `@assets/*`, `@styles/*`, `@utils/*`,
+`@hooks/*`.
 Import a component through its folder (`@components/button`), never its internal files.
 
 ## Contributing

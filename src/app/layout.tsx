@@ -25,11 +25,11 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  const htmlClasses = cn(poppins.variable, firaCode.variable);
+  const fontClasses = cn(poppins.variable, firaCode.variable);
 
   return (
     // next-themes sets the theme class on <html> before React hydrates
-    <html lang="en" className={htmlClasses} suppressHydrationWarning>
+    <html lang="en" className={fontClasses} suppressHydrationWarning>
       <body>
         <ThemeProvider>{children}</ThemeProvider>
       </body>

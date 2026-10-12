@@ -44,10 +44,10 @@ const eslintConfig = defineConfig([
             }
           ],
           // Components are imported through their folder's index, never their internal
-          // files. icons/ is a collection, imported per file.
+          // files. (Icons in @assets/icons are a collection, imported per file.)
           patterns: [
             {
-              group: ["@components/*/*", "!@components/icons/*"],
+              group: ["@components/*/*"],
               message:
                 "Import a component through its folder (@components/button), not its internal files."
             }

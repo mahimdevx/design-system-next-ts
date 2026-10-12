@@ -3,9 +3,9 @@ import { ArrowRight, Check, Plus, Search } from "lucide-react";
 import { Button } from "@components/button";
 import { Heading, headingElements, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
-import { LogoMark } from "@components/icons/logo-mark";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
+import { LogoMark } from "@assets/icons/logo-mark";
 
 const buttonVariantNames = [
   "primary",
