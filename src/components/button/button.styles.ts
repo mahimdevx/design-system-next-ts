@@ -38,9 +38,10 @@ export const buttonVariants = tv({
     iconOnly: {
       true: "aspect-square px-0"
     },
+    // Corners come from the --radius token; `rounded` makes a pill (icon buttons, CTAs)
     rounded: {
       true: "rounded-full",
-      false: "rounded-none"
+      false: "rounded-md"
     }
   },
   defaultVariants: {

@@ -71,6 +71,12 @@
   --font-sans: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-fira-code), ui-monospace, monospace;
 
+  /* With --radius: 0.5rem these equal Tailwind's defaults; change --radius to reshape all */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
