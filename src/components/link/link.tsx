@@ -18,14 +18,24 @@ type LinkProps<RouteType> = Omit<ComponentProps<"a">, keyof NextLinkProps<RouteT
  * prefetch, replace, scroll.
  */
 export function Link<RouteType>({
+  href,
   variant = "inline",
   className,
   ...props
 }: LinkProps<RouteType>) {
   const linkClasses = linkVariants({ variant, className });
 
+  // `href` is required by the types. If it is still missing, render a placeholder <a>
+  // (no href: not focusable, not announced as a link) instead of crashing or guessing "/".
+  if (href == null) {
+    return (
+      <a data-slot="link" data-variant={variant} className={linkClasses} {...props} />
+    );
+  }
+
   return (
     <NextLink
+      href={href}
       data-slot="link"
       data-variant={variant}
       className={linkClasses}

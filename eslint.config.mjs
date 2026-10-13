@@ -32,6 +32,13 @@ const eslintConfig = defineConfig([
       eqeqeq: ["error", "smart"],
       // Leftover console.log calls are mistakes; warn/error logging is fine
       "no-console": ["warn", { allow: ["warn", "error"] }],
+      // Fake links (href="#", javascript:) and click-only anchors that should be <button>s,
+      // on <a> and on our <Link>. "noHref" is left out: an <a> without href is a valid
+      // placeholder (Link renders one when href is missing).
+      "jsx-a11y/anchor-is-valid": [
+        "error",
+        { components: ["Link"], aspects: ["invalidHref", "preferButton"] }
+      ],
       // tv() and cn() must come from @utils, which knows the custom tokens (text-h1...)
       "no-restricted-imports": [
         "error",
