@@ -3,6 +3,7 @@ import { ArrowRight, Check, Plus, Search } from "lucide-react";
 import { Button } from "@components/button";
 import { Heading, headingElements, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
+import { Link } from "@components/link";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
 import { LogoMark } from "@assets/icons/logo-mark";
@@ -211,6 +212,31 @@ export default function FoundationsPage() {
             Labelled icon (announced as &ldquo;Completed&rdquo;)
           </Text>
         </div>
+      </section>
+
+      <section className={sectionClasses} aria-labelledby="links">
+        <Heading as="h2" size="h3" id="links">
+          Links
+        </Heading>
+
+        <Text>
+          Inline links sit inside running text and stay underlined, so they are not
+          identified by color alone: read about the{" "}
+          <Link href="#typography">type scale</Link> or the{" "}
+          <Link href="https://nextjs.org/docs">Next.js docs</Link>.
+        </Text>
+
+        <nav aria-label="Showcase sections">
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {["colors", "typography", "buttons", "icons"].map((section) => (
+              <li key={section}>
+                <Link href={`#${section}`} variant="subtle" className="capitalize">
+                  {section}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
       </section>
     </main>
   );
