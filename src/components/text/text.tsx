@@ -15,14 +15,10 @@ type TextProps<T extends (typeof textElements)[number]> = ComponentProps<T> & {
   /**
    * The HTML element to render: `p` (default), `span` (inline) or `div`.
    * This sets the semantics only. For the look, use `variant`.
-   *
-   * @example <Text as="span" variant="caption">8 Oct</Text>
    */
   as?: T;
   /**
    * How the text looks: `lead`, `p` (default), `small`, `caption`, `overline`, `label`.
-   *
-   * @example <Text variant="caption">Photo by …</Text>
    */
   variant?: TextVariantProps["variant"];
   /** Font weight, limited to the weights loaded in src/styles/fonts.ts. */
