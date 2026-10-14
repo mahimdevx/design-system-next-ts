@@ -15,7 +15,7 @@ export const buttonVariants = tv({
   ],
   variants: {
     size: {
-      xxs: "h-6 px-2 text-xs leading-4 [--icon-size:0.75rem]",
+      xxs: "h-6 px-2 text-xs leading-4 [--icon-size:0.875rem]",
       xs: "h-8 px-4 text-xs leading-4 [--icon-size:0.875rem]",
       sm: "h-10 px-5 text-sm leading-4 [--icon-size:1rem]",
       base: "h-12 px-6 text-sm leading-4 [--icon-size:1rem]",
@@ -38,7 +38,6 @@ export const buttonVariants = tv({
     iconOnly: {
       true: "aspect-square px-0"
     },
-    // Corners come from the --radius token; `rounded` makes a pill (icon buttons, CTAs)
     rounded: {
       true: "rounded-full",
       false: "rounded-md"
