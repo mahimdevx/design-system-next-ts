@@ -27,7 +27,9 @@ updates:
             "@rolldown/*",
             "@babel/*",
             "@testing-library/*",
-            "jsdom"
+            "jsdom",
+            "@playwright/*",
+            "@axe-core/*"
           ]
     ignore:
       # ESLint 10 crashes eslint-config-next's React plugin

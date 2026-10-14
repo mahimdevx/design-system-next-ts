@@ -40,8 +40,13 @@ Tests live next to the code they test: `button.tsx` has `button.test.tsx`.
 - Rules that live in the types (an icon-only button needs `aria-label`) go in a
   `*.test-d.tsx` file with `@ts-expect-error` lines. `pnpm typecheck` fails if one of
   them stops being an error.
-- Unit tests run in jsdom, which has no layout or real CSS. Leave contrast, focus rings and
-  responsive layout to browser tests.
+- Unit tests run in jsdom, which has no layout or real CSS. What needs a real browser goes
+  in `e2e/` and runs in Playwright against the production build, in Chromium, Firefox and
+  WebKit: accessibility scans with axe (WCAG 2.2 AA, including contrast) in light and dark
+  mode, keyboard operation, theming.
+- `pnpm test:e2e` builds the app and runs them. The first time, install the browsers:
+  `pnpm exec playwright install`. Add `--ui` to debug, `--project=chromium` for one
+  browser.
 - Tests run with the React Compiler, like the app. Keep `@babel/core` on 7: the compiler
   silently skips components under Babel 8.
 

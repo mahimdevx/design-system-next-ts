@@ -36,3 +36,35 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+  e2e:
+    name: E2E
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: pnpm/action-setup@v6
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      # Browsers match the installed @playwright/test; --with-deps adds their OS libraries
+      - name: Install Playwright browsers
+        run: pnpm exec playwright install --with-deps chromium firefox webkit
+
+      # Builds the app and serves it (webServer in playwright.config.ts)
+      - name: Accessibility and browser tests
+        run: pnpm test:e2e
+
+      # The HTML report with traces of retried tests, to debug failures
+      - uses: actions/upload-artifact@v7
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 14

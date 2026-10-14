@@ -4,6 +4,7 @@ import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import prettier from "eslint-config-prettier/flat";
 import jestDom from "eslint-plugin-jest-dom";
+import playwright from "eslint-plugin-playwright";
 import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig, globalIgnores } from "eslint/config";
 
@@ -92,6 +93,12 @@ const eslintConfig = defineConfig([
     rules: {
       "vitest/consistent-test-it": ["error", { fn: "test" }]
     }
+  },
+
+  // Browser tests: awaited assertions, web-first matchers, no fixed waits
+  {
+    files: ["e2e/**/*.ts"],
+    extends: [playwright.configs["flat/recommended"]]
   },
 
   // Must be last: turns off every rule that would fight Prettier's formatting

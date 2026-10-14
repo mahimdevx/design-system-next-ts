@@ -17,7 +17,7 @@ built with Tailwind CSS v4 and Radix UI.
 | Language  | TypeScript 6, strict mode                                    |
 | Styling   | Tailwind CSS v4, tailwind-variants, design tokens in OKLCH   |
 | Tooling   | pnpm, ESLint 9, Prettier (import and Tailwind class sorting) |
-| Testing   | Vitest, Testing Library, jsdom                               |
+| Testing   | Vitest + Testing Library; Playwright + axe in three browsers |
 | CI        | GitHub Actions: typecheck, lint, format, tests, build per PR |
 
 ## Getting started
@@ -44,6 +44,7 @@ Open http://localhost:3000.
 | `pnpm lint`      | ESLint, zero warnings allowed                   |
 | `pnpm format`    | Format everything with Prettier                 |
 | `pnpm test`      | Unit tests once (`test:watch`, `test:coverage`) |
+| `pnpm test:e2e`  | Browser and accessibility tests (Playwright)    |
 
 ## Project structure
 
