@@ -5,7 +5,7 @@ commit workflow, and what a pull request needs before it can merge.
 
 ## Setup
 
-1. Install Node.js 24+ (the version is pinned in `.node-version`) and pnpm
+1. Install Node.js 24.15+ (the version is pinned in `.node-version`) and pnpm
    (`npm install -g pnpm`).
 2. Fork and clone the repository, then run `pnpm install`.
 3. Run `pnpm dev` and open http://localhost:3000. The first run also generates Next.js's
@@ -27,6 +27,23 @@ lint fixes run on save.
 2. Make your change. Keep each pull request focused on one thing.
 3. Run `pnpm check` before you push. It runs the same checks as CI.
 4. Open a pull request and fill in the template.
+
+## Testing
+
+Tests live next to the code they test: `button.tsx` has `button.test.tsx`.
+
+- `pnpm test` runs the unit tests once; `pnpm test:watch` reruns them on save;
+  `pnpm test:coverage` writes a report to `coverage/`.
+- Test what users and callers rely on: the rendered element, roles and accessible names,
+  keyboard and click behavior, fallbacks. Query by role and name (`getByRole("button",
+{ name: "Save" })`), not by class or DOM structure, and use `userEvent` for interaction.
+- Rules that live in the types (an icon-only button needs `aria-label`) go in a
+  `*.test-d.tsx` file with `@ts-expect-error` lines. `pnpm typecheck` fails if one of
+  them stops being an error.
+- Unit tests run in jsdom, which has no layout or real CSS. Leave contrast, focus rings and
+  responsive layout to browser tests.
+- Tests run with the React Compiler, like the app. Keep `@babel/core` on 7: the compiler
+  silently skips components under Babel 8.
 
 ## Commit messages
 

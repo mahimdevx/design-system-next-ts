@@ -14,6 +14,7 @@ Closes #
 ## Checklist
 
 - [ ] `pnpm check` passes
+- [ ] Tests added or updated for new behavior
 - [ ] Works in light and dark mode
 - [ ] Keyboard and screen reader friendly (focus states, labels, roles)
 - [ ] Screenshots added for visual changes
