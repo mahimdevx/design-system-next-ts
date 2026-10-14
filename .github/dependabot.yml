@@ -17,6 +17,18 @@ updates:
         patterns: ["eslint*", "@eslint*", "prettier*", "@ianvs/*", "typescript"]
       tailwind:
         patterns: ["tailwindcss", "@tailwindcss/*"]
+      # vitest and @vitest/* must share one exact version
+      testing:
+        patterns:
+          [
+            "vitest",
+            "@vitest/*",
+            "@vitejs/*",
+            "@rolldown/*",
+            "@babel/*",
+            "@testing-library/*",
+            "jsdom"
+          ]
     ignore:
       # ESLint 10 crashes eslint-config-next's React plugin
       - dependency-name: eslint
@@ -24,6 +36,10 @@ updates:
       # typescript-eslint does not support TypeScript 7 yet
       - dependency-name: typescript
         versions: [">=7"]
+      # babel-plugin-react-compiler 1.0 is built on Babel 7's AST: with Babel 8 it skips
+      # components it cannot parse, so tests would run uncompiled code. Next bundles Babel 7.
+      - dependency-name: "@babel/core"
+        versions: [">=8"]
       # Types must match the Node runtime in .node-version (24)
       - dependency-name: "@types/node"
         versions: [">=25"]

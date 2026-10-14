@@ -1,7 +1,10 @@
 import comments from "@eslint-community/eslint-plugin-eslint-comments/configs";
+import vitest from "@vitest/eslint-plugin";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 import prettier from "eslint-config-prettier/flat";
+import jestDom from "eslint-plugin-jest-dom";
+import testingLibrary from "eslint-plugin-testing-library";
 import { defineConfig, globalIgnores } from "eslint/config";
 
 const eslintConfig = defineConfig([
@@ -75,6 +78,20 @@ const eslintConfig = defineConfig([
   {
     files: ["src/utils/tv.ts", "src/utils/cn.ts"],
     rules: { "no-restricted-imports": "off" }
+  },
+
+  // Tests: no focused/skipped tests left behind, accessible queries over DOM access,
+  // specific matchers (toBeDisabled, not toHaveAttribute("disabled"))
+  {
+    files: ["src/**/*.test.{ts,tsx}"],
+    extends: [
+      vitest.configs.recommended,
+      testingLibrary.configs["flat/react"],
+      jestDom.configs["flat/recommended"]
+    ],
+    rules: {
+      "vitest/consistent-test-it": ["error", { fn: "test" }]
+    }
   },
 
   // Must be last: turns off every rule that would fight Prettier's formatting

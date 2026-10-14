@@ -11,17 +11,18 @@ built with Tailwind CSS v4 and Radix UI.
 
 ## Stack
 
-| Area      | Choice                                                         |
-| --------- | -------------------------------------------------------------- |
-| Framework | Next.js 16 (App Router, Turbopack, React Compiler), React 19   |
-| Language  | TypeScript 6, strict mode                                      |
-| Styling   | Tailwind CSS v4, tailwind-variants, design tokens in OKLCH     |
-| Tooling   | pnpm, ESLint 9, Prettier (import and Tailwind class sorting)   |
-| CI        | GitHub Actions: typecheck, lint, format check and build per PR |
+| Area      | Choice                                                       |
+| --------- | ------------------------------------------------------------ |
+| Framework | Next.js 16 (App Router, Turbopack, React Compiler), React 19 |
+| Language  | TypeScript 6, strict mode                                    |
+| Styling   | Tailwind CSS v4, tailwind-variants, design tokens in OKLCH   |
+| Tooling   | pnpm, ESLint 9, Prettier (import and Tailwind class sorting) |
+| Testing   | Vitest, Testing Library, jsdom                               |
+| CI        | GitHub Actions: typecheck, lint, format, tests, build per PR |
 
 ## Getting started
 
-Requirements: Node.js 24+ and pnpm (`npm install -g pnpm`).
+Requirements: Node.js 24.15+ and pnpm (`npm install -g pnpm`).
 
 ```bash
 git clone https://github.com/mahimdevx/design-system-next-ts.git
@@ -38,10 +39,11 @@ Open http://localhost:3000.
 | ---------------- | ----------------------------------------------- |
 | `pnpm dev`       | Dev server + live type checking (same terminal) |
 | `pnpm build`     | Production build                                |
-| `pnpm check`     | Typecheck, lint and format check (same as CI)   |
+| `pnpm check`     | Typecheck, lint, format check, unit tests (CI)  |
 | `pnpm typecheck` | Generate route types, then run `tsc`            |
 | `pnpm lint`      | ESLint, zero warnings allowed                   |
 | `pnpm format`    | Format everything with Prettier                 |
+| `pnpm test`      | Unit tests once (`test:watch`, `test:coverage`) |
 
 ## Project structure
 
@@ -52,6 +54,8 @@ src/
 │   ├── button/             # One folder per component:
 │   │   ├── button.tsx      #   the component
 │   │   ├── button.styles.ts#   its variants (tv)
+│   │   ├── button.test.tsx #   behavior tests (Vitest)
+│   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
 │   └── heading/ …          # heading, icon, text, theme-toggle, theme-provider
 ├── assets/
