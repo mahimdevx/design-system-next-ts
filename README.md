@@ -58,7 +58,8 @@ src/
 │   │   ├── button.test.tsx #   behavior tests (Vitest)
 │   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
-│   └── heading/ …          # heading, icon, text, theme-toggle, theme-provider
+│   └── …                   # container, grid, heading, icon, link, section, stack,
+│                           # text, theme-toggle, theme-provider
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts

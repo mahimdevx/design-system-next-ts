@@ -64,6 +64,15 @@
 
   --text-lead: clamp(1.125rem, 1.076rem + 0.217vw, 1.25rem);
   --text-lead--line-height: 1.6;
+
+  /*
+   * Layout spacing: fluid like the type scale (360px to 1280px viewport), so pages breathe
+   * on large screens without breakpoint jumps. Used as px-gutter, py-section-md...
+   */
+  --spacing-gutter: clamp(1rem, 0.609rem + 1.739vw, 2rem);
+  --spacing-section-sm: clamp(2rem, 1.609rem + 1.739vw, 3rem);
+  --spacing-section-md: clamp(3rem, 2.217rem + 3.478vw, 5rem);
+  --spacing-section-lg: clamp(4rem, 2.435rem + 6.957vw, 8rem);
 }
 
 /* Tokens that point at runtime variables: inline so they resolve per theme */
