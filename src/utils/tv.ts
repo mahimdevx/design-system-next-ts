@@ -8,7 +8,9 @@ import { createTV, type TWMergeConfig } from "tailwind-variants";
 export const twMergeConfig = {
   extend: {
     theme: {
-      text: ["h1", "h2", "h3", "h4", "h5", "h6", "lead"]
+      text: ["h1", "h2", "h3", "h4", "h5", "h6", "lead"],
+      // Named spacing (px-gutter, py-section-md), so they replace other paddings
+      spacing: ["gutter", "section-sm", "section-md", "section-lg"]
     }
   }
 } satisfies TWMergeConfig;

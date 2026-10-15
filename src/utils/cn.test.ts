@@ -23,4 +23,10 @@ describe("cn", () => {
   test("resolves conflicts between custom text sizes", () => {
     expect(cn("text-h1", "text-lead")).toBe("text-lead");
   });
+
+  test("named layout spacing conflicts with other spacing", () => {
+    expect(cn("py-section-md", "py-0")).toBe("py-0");
+    expect(cn("px-gutter", "px-4")).toBe("px-4");
+    expect(cn("p-4", "px-gutter")).toBe("p-4 px-gutter");
+  });
 });
