@@ -61,16 +61,27 @@ test("section spacing is fluid: more room on wide screens", async ({ page }) => 
 });
 
 test.describe("portfolio demo", () => {
-  test("puts the profile beside the content on wide screens", async ({ page }) => {
+  test("keeps the header in view while scrolling, and anchors land below it", async ({
+    page
+  }) => {
     await page.setViewportSize({ width: 1440, height: 900 });
+    // Instant jumps instead of smooth scrolling, so positions are final when measured
+    await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/demo/portfolio");
 
-    const profile = await page
-      .getByRole("complementary", { name: "Profile" })
-      .boundingBox();
-    const heading = await page.getByRole("heading", { level: 1 }).boundingBox();
+    await page
+      .getByRole("navigation", { name: "Page sections" })
+      .getByRole("link", { name: "Experience" })
+      .click();
 
-    expect(profile && heading && heading.x > profile.x + profile.width).toBe(true);
+    const header = await page.getByRole("banner").boundingBox();
+    const heading = await page
+      .getByRole("heading", { level: 2, name: "Experience" })
+      .boundingBox();
+
+    // Sticky header still at the top; the section heading is not hidden under it
+    expect(header?.y).toBe(0);
+    expect(heading && header && heading.y >= header.height).toBe(true);
   });
 
   test("stacks on a phone without horizontal scroll", async ({ page }) => {

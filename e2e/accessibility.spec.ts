@@ -7,6 +7,7 @@ const axeTags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-p
 
 const pages = [
   { name: "showcase", path: "/" },
+  { name: "demos index", path: "/demo" },
   // Re-themed through scoped tokens: proves the overrides still pass contrast
   { name: "portfolio demo", path: "/demo/portfolio" }
 ];

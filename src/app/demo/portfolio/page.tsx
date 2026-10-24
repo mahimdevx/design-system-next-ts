@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 
-import { Calendar, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowRight, Clock, Mail, MapPin, Quote } from "lucide-react";
 
 import { cn } from "@utils/cn";
 
@@ -15,11 +14,18 @@ import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
-import { Dribbble } from "@assets/icons/dribbble";
-import { Facebook } from "@assets/icons/facebook";
-import { Instagram } from "@assets/icons/instagram";
-import { Twitter } from "@assets/icons/twitter";
-import profile from "@assets/images/profile.png";
+
+import {
+  experience,
+  person,
+  projects,
+  sections,
+  services,
+  socials,
+  stats,
+  testimonial,
+  tools
+} from "./data";
 
 import "./portfolio.css";
 
@@ -29,352 +35,497 @@ export const metadata: Metadata = {
     "A portfolio page built only from the design system's components and tokens."
 };
 
-// Placeholder contact details: this repository is public
-const contacts = [
-  {
-    label: "Email",
-    value: "hello@example.com",
-    href: "mailto:hello@example.com",
-    icon: Mail
-  },
-  { label: "Phone", value: "+1 555 0100", href: "tel:+15550100", icon: Phone },
-  { label: "Birthday", value: "January 1, 2000", icon: Calendar },
-  { label: "Location", value: "Chattogram, BD", icon: MapPin }
-] as const;
+const cardClasses = "rounded-xl border bg-card text-card-foreground";
 
-const socials = [
-  { label: "Facebook", href: "https://facebook.com/mahimfarhad", icon: Facebook },
-  { label: "Twitter", href: "https://twitter.com/mahimfarhad", icon: Twitter },
-  { label: "Instagram", href: "https://instagram.com/mahimfarhad", icon: Instagram },
-  { label: "Dribbble", href: "https://dribbble.com/mahimfarhad", icon: Dribbble }
-];
+// Offsets in-page anchors for the sticky header
+const anchorClasses = "scroll-mt-24";
 
-const pageSections = ["about", "projects", "skills", "contact"] as const;
-
-const highlights = [
-  { value: "18+", text: "Projects completed with modern frontend workflows." },
-  {
-    value: "4+ years",
-    text: "Designing and developing responsive experiences for startups and teams."
-  },
-  {
-    value: "Accessible",
-    text: "Focused on clean markup, readable styling, and inclusive interactions."
-  }
-];
-
-const projects = [
-  {
-    title: "Studio Landing Page",
-    description:
-      "A polished landing page with animated sections, modern interactions, and refined branding.",
-    tags: ["Next.js", "Tailwind", "Motion"]
-  },
-  {
-    title: "Dashboard Experience",
-    description:
-      "A responsive project management dashboard with clear data visualisations and smooth navigation.",
-    tags: ["React", "UX", "Data"]
-  },
-  {
-    title: "E-commerce Refresh",
-    description:
-      "A high-conversion storefront with product storytelling, modern checkout flows, and polished UI.",
-    tags: ["Commerce", "Design", "Performance"]
-  }
-];
-
-const skills = [
-  "Responsive interfaces",
-  "Design systems",
-  "Component-driven UI",
-  "CSS theming",
-  "Animations",
-  "Accessible layouts"
-];
-
-const cardClasses = "rounded-xl border bg-card p-6 text-card-foreground sm:p-8";
-
-function Profile() {
+function SiteHeader() {
   return (
-    <Stack asChild gap="6" className={cn(cardClasses, "xl:sticky xl:top-8")}>
-      <aside id="contact" aria-label="Profile" className="scroll-mt-8">
-        <Stack
-          gap="6"
-          className="sm:flex-row sm:items-center xl:flex-col xl:items-stretch"
+    <header className="sticky top-0 z-10 border-b bg-background/75 backdrop-blur-md">
+      <Container>
+        <Stack direction="row" align="center" justify="between" gap="4" className="h-16">
+          <a
+            href="#top"
+            className="flex items-center gap-3 rounded-md font-semibold outline-hidden focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
+            <span className="flex size-9 items-center justify-center rounded-lg bg-accent text-sm font-bold text-accent-foreground">
+              {person.initials}
+            </span>
+            {person.name}
+          </a>
+
+          <nav aria-label="Page sections" className="hidden md:block">
+            <Stack asChild direction="row" gap="1">
+              <ul>
+                {sections.map((section) => (
+                  <li key={section.id}>
+                    <Link
+                      href={`#${section.id}`}
+                      variant="subtle"
+                      className="block rounded-md px-3 py-2 text-sm font-medium"
+                    >
+                      {section.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </Stack>
+          </nav>
+
+          <Stack direction="row" align="center" gap="2">
+            <ThemeToggle />
+            <Button asChild variant="accent" size="sm" rounded>
+              <a href="#contact">Hire me</a>
+            </Button>
+          </Stack>
+        </Stack>
+      </Container>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <Section spacing="lg" id="top" className={anchorClasses}>
+      <Container>
+        <Grid
+          gap="12"
+          align="center"
+          className="lg:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]"
         >
-          <Image
-            src={profile}
-            alt="Portrait of Farhad Al Rashid"
-            placeholder="blur"
-            sizes="(min-width: 1280px) 18rem, 6rem"
-            className="size-24 shrink-0 rounded-lg object-cover xl:aspect-4/3 xl:h-auto xl:w-full"
+          <Stack gap="6" align="start">
+            <span className="flex items-center gap-2 rounded-full border bg-card px-3 py-1 text-sm text-muted-foreground">
+              <span className="relative flex size-2">
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-success opacity-75" />
+                <span className="relative inline-flex size-2 rounded-full bg-success" />
+              </span>
+              {person.availability}
+            </span>
+
+            <Heading as="h1">
+              Design-minded engineer building{" "}
+              <span className="text-accent-text">interfaces people love</span>.
+            </Heading>
+
+            <Text variant="lead" className="max-w-xl">
+              I&rsquo;m {person.name}, a {person.role.toLowerCase()} specialist. I turn
+              complex products into fast, accessible and beautifully consistent web
+              experiences.
+            </Text>
+
+            <Stack direction="row" gap="3" wrap>
+              <Button asChild variant="accent" size="lg" rounded>
+                <a href="#work">
+                  View my work
+                  <Icon as={ArrowRight} />
+                </a>
+              </Button>
+              <Button asChild variant="outline" size="lg" rounded>
+                <a href="#contact">Get in touch</a>
+              </Button>
+            </Stack>
+
+            <Stack direction="row" gap="6" wrap className="text-sm text-muted-foreground">
+              <span className="flex items-center gap-2">
+                <Icon as={MapPin} />
+                {person.location}
+              </span>
+              <span className="flex items-center gap-2">
+                <Icon as={Clock} />
+                {person.timezone}
+              </span>
+            </Stack>
+          </Stack>
+
+          <ProfileVisual />
+        </Grid>
+      </Container>
+    </Section>
+  );
+}
+
+// A portrait placeholder: initials on a token gradient, with floating stat chips
+function ProfileVisual() {
+  return (
+    <div
+      aria-hidden="true"
+      className="relative mx-auto aspect-square w-full max-w-sm overflow-hidden rounded-xl border bg-linear-to-br from-accent/30 via-card to-card"
+    >
+      <span className="absolute inset-0 flex items-center justify-center text-[clamp(5rem,12vw,8rem)] font-extrabold tracking-tighter text-accent-text/80">
+        {person.initials}
+      </span>
+
+      <span className="absolute top-5 left-5 rounded-lg border bg-background/80 px-3 py-2 text-sm font-medium shadow-sm backdrop-blur">
+        ★ 4.9 client rating
+      </span>
+      <span className="absolute right-5 bottom-5 rounded-lg border bg-background/80 px-3 py-2 text-sm font-medium shadow-sm backdrop-blur">
+        48 projects shipped
+      </span>
+    </div>
+  );
+}
+
+function Tools() {
+  return (
+    <Container>
+      <Stack gap="4" align="center" className="border-y py-8">
+        <Text variant="overline" className="text-muted-foreground">
+          Tools I work with
+        </Text>
+        <Stack asChild direction="row" justify="center" gap="2" wrap>
+          <ul aria-label="Tools">
+            {tools.map((tool) => (
+              <li key={tool} className="rounded-full border bg-card px-4 py-1.5 text-sm">
+                {tool}
+              </li>
+            ))}
+          </ul>
+        </Stack>
+      </Stack>
+    </Container>
+  );
+}
+
+function SectionHeader({ id, title, text }: { id: string; title: string; text: string }) {
+  return (
+    <Stack gap="3" className="max-w-2xl">
+      <Heading as="h2" size="h3" id={id}>
+        {title}
+      </Heading>
+      <Text className="text-muted-foreground">{text}</Text>
+    </Stack>
+  );
+}
+
+function Services() {
+  const [featured, ...rest] = services;
+
+  return (
+    <Section aria-labelledby="services" className={anchorClasses}>
+      <Container>
+        <Stack gap="10">
+          <SectionHeader
+            id="services"
+            title="What I do"
+            text="From the first token to the last pixel: systems, performance and accessibility, built in from the start."
           />
 
-          <Stack gap="3">
-            <p className={headingVariants({ size: "h5", weight: "regular" })}>
-              Farhad Al Rashid
-            </p>
-            <span className="w-fit rounded-md bg-muted px-2.5 py-0.5 font-mono text-xs font-medium text-accent-text uppercase">
-              {"<Programmer />"}
-            </span>
-          </Stack>
-        </Stack>
-
-        <hr />
-
-        <Grid asChild minItemWidth="14rem" gap="6" className="xl:grid-cols-1">
-          <ul aria-label="Contact details">
-            {contacts.map((contact) => (
-              <Stack asChild key={contact.label} direction="row" align="center" gap="4">
-                <li>
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-lg bg-muted text-accent-text">
-                    <Icon as={contact.icon} size="base" />
-                  </span>
-
-                  <Stack gap="1" className="min-w-0">
-                    <Text as="span" variant="caption" className="uppercase">
-                      {contact.label}
-                    </Text>
-                    <Text as="span" variant="small" className="truncate">
-                      {"href" in contact ? (
-                        <Link
-                          href={contact.href}
-                          variant="subtle"
-                          className="text-foreground"
-                        >
-                          {contact.value}
-                        </Link>
-                      ) : (
-                        contact.value
-                      )}
-                    </Text>
-                  </Stack>
-                </li>
-              </Stack>
-            ))}
-          </ul>
-        </Grid>
-
-        <hr />
-
-        <Stack asChild direction="row" justify="center" gap="2">
-          <ul aria-label="Social profiles">
-            {socials.map((social) => (
-              <li key={social.label}>
-                <Button
+          {/* Bento: a large featured tile, stats, and the other services */}
+          <Grid asChild gap="4" className="md:grid-cols-6">
+            <ul>
+              {featured && (
+                <Stack
                   asChild
-                  variant="soft"
-                  size="sm"
-                  iconOnly
-                  rounded
-                  aria-label={social.label}
+                  gap="4"
+                  justify="between"
+                  className={cn(
+                    cardClasses,
+                    "bg-linear-to-br from-accent/15 to-card p-8 md:col-span-4 md:row-span-2"
+                  )}
                 >
-                  <a href={social.href} target="_blank" rel="noopener noreferrer">
-                    <Icon as={social.icon} />
-                  </a>
-                </Button>
-              </li>
-            ))}
-          </ul>
+                  <li>
+                    <span className="flex size-12 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                      <Icon as={featured.icon} size="lg" />
+                    </span>
+                    <Stack gap="3">
+                      <Heading as="h3" size="h3">
+                        {featured.title}
+                      </Heading>
+                      <Text className="max-w-md text-muted-foreground">
+                        {featured.text}
+                      </Text>
+                    </Stack>
+                  </li>
+                </Stack>
+              )}
+
+              {stats.map((stat) => (
+                <Stat key={stat.label} {...stat} />
+              ))}
+
+              {rest.map((service) => (
+                <Stack
+                  asChild
+                  key={service.title}
+                  gap="3"
+                  className={cn(cardClasses, "p-6 md:col-span-2")}
+                >
+                  <li>
+                    <Icon as={service.icon} size="lg" className="text-accent-text" />
+                    <Heading as="h3" size="h6">
+                      {service.title}
+                    </Heading>
+                    <Text variant="small" className="text-muted-foreground">
+                      {service.text}
+                    </Text>
+                  </li>
+                </Stack>
+              ))}
+            </ul>
+          </Grid>
         </Stack>
-      </aside>
-    </Stack>
+      </Container>
+    </Section>
   );
 }
 
-function PageNav() {
+function Stat({ value, label }: { value: string; label: string }) {
   return (
-    // Pinned to the card's top-right corner, like a tab
-    <nav
-      aria-label="Page sections"
-      className="-mx-6 -mt-6 flex justify-end sm:-mx-8 sm:-mt-8"
+    <Stack
+      asChild
+      gap="1"
+      justify="center"
+      className={cn(cardClasses, "p-6 md:col-span-2")}
     >
-      <Stack
-        direction="row"
-        align="center"
-        gap="2"
-        className="w-full min-w-0 overflow-x-auto border-b bg-muted px-4 py-2 sm:w-auto sm:rounded-bl-xl sm:border-l sm:px-6"
-      >
-        <Stack asChild direction="row" gap="1">
-          <ul>
-            {pageSections.map((section) => (
-              <li key={section}>
-                <Link
-                  href={`#${section}`}
-                  variant="subtle"
-                  className="block px-3 py-2 text-sm font-medium text-foreground uppercase hover:text-accent-text"
+      <li>
+        <p className={cn(headingVariants({ size: "h2" }), "text-accent-text")}>{value}</p>
+        <Text variant="small" className="text-muted-foreground">
+          {label}
+        </Text>
+      </li>
+    </Stack>
+  );
+}
+
+function Work() {
+  return (
+    <Section aria-labelledby="work" className={anchorClasses}>
+      <Container>
+        <Stack gap="10">
+          <SectionHeader
+            id="work"
+            title="Selected work"
+            text="A few recent projects. Every one shipped to real users, measured, and improved."
+          />
+
+          <Grid asChild minItemWidth="26rem" gap="6">
+            <ul>
+              {projects.map((project) => (
+                <Stack
+                  asChild
+                  key={project.title}
+                  gap="5"
+                  className={cn(cardClasses, "p-4 pb-6")}
                 >
-                  {section}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </Stack>
+                  <li>
+                    <div
+                      aria-hidden="true"
+                      className={cn(
+                        "flex aspect-video items-center justify-center rounded-lg",
+                        project.thumbnail
+                      )}
+                    >
+                      <span
+                        className={cn(
+                          headingVariants({ size: "h4" }),
+                          "rounded-lg bg-background/80 px-4 py-2 backdrop-blur"
+                        )}
+                      >
+                        {project.title.split(" ")[0]}
+                      </span>
+                    </div>
 
-        <ThemeToggle />
-      </Stack>
-    </nav>
-  );
-}
-
-function Highlights() {
-  return (
-    <Grid asChild minItemWidth="16rem" gap="4">
-      <ul aria-label="Highlights">
-        {highlights.map((highlight) => (
-          <Stack asChild key={highlight.value} gap="2" className="rounded-xl border p-6">
-            <li>
-              <p
-                className={cn(
-                  headingVariants({ size: "h4", weight: "regular" }),
-                  "uppercase"
-                )}
-              >
-                {highlight.value}
-              </p>
-              <Text variant="small" className="text-muted-foreground">
-                {highlight.text}
-              </Text>
-            </li>
-          </Stack>
-        ))}
-      </ul>
-    </Grid>
-  );
-}
-
-function Projects() {
-  return (
-    <Stack asChild gap="6">
-      <section aria-labelledby="projects" className="scroll-mt-8">
-        <Stack direction="row" align="baseline" justify="between" gap="4" wrap>
-          <Heading as="h2" size="h4" id="projects">
-            Featured projects
-          </Heading>
-          <Text variant="small" className="text-muted-foreground">
-            Latest work and case studies
-          </Text>
-        </Stack>
-
-        <Grid asChild minItemWidth="16rem" gap="4">
-          <ul>
-            {projects.map((project) => (
-              <Stack
-                asChild
-                key={project.title}
-                gap="4"
-                className="rounded-xl border p-6"
-              >
-                <li>
-                  <Heading as="h3" size="h5">
-                    {project.title}
-                  </Heading>
-                  <Text variant="small" className="text-muted-foreground">
-                    {project.description}
-                  </Text>
-                  <Stack asChild direction="row" gap="2" wrap>
-                    <ul aria-label="Technologies">
-                      {project.tags.map((tag) => (
-                        <li
-                          key={tag}
-                          className="rounded-full border px-3 py-1 text-xs tracking-widest text-muted-foreground uppercase"
+                    <Stack gap="3" className="px-2">
+                      <Stack direction="row" align="baseline" justify="between" gap="4">
+                        <Heading as="h3" size="h5">
+                          {project.title}
+                        </Heading>
+                        <Text
+                          as="span"
+                          variant="small"
+                          className="font-mono text-muted-foreground"
                         >
-                          {tag}
-                        </li>
-                      ))}
-                    </ul>
-                  </Stack>
-                </li>
-              </Stack>
-            ))}
-          </ul>
-        </Grid>
-      </section>
-    </Stack>
+                          {project.year}
+                        </Text>
+                      </Stack>
+                      <Text variant="small" className="text-muted-foreground">
+                        {project.description}
+                      </Text>
+                      <Stack asChild direction="row" gap="2" wrap>
+                        <ul aria-label="Technologies">
+                          {project.tags.map((tag) => (
+                            <li
+                              key={tag}
+                              className="rounded-full bg-muted px-3 py-1 text-xs font-medium text-muted-foreground"
+                            >
+                              {tag}
+                            </li>
+                          ))}
+                        </ul>
+                      </Stack>
+                    </Stack>
+                  </li>
+                </Stack>
+              ))}
+            </ul>
+          </Grid>
+        </Stack>
+      </Container>
+    </Section>
   );
 }
 
-function Skills() {
+function Experience() {
   return (
-    <Stack asChild gap="6">
-      <section aria-labelledby="skills" className="scroll-mt-8">
-        <Heading as="h2" size="h4" id="skills">
-          Core skills
-        </Heading>
+    <Section aria-labelledby="experience" className={anchorClasses}>
+      <Container>
+        <Grid gap="10" className="lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)]">
+          <SectionHeader
+            id="experience"
+            title="Experience"
+            text="Eight years across product teams, studios and agencies."
+          />
 
-        <Grid asChild minItemWidth="14rem" gap="3">
-          <ul>
-            {skills.map((skill) => (
-              <li key={skill} className="rounded-xl border bg-muted/40 p-5 text-sm">
-                {skill}
+          <ol className="border-l">
+            {experience.map((job) => (
+              <li key={job.company} className="relative pb-10 pl-8 last:pb-0">
+                <span
+                  aria-hidden="true"
+                  className="absolute top-1.5 -left-1.5 size-3 rounded-full border-2 border-background bg-accent"
+                />
+                <Stack gap="2">
+                  <Text
+                    as="span"
+                    variant="small"
+                    className="font-mono text-muted-foreground"
+                  >
+                    {job.period}
+                  </Text>
+                  <Heading as="h3" size="h5">
+                    {job.role}{" "}
+                    <span className="text-muted-foreground">· {job.company}</span>
+                  </Heading>
+                  <Text className="text-muted-foreground">{job.text}</Text>
+                </Stack>
               </li>
             ))}
-          </ul>
+          </ol>
         </Grid>
-      </section>
-    </Stack>
+      </Container>
+    </Section>
+  );
+}
+
+function Testimonial() {
+  return (
+    <Section spacing="sm">
+      <Container size="md">
+        <Stack asChild gap="6" align="center" className="text-center">
+          <figure>
+            <Icon as={Quote} size="xl" className="text-accent-text" />
+            <blockquote className="border-none p-0 not-italic">
+              <p className={headingVariants({ size: "h4", weight: "medium" })}>
+                &ldquo;{testimonial.quote}&rdquo;
+              </p>
+            </blockquote>
+            <figcaption>
+              <Text as="span" weight="semibold">
+                {testimonial.name}
+              </Text>
+              <Text variant="small" className="text-muted-foreground">
+                {testimonial.role}
+              </Text>
+            </figcaption>
+          </figure>
+        </Stack>
+      </Container>
+    </Section>
+  );
+}
+
+function Contact() {
+  return (
+    <Section aria-labelledby="contact" className={anchorClasses}>
+      <Container>
+        <Stack
+          gap="8"
+          align="center"
+          className={cn(
+            cardClasses,
+            "bg-linear-to-br from-accent/20 via-card to-card px-6 py-16 text-center sm:px-12"
+          )}
+        >
+          <Stack gap="4" align="center" className="max-w-2xl">
+            <Heading as="h2" size="h2" id="contact">
+              Let&rsquo;s build something great together
+            </Heading>
+            <Text variant="lead">
+              Have a product that deserves a better interface? Tell me about it: I reply
+              within two working days.
+            </Text>
+          </Stack>
+
+          {/* An email address reads wrong in uppercase */}
+          <Button asChild variant="accent" size="lg" rounded className="normal-case">
+            <a href={`mailto:${person.email}`}>
+              <Icon as={Mail} />
+              {person.email}
+            </a>
+          </Button>
+
+          <Stack asChild direction="row" gap="2">
+            <ul aria-label="Social profiles">
+              {socials.map((social) => (
+                <li key={social.label}>
+                  <Button
+                    asChild
+                    variant="outline"
+                    size="sm"
+                    iconOnly
+                    rounded
+                    aria-label={social.label}
+                  >
+                    <a href={social.href} target="_blank" rel="noopener noreferrer">
+                      <Icon as={social.icon} />
+                    </a>
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          </Stack>
+        </Stack>
+      </Container>
+    </Section>
+  );
+}
+
+function SiteFooter() {
+  return (
+    <footer className="border-t py-8">
+      <Container>
+        <Stack
+          direction="row"
+          align="center"
+          justify="between"
+          gap="4"
+          wrap
+          className="text-sm text-muted-foreground"
+        >
+          <span>© 2026 {person.name}. All data on this page is fictional.</span>
+          <span>
+            Built only with the design system. <Link href="/demo">More demos</Link>
+          </span>
+        </Stack>
+      </Container>
+    </footer>
   );
 }
 
 export default function PortfolioDemoPage() {
   return (
     <div className="portfolio-theme min-h-dvh bg-background text-foreground">
-      <Container size="full" asChild className="max-w-(--breakpoint-2xl)">
-        <main>
-          <Section spacing="md">
-            <Grid
-              gap="8"
-              className="grid-cols-[minmax(0,1fr)] items-start xl:grid-cols-[22rem_minmax(0,1fr)]"
-            >
-              <Profile />
-
-              <Stack gap="12" className={cardClasses}>
-                <PageNav />
-
-                <Stack gap="6" id="about" className="scroll-mt-8">
-                  <Heading
-                    as="h1"
-                    className="max-w-5xl wrap-break-word hyphens-auto uppercase"
-                  >
-                    I build memorable frontend experiences for brands and products.
-                  </Heading>
-                  <Text variant="lead" className="max-w-2xl">
-                    I create polished websites, interactive portfolio showcases, and
-                    usable design systems with clean component architecture, fast
-                    performance, and a strong visual language.
-                  </Text>
-                  <Stack direction="row" gap="4" wrap>
-                    <Button asChild size="lg" variant="secondary">
-                      <a href="#projects">View portfolio</a>
-                    </Button>
-                    <Button
-                      asChild
-                      size="lg"
-                      variant="outline"
-                      className="border-accent-text text-accent-text hover:bg-accent hover:text-accent-foreground"
-                    >
-                      <a href="#contact">Get in touch</a>
-                    </Button>
-                  </Stack>
-                </Stack>
-
-                <Highlights />
-                <Projects />
-                <Skills />
-              </Stack>
-            </Grid>
-          </Section>
-
-          <Text
-            variant="small"
-            className="pb-section-sm text-center text-muted-foreground"
-          >
-            Built only from the design system&rsquo;s components and tokens.{" "}
-            <Link href="/">Back to the showcase</Link>
-          </Text>
-        </main>
-      </Container>
+      <SiteHeader />
+      <main>
+        <Hero />
+        <Tools />
+        <Services />
+        <Work />
+        <Experience />
+        <Testimonial />
+        <Contact />
+      </main>
+      <SiteFooter />
     </div>
   );
 }
