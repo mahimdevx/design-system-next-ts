@@ -59,3 +59,25 @@ test("section spacing is fluid: more room on wide screens", async ({ page }) => 
   expect(wide).toBeCloseTo(48, 0);
   expect(wide).toBeGreaterThan(narrow);
 });
+
+test.describe("portfolio demo", () => {
+  test("puts the profile beside the content on wide screens", async ({ page }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.goto("/demo/portfolio");
+
+    const profile = await page
+      .getByRole("complementary", { name: "Profile" })
+      .boundingBox();
+    const heading = await page.getByRole("heading", { level: 1 }).boundingBox();
+
+    expect(profile && heading && heading.x > profile.x + profile.width).toBe(true);
+  });
+
+  test("stacks on a phone without horizontal scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto("/demo/portfolio");
+
+    const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(pageWidth).toBeLessThanOrEqual(320);
+  });
+});

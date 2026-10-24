@@ -67,6 +67,10 @@ export default function FoundationsPage() {
                 <Text variant="lead">
                   Design tokens, type and core components, in light and dark mode.
                 </Text>
+                <Text variant="small" className="text-muted-foreground">
+                  See them in a full page: the{" "}
+                  <Link href="/demo/portfolio">portfolio demo</Link>.
+                </Text>
               </Stack>
 
               <ThemeToggle />

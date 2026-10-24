@@ -55,7 +55,11 @@ import { Section } from "@components/section";
 </Section>;
 ```
 
-Run `pnpm dev` to see every component in light and dark mode on the showcase page.
+Run `pnpm dev` to see every component in light and dark mode on the showcase page (`/`).
+
+`/demo/portfolio` is a full portfolio page built only from these components. Its gold,
+dark look comes from overriding tokens in a scoped class (`portfolio.css`), not from
+custom styles: the way to re-theme the system for a product.
 
 ## Getting started
 
@@ -88,7 +92,7 @@ Open http://localhost:3000.
 ```
 e2e/                        # Browser tests (Playwright): accessibility, layout, theming
 src/
-├── app/                    # Next.js routes: the component showcase
+├── app/                    # Next.js routes: the showcase and demo/portfolio
 ├── components/
 │   ├── button/             # One folder per component:
 │   │   ├── button.tsx      #   the component
@@ -99,7 +103,8 @@ src/
 │   └── …                   # container, grid, heading, icon, link, section, stack,
 │                           # text, theme-toggle, theme-provider
 ├── assets/
-│   └── icons/              # Custom SVG icons as React components (imported per file)
+│   ├── icons/              # Custom SVG icons as React components (imported per file)
+│   └── images/             # Raster images (imported for next/image)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
 └── utils/                  # cn() and the shared tv() setup
 ```
