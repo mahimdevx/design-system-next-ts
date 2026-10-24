@@ -11,14 +11,51 @@ built with Tailwind CSS v4 and Radix UI.
 
 ## Stack
 
-| Area      | Choice                                                       |
-| --------- | ------------------------------------------------------------ |
-| Framework | Next.js 16 (App Router, Turbopack, React Compiler), React 19 |
-| Language  | TypeScript 6, strict mode                                    |
-| Styling   | Tailwind CSS v4, tailwind-variants, design tokens in OKLCH   |
-| Tooling   | pnpm, ESLint 9, Prettier (import and Tailwind class sorting) |
-| Testing   | Vitest + Testing Library; Playwright + axe in three browsers |
-| CI        | GitHub Actions: typecheck, lint, format, tests, build per PR |
+| Area      | Choice                                                                           |
+| --------- | -------------------------------------------------------------------------------- |
+| Framework | Next.js 16 (App Router, Turbopack, React Compiler), React 19                     |
+| Language  | TypeScript 6, strict mode                                                        |
+| Styling   | Tailwind CSS v4, tailwind-variants, OKLCH color tokens, fluid type and spacing   |
+| Tooling   | pnpm, ESLint 9, Prettier (import and Tailwind class sorting)                     |
+| Testing   | Vitest + Testing Library; Playwright + axe in three browsers                     |
+| CI        | GitHub Actions per PR: typecheck, lint, format, unit tests, build, browser tests |
+
+## Components
+
+| Component                      | Use it for                                                                      |
+| ------------------------------ | ------------------------------------------------------------------------------- |
+| `Button`                       | Actions. 8 variants, 6 sizes, icon-only (requires a label), `asChild` for links |
+| `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`   |
+| `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                          |
+| `Text`                         | Running text: lead, p, small, caption, overline, label                          |
+| `Link`                         | Links with typed routes; `inline` (underlined) or `subtle`                      |
+| `Container`                    | Page width and fluid side padding                                               |
+| `Section`                      | Vertical spacing between page sections                                          |
+| `Stack`                        | Flex layout: column or row, gap, alignment                                      |
+| `Grid`                         | Grid layout: fixed `columns`, or `minItemWidth` for a self-responsive grid      |
+| `ThemeProvider`, `ThemeToggle` | Light, dark and system theme                                                    |
+
+```tsx
+import { Button } from "@components/button";
+import { Container } from "@components/container";
+import { Grid } from "@components/grid";
+import { Heading } from "@components/heading";
+import { Section } from "@components/section";
+
+<Section aria-labelledby="features">
+  <Container>
+    <Heading as="h2" id="features">
+      Features
+    </Heading>
+    <Grid minItemWidth="16rem" gap="6">
+      {/* 4 columns on desktop, 1 on a phone, no breakpoints */}
+    </Grid>
+    <Button>Get started</Button>
+  </Container>
+</Section>;
+```
+
+Run `pnpm dev` to see every component in light and dark mode on the showcase page.
 
 ## Getting started
 
@@ -49,6 +86,7 @@ Open http://localhost:3000.
 ## Project structure
 
 ```
+e2e/                        # Browser tests (Playwright): accessibility, layout, theming
 src/
 ├── app/                    # Next.js routes: the component showcase
 ├── components/
@@ -63,12 +101,11 @@ src/
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
-├── utils/                  # cn() and the shared tv() setup
-└── hooks/                  # Shared React hooks
+└── utils/                  # cn() and the shared tv() setup
 ```
 
-Imports use per-folder aliases: `@components/*`, `@assets/*`, `@styles/*`, `@utils/*`,
-`@hooks/*`.
+Imports use per-folder aliases: `@components/*`, `@assets/*`, `@styles/*`, `@utils/*`
+(and `@hooks/*`, reserved for shared hooks in `src/hooks/`).
 Import a component through its folder (`@components/button`), never its internal files.
 
 ## Contributing
