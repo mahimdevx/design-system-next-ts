@@ -98,12 +98,7 @@ const eslintConfig = defineConfig([
   // Browser tests: awaited assertions, web-first matchers, no fixed waits
   {
     files: ["e2e/**/*.ts"],
-    extends: [playwright.configs["flat/recommended"]],
-    rules: {
-      // Skipping for a known browser difference is fine (test.skip(condition, reason));
-      // an unconditional skip is still an error
-      "playwright/no-skipped-test": ["error", { allowConditional: { skip: true } }]
-    }
+    extends: [playwright.configs["flat/recommended"]]
   },
 
   // Must be last: turns off every rule that would fight Prettier's formatting
