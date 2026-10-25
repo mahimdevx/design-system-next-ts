@@ -7,6 +7,7 @@ import { Grid } from "@components/grid";
 import { Heading } from "@components/heading";
 import { Icon } from "@components/icon";
 import { Link } from "@components/link";
+import { Main } from "@components/main";
 import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Text } from "@components/text";
@@ -29,7 +30,7 @@ const demos = [
 export default function DemosPage() {
   return (
     <Container size="md" asChild>
-      <main>
+      <Main>
         <Section spacing="sm">
           <Stack gap="10">
             <Stack direction="row" align="start" justify="between" gap="4">
@@ -74,7 +75,7 @@ export default function DemosPage() {
             </Text>
           </Stack>
         </Section>
-      </main>
+      </Main>
     </Container>
   );
 }

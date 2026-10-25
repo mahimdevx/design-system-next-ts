@@ -10,6 +10,7 @@ import { Grid } from "@components/grid";
 import { Heading, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
 import { Link } from "@components/link";
+import { Main } from "@components/main";
 import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Text } from "@components/text";
@@ -516,7 +517,7 @@ export default function PortfolioDemoPage() {
   return (
     <div className="portfolio-theme min-h-dvh bg-background text-foreground">
       <SiteHeader />
-      <main>
+      <Main>
         <Hero />
         <Tools />
         <Services />
@@ -524,7 +525,7 @@ export default function PortfolioDemoPage() {
         <Experience />
         <Testimonial />
         <Contact />
-      </main>
+      </Main>
       <SiteFooter />
     </div>
   );

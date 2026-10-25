@@ -4,6 +4,7 @@ import { cn } from "@utils/cn";
 
 import { firaCode, poppins } from "@styles/fonts";
 
+import { SkipLink } from "@components/skip-link";
 import { ThemeProvider } from "@components/theme-provider";
 
 import "@styles/globals.css";
@@ -31,6 +32,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // next-themes sets the theme class on <html> before React hydrates
     <html lang="en" className={fontClasses} suppressHydrationWarning>
       <body>
+        {/* First focusable element on every page; jumps to <Main> */}
+        <SkipLink />
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

@@ -29,6 +29,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                          |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                          |
 | `Link`                         | Links with typed routes; `inline` (underlined) or `subtle`                      |
+| `Main`, `SkipLink`             | The page's main landmark, and the "Skip to content" link that jumps to it       |
 | `Container`                    | Page width and fluid side padding                                               |
 | `Section`                      | Vertical spacing between page sections                                          |
 | `Stack`                        | Flex layout: column or row, gap, alignment                                      |
@@ -101,8 +102,8 @@ src/
 │   │   ├── button.test.tsx #   behavior tests (Vitest)
 │   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
-│   └── …                   # container, grid, heading, icon, link, section, stack,
-│                           # text, theme-toggle, theme-provider
+│   └── …                   # container, grid, heading, icon, link, main, section,
+│                           # skip-link, stack, text, theme-toggle, theme-provider
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts

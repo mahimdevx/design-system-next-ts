@@ -4,6 +4,7 @@ import { useEffect } from "react";
 
 import { Button } from "@components/button";
 import { Heading } from "@components/heading";
+import { Main } from "@components/main";
 import { Text } from "@components/text";
 
 type ErrorProps = {
@@ -20,7 +21,7 @@ export default function ErrorPage({ error, retry }: ErrorProps) {
   }, [error]);
 
   return (
-    <main className="mx-auto flex max-w-xl flex-col items-start gap-4 px-4 py-24">
+    <Main className="mx-auto flex max-w-xl flex-col items-start gap-4 px-4 py-24">
       <Heading as="h1" size="h3">
         Something went wrong
       </Heading>
@@ -29,6 +30,6 @@ export default function ErrorPage({ error, retry }: ErrorProps) {
         the page.
       </Text>
       <Button onClick={() => retry()}>Try again</Button>
-    </main>
+    </Main>
   );
 }
