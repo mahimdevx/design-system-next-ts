@@ -23,7 +23,7 @@ const demos = [
     href: "/demo/portfolio",
     title: "Portfolio",
     description:
-      "A personal portfolio: sticky header, hero, bento services, project cards, timeline and contact. Re-themed through scoped tokens."
+      "A personal portfolio: sticky header, hero, bento services, project cards, timeline and contact, in the system's own theme."
   }
 ] as const;
 

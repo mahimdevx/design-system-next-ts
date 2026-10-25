@@ -28,8 +28,6 @@ import {
   tools
 } from "./data";
 
-import "./portfolio.css";
-
 export const metadata: Metadata = {
   title: "Portfolio demo",
   description:
@@ -515,7 +513,7 @@ function SiteFooter() {
 
 export default function PortfolioDemoPage() {
   return (
-    <div className="portfolio-theme min-h-dvh bg-background text-foreground">
+    <>
       <SiteHeader />
       <Main>
         <Hero />
@@ -527,6 +525,6 @@ export default function PortfolioDemoPage() {
         <Contact />
       </Main>
       <SiteFooter />
-    </div>
+    </>
   );
 }

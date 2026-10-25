@@ -58,10 +58,8 @@ import { Section } from "@components/section";
 
 Run `pnpm dev` to see every component in light and dark mode on the showcase page (`/`).
 
-`/demo` lists showcase pages: complete pages built only from these components, without
-changing the system. The portfolio demo (dummy data) gets its own gold look by overriding
-tokens in a scoped class (`portfolio.css`), which is how to re-theme the system for a
-product.
+`/demo` lists showcase pages: complete pages (such as a portfolio with dummy data) built
+only from these components and the system's own theme, without changing the system.
 
 ## Getting started
 
