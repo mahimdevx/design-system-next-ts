@@ -14,13 +14,18 @@ describe("Main", () => {
 
   test("passes other props through", () => {
     render(
-      <Main id="content" className="py-12" aria-label="Article">
+      <Main className="py-12" aria-label="Article">
         Content
       </Main>
     );
-    const main = screen.getByRole("main", { name: "Article" });
 
-    expect(main).toHaveAttribute("id", "content");
-    expect(main).toHaveClass("py-12");
+    expect(screen.getByRole("main", { name: "Article" })).toHaveClass("py-12");
+  });
+
+  test("keeps the skip link's target id even if an untyped caller passes one", () => {
+    // @ts-expect-error -- simulates untyped callers (JS) that pass an id
+    render(<Main id="content">Content</Main>);
+
+    expect(screen.getByRole("main")).toHaveAttribute("id", mainContentId);
   });
 });
