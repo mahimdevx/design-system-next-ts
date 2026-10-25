@@ -1,5 +1,6 @@
 import { ArrowRight, Check, Plus, Search } from "lucide-react";
 
+import { Badge } from "@components/badge";
 import { Button } from "@components/button";
 import { Container } from "@components/container";
 import { Grid } from "@components/grid";
@@ -50,7 +51,19 @@ const chartTokens = [
 
 const textVariantNames = ["lead", "p", "small", "caption", "overline", "label"] as const;
 
-const sections = ["colors", "typography", "buttons", "icons", "layout"];
+const badgeVariantNames = [
+  "primary",
+  "secondary",
+  "accent",
+  "soft",
+  "outline",
+  "muted",
+  "success",
+  "warning",
+  "destructive"
+] as const;
+
+const sections = ["colors", "typography", "buttons", "badges", "icons", "layout"];
 
 export default function FoundationsPage() {
   const sampleClasses =
@@ -200,6 +213,35 @@ export default function FoundationsPage() {
               <Button variant="soft" asChild>
                 <a href="#buttons">Link as button</a>
               </Button>
+            </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="badges">
+          <Stack>
+            <Heading as="h2" size="h3" id="badges">
+              Badges
+            </Heading>
+
+            <Stack direction="row" align="center" gap="3" wrap>
+              {badgeVariantNames.map((variant) => (
+                <Badge key={variant} variant={variant}>
+                  {variant}
+                </Badge>
+              ))}
+            </Stack>
+
+            <Stack direction="row" align="center" gap="3" wrap>
+              <Badge variant="success" rounded>
+                <Icon as={Check} />
+                Published
+              </Badge>
+              <Badge variant="muted" rounded>
+                Design systems
+              </Badge>
+              <Badge variant="outline" rounded asChild>
+                <a href="#badges">Link badge</a>
+              </Badge>
             </Stack>
           </Stack>
         </Section>
