@@ -124,10 +124,11 @@ function SiteHeader() {
 
             <Stack direction="row" align="center" gap="2">
               <ThemeToggle />
-              <Button asChild variant="outline" size="sm">
+              <Button asChild variant="outline" size="sm" className="max-sm:px-3">
                 <a href="#latest">
                   <Icon as={ShoppingBag} />
-                  Cart
+                  {/* Icon and count only on phones; the name stays for screen readers */}
+                  <span className="max-sm:sr-only">Cart</span>
                   <Badge variant="accent" className="h-5 px-1.5">
                     2<span className="sr-only"> items</span>
                   </Badge>
