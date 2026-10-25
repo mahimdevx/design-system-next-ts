@@ -59,3 +59,36 @@ test("section spacing is fluid: more room on wide screens", async ({ page }) => 
   expect(wide).toBeCloseTo(48, 0);
   expect(wide).toBeGreaterThan(narrow);
 });
+
+test.describe("portfolio demo", () => {
+  test("keeps the header in view while scrolling, and anchors land below it", async ({
+    page
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    // Instant jumps instead of smooth scrolling, so positions are final when measured
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/demo/portfolio");
+
+    await page
+      .getByRole("navigation", { name: "Page sections" })
+      .getByRole("link", { name: "Experience" })
+      .click();
+
+    const header = await page.getByRole("banner").boundingBox();
+    const heading = await page
+      .getByRole("heading", { level: 2, name: "Experience" })
+      .boundingBox();
+
+    // Sticky header still at the top; the section heading is not hidden under it
+    expect(header?.y).toBe(0);
+    expect(heading && header && heading.y >= header.height).toBe(true);
+  });
+
+  test("stacks on a phone without horizontal scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto("/demo/portfolio");
+
+    const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(pageWidth).toBeLessThanOrEqual(320);
+  });
+});
