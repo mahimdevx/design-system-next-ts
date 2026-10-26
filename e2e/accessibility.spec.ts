@@ -8,7 +8,8 @@ const axeTags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-p
 const pages = [
   { name: "showcase", path: "/" },
   { name: "demos index", path: "/demo" },
-  { name: "portfolio demo", path: "/demo/portfolio" }
+  { name: "portfolio demo", path: "/demo/portfolio" },
+  { name: "store demo", path: "/demo/store" }
 ];
 
 for (const colorScheme of ["light", "dark"] as const) {

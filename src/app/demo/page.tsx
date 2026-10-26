@@ -23,6 +23,12 @@ const demos = [
     title: "Portfolio",
     description:
       "A personal portfolio: sticky header, hero, bento services, project cards, timeline and contact, in the system's own theme."
+  },
+  {
+    href: "/demo/store",
+    title: "Store",
+    description:
+      "An esports apparel store home page: announcement bar, product hero, order paths, product grid, team pricing and a full footer."
   }
 ] as const;
 
