@@ -2,7 +2,7 @@ import type { CSSProperties, ReactNode } from "react";
 
 import type { Metadata } from "next";
 
-import { ArrowRight, Headset, ShoppingBag } from "lucide-react";
+import { ArrowRight, ShoppingBag } from "lucide-react";
 
 import { cn } from "@utils/cn";
 
@@ -450,46 +450,64 @@ function SiteFooter() {
   return (
     <footer className="border-t">
       <Container>
-        <Grid gap="8" align="center" className="border-b py-10 md:grid-cols-3">
-          <Stack direction="row" align="center" gap="4">
+        <Grid gap="8" align="center" className="border-b py-12 md:grid-cols-3">
+          <a
+            href="#top"
+            className="flex items-center gap-4 justify-self-start rounded-md outline-hidden focus-visible:ring-3 focus-visible:ring-ring/50"
+          >
             <span className="flex size-14 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
               <RaphixLogo className="h-6 w-auto" />
             </span>
-            <div>
-              <p className={cn(headingVariants({ size: "h5" }), displayClasses)}>
+            <span>
+              <span
+                className={cn(headingVariants({ size: "h5" }), displayClasses, "block")}
+              >
                 {store.fullName}
-              </p>
-              <Text variant="small" className="text-muted-foreground">
+              </span>
+              <Text as="span" variant="small" className="text-muted-foreground">
                 {store.tagline}
               </Text>
-            </div>
-          </Stack>
-          <Text variant="small" className="max-w-sm text-muted-foreground">
+            </span>
+          </a>
+
+          <Text className="max-w-sm text-muted-foreground md:justify-self-center">
             Custom sublimated kits for players, teams and brands. Printed in-house,
             shipped to 60+ countries.
           </Text>
-          <Stack direction="row" align="center" gap="3" className="md:justify-self-end">
-            <Icon as={Headset} size="lg" className="text-accent-text" />
-            <div>
+
+          <Stack direction="row" align="center" gap="4" className="md:justify-self-end">
+            <div className="md:text-right">
               <Overline>Hotline, free 24/7</Overline>
-              <p className="font-mono text-lg font-bold">{store.hotline}</p>
+              <p className="mt-1 font-mono text-xl font-bold sm:text-2xl">
+                {store.hotline}
+              </p>
             </div>
+            <span
+              aria-hidden="true"
+              className="flex size-14 shrink-0 items-center justify-center rounded-md border font-mono text-xs font-bold text-accent-text"
+            >
+              24/7
+            </span>
           </Stack>
         </Grid>
 
-        <Grid columns="2" gap="8" className="py-10 md:grid-cols-3">
+        <Grid columns="2" gap="10" className="py-12 md:grid-cols-3 lg:grid-cols-5">
           {footerColumns.map((column) => (
             <nav key={column.title} aria-label={column.title}>
-              <Stack gap="3">
+              <Stack gap="4">
                 <Heading as="h2" size="h6" className={displayClasses}>
                   {column.title}
                 </Heading>
-                <Stack asChild gap="2">
+                <Stack asChild gap="3">
                   <ul>
                     {column.links.map((label) => (
                       <li key={label}>
                         {/* The other store screens are not built: links return to the top */}
-                        <Link href="#top" variant="subtle" className="text-sm">
+                        <Link
+                          href="#top"
+                          variant="subtle"
+                          className="text-sm font-medium tracking-wide uppercase hover:text-accent-text"
+                        >
                           {label}
                         </Link>
                       </li>
@@ -499,32 +517,77 @@ function SiteFooter() {
               </Stack>
             </nav>
           ))}
+
+          <Newsletter />
         </Grid>
 
-        <Stack
-          direction="row"
-          align="center"
-          justify="between"
-          gap="4"
-          wrap
-          className="border-t py-6 text-sm text-muted-foreground"
-        >
-          <span>
-            © 2026 {store.fullName}. All data on this page is fictional.{" "}
-            <Link href="/demo">More demos</Link>
-          </span>
-          <Stack asChild direction="row" gap="2" wrap>
+        <Grid gap="4" align="center" className="border-t py-6 md:grid-cols-3">
+          <Text as="span" variant="caption" className="font-mono tracking-wide uppercase">
+            Copyright © 2026, {store.fullName} Ltd.
+          </Text>
+          <Link
+            href="/"
+            variant="subtle"
+            className={cn(
+              headingVariants({ size: "h6" }),
+              displayClasses,
+              "justify-self-start text-foreground hover:text-accent-text md:justify-self-center"
+            )}
+          >
+            &lt;Know the developer /&gt;
+          </Link>
+          <Stack asChild direction="row" gap="2" wrap className="md:justify-end">
             <ul aria-label="Payment methods">
               {paymentMethods.map((method) => (
                 <li key={method}>
-                  <Badge variant="muted">{method}</Badge>
+                  <Badge
+                    variant="muted"
+                    className="h-7 border-border bg-card font-mono text-card-foreground"
+                  >
+                    {method}
+                  </Badge>
                 </li>
               ))}
             </ul>
           </Stack>
-        </Stack>
+        </Grid>
       </Container>
     </footer>
+  );
+}
+
+// Demo only: the system has no Input component yet, and nothing receives the form
+function Newsletter() {
+  return (
+    <Stack
+      gap="4"
+      className="col-span-2 md:col-span-3 lg:col-span-2 lg:items-end lg:text-right"
+    >
+      <Heading as="h2" size="h6" className={displayClasses}>
+        Receive offers &amp; discounts
+      </Heading>
+      <Text variant="small" className="text-muted-foreground">
+        New drops, restocks and team discount codes, straight to your inbox.
+      </Text>
+      <form className="flex w-full max-w-md gap-2 rounded-md border bg-card p-1.5 focus-within:ring-3 focus-within:ring-ring/50">
+        <label htmlFor="newsletter-email" className="sr-only">
+          Email address
+        </label>
+        <input
+          id="newsletter-email"
+          type="email"
+          name="email"
+          autoComplete="email"
+          required
+          placeholder="Email address"
+          className="min-w-0 flex-1 bg-transparent px-3 text-base outline-hidden placeholder:text-muted-foreground"
+        />
+        <Button type="submit" variant="accent" size="sm">
+          Subscribe
+        </Button>
+      </form>
+      <Text variant="caption">We will never share your email with third parties.</Text>
+    </Stack>
   );
 }
 
