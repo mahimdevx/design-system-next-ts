@@ -92,3 +92,35 @@ test.describe("portfolio demo", () => {
     expect(pageWidth).toBeLessThanOrEqual(320);
   });
 });
+
+test.describe("store demo", () => {
+  test("keeps the header in view while scrolling, and anchors land below it", async ({
+    page
+  }) => {
+    await page.setViewportSize({ width: 1440, height: 900 });
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/demo/store");
+
+    await page
+      .getByRole("navigation", { name: "Store sections" })
+      .getByRole("link", { name: "How it works" })
+      .click();
+
+    const header = await page.getByRole("banner").boundingBox();
+    const heading = await page
+      .getByRole("heading", { level: 2, name: "How it works" })
+      .boundingBox();
+
+    // The announcement bar scrolls away; the header sticks and doesn't cover the heading
+    expect(header?.y).toBe(0);
+    expect(heading && header && heading.y >= header.height).toBe(true);
+  });
+
+  test("stacks on a phone without horizontal scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto("/demo/store");
+
+    const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(pageWidth).toBeLessThanOrEqual(320);
+  });
+});
