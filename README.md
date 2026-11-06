@@ -22,18 +22,19 @@ built with Tailwind CSS v4 and Radix UI.
 
 ## Components
 
-| Component                      | Use it for                                                                      |
-| ------------------------------ | ------------------------------------------------------------------------------- |
-| `Button`                       | Actions. 8 variants, 6 sizes, icon-only (requires a label), `asChild` for links |
-| `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`   |
-| `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                          |
-| `Text`                         | Running text: lead, p, small, caption, overline, label                          |
-| `Link`                         | Links with typed routes; `inline` (underlined) or `subtle`                      |
-| `Container`                    | Page width and fluid side padding                                               |
-| `Section`                      | Vertical spacing between page sections                                          |
-| `Stack`                        | Flex layout: column or row, gap, alignment                                      |
-| `Grid`                         | Grid layout: fixed `columns`, or `minItemWidth` for a self-responsive grid      |
-| `ThemeProvider`, `ThemeToggle` | Light, dark and system theme                                                    |
+| Component                      | Use it for                                                                         |
+| ------------------------------ | ---------------------------------------------------------------------------------- |
+| `Button`                       | Actions. 8 variants, 6 sizes, icon-only (requires a label), `asChild` for links    |
+| `Badge`                        | Short labels: status, category, count. 9 variants, pill shape, `asChild` for links |
+| `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
+| `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
+| `Text`                         | Running text: lead, p, small, caption, overline, label                             |
+| `Link`                         | Links with typed routes; `inline` (underlined) or `subtle`                         |
+| `Container`                    | Page width and fluid side padding                                                  |
+| `Section`                      | Vertical spacing between page sections                                             |
+| `Stack`                        | Flex layout: column or row, gap, alignment                                         |
+| `Grid`                         | Grid layout: fixed `columns`, or `minItemWidth` for a self-responsive grid         |
+| `ThemeProvider`, `ThemeToggle` | Light, dark and system theme                                                       |
 
 ```tsx
 import { Button } from "@components/button";
@@ -57,7 +58,8 @@ import { Section } from "@components/section";
 
 Run `pnpm dev` to see every component in light and dark mode on the showcase page (`/`).
 
-`/demo` lists showcase pages: complete pages (such as a portfolio with dummy data) built
+`/demo` lists showcase pages: complete pages with dummy data (a portfolio and an esports
+apparel store home page) built
 only from these components and the system's own theme, without changing the system.
 
 ## Getting started
@@ -99,8 +101,8 @@ src/
 │   │   ├── button.test.tsx #   behavior tests (Vitest)
 │   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
-│   └── …                   # container, grid, heading, icon, link, section, stack,
-│                           # text, theme-toggle, theme-provider
+│   └── …                   # badge, container, grid, heading, icon, link, section,
+│                           # stack, text, theme-toggle, theme-provider
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
