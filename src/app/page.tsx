@@ -1,5 +1,16 @@
-import { ArrowRight, Check, Plus, Search } from "lucide-react";
+import {
+  ArrowRight,
+  Bell,
+  Check,
+  CircleCheck,
+  CircleX,
+  Info,
+  Plus,
+  Search,
+  TriangleAlert
+} from "lucide-react";
 
+import { Alert, AlertAction, AlertDescription, AlertTitle } from "@components/alert";
 import { Badge } from "@components/badge";
 import { Button } from "@components/button";
 import { Container } from "@components/container";
@@ -63,7 +74,27 @@ const badgeVariantNames = [
   "destructive"
 ] as const;
 
-const sections = ["colors", "typography", "buttons", "badges", "icons", "layout"];
+const alertSamples = [
+  { variant: "primary", icon: Info },
+  { variant: "secondary", icon: Info },
+  { variant: "accent", icon: Info },
+  { variant: "soft", icon: Info },
+  { variant: "outline", icon: Info },
+  { variant: "muted", icon: Info },
+  { variant: "success", icon: CircleCheck },
+  { variant: "warning", icon: TriangleAlert },
+  { variant: "destructive", icon: CircleX }
+] as const;
+
+const sections = [
+  "colors",
+  "typography",
+  "buttons",
+  "badges",
+  "alerts",
+  "icons",
+  "layout"
+];
 
 export default function FoundationsPage() {
   const sampleClasses =
@@ -242,6 +273,47 @@ export default function FoundationsPage() {
               <Badge variant="outline" rounded asChild>
                 <a href="#badges">Link badge</a>
               </Badge>
+            </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="alerts">
+          <Stack>
+            <Heading as="h2" size="h3" id="alerts">
+              Alerts
+            </Heading>
+
+            <Stack gap="3">
+              {alertSamples.map(({ variant, icon }) => (
+                <Alert key={variant} variant={variant}>
+                  <Icon as={icon} />
+                  <AlertTitle>{variant} alert</AlertTitle>
+                  <AlertDescription>
+                    A short description of what happened and{" "}
+                    <Link href="#alerts">what to do next</Link>.
+                  </AlertDescription>
+                </Alert>
+              ))}
+
+              <Alert variant="outline">
+                <Icon as={Bell} />
+                <AlertTitle>With an action</AlertTitle>
+                <AlertDescription>
+                  The action stays beside the text, however long the text is, and moves
+                  below it on a phone.
+                </AlertDescription>
+                <AlertAction>
+                  <Button variant="outline" size="xs">
+                    Undo
+                  </Button>
+                </AlertAction>
+              </Alert>
+
+              <Alert variant="muted">
+                <AlertDescription>
+                  Just a description: no icon, no title, no action.
+                </AlertDescription>
+              </Alert>
             </Stack>
           </Stack>
         </Section>
