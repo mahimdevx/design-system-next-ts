@@ -113,6 +113,7 @@
   --color-accent-text: var(--accent-text);
   --color-destructive-text: var(--destructive-text);
   --color-success-text: var(--success-text);
+  --color-warning-text: var(--warning-text);
 
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
