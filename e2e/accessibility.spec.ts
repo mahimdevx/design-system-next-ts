@@ -9,7 +9,8 @@ const pages = [
   { name: "showcase", path: "/" },
   { name: "demos index", path: "/demo" },
   { name: "portfolio demo", path: "/demo/portfolio" },
-  { name: "store demo", path: "/demo/store" }
+  { name: "store demo", path: "/demo/store" },
+  { name: "card examples demo", path: "/demo/cards" }
 ];
 
 for (const colorScheme of ["light", "dark"] as const) {

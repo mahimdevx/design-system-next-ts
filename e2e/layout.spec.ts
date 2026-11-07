@@ -153,3 +153,26 @@ test("a heading inside a card title looks like a plain title", async ({ page }) 
     await expect(heading).toHaveCSS(property, expected);
   }
 });
+
+test.describe("card examples demo", () => {
+  test("stacks on a phone without horizontal scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto("/demo/cards");
+
+    const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(pageWidth).toBeLessThanOrEqual(320);
+  });
+
+  test("the carousel scrolls by itself, and from the keyboard", async ({ page }) => {
+    await page.setViewportSize({ width: 800, height: 700 });
+    await page.goto("/demo/cards");
+
+    const carousel = page.getByRole("region", { name: "Podcasts carousel" });
+    await carousel.focus();
+    await page.keyboard.press("ArrowRight");
+
+    await expect
+      .poll(() => carousel.evaluate((element) => element.scrollLeft))
+      .toBeGreaterThan(0);
+  });
+});
