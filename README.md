@@ -27,7 +27,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Button`                       | Actions. 8 variants, 6 sizes, icon-only (requires a label), `asChild` for links    |
 | `Badge`                        | Short labels: status, category, count. 9 variants, pill shape, `asChild` for links |
 | `Alert`                        | Page messages with icon, title, description and action. 9 variants                 |
-| `Card`                         | Content surface with header, action, content and footer. 3 sizes, `asChild`        |
+| `Card`                         | Content surface with header, action, content and footer. 2 sizes, `asChild`        |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
