@@ -60,8 +60,8 @@ import { Section } from "@components/section";
 
 Run `pnpm dev` to see every component in light and dark mode on the showcase page (`/`).
 
-`/demo` lists showcase pages: complete pages with dummy data (a portfolio and an esports
-apparel store home page) built
+`/demo` lists showcase pages: complete pages with dummy data (a portfolio, an esports
+apparel store home page and Card examples) built
 only from these components and the system's own theme, without changing the system.
 
 ## Getting started

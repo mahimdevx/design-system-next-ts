@@ -29,6 +29,12 @@ const demos = [
     title: "Store",
     description:
       "An esports apparel store home page: announcement bar, product hero, order paths, product grid, team pricing and a full footer."
+  },
+  {
+    href: "/demo/cards",
+    title: "Cards",
+    description:
+      "The Card component arranged like the Material Design 3 examples: variants, anatomy, actions, collections and adaptive layouts."
   }
 ] as const;
 
