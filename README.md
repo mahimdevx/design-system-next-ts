@@ -28,6 +28,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Badge`                        | Short labels: status, category, count. 9 variants, pill shape, `asChild` for links |
 | `Alert`                        | Page messages with icon, title, description and action. 9 variants                 |
 | `Card`                         | Content surface with header, action, content and footer. 2 sizes, `asChild`        |
+| `Avatar`                       | A person or brand's image with a fallback for loading and errors. 2 sizes          |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
@@ -103,7 +104,7 @@ src/
 │   │   ├── button.test.tsx #   behavior tests (Vitest)
 │   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
-│   └── …                   # alert, badge, card, container, grid, heading, icon, link, section,
+│   └── …                   # alert, avatar, badge, card, container, grid, heading, icon, link, section,
 │                           # stack, text, theme-toggle, theme-provider
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)

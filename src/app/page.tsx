@@ -7,10 +7,12 @@ import {
   Info,
   Plus,
   Search,
-  TriangleAlert
+  TriangleAlert,
+  User
 } from "lucide-react";
 
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@components/alert";
+import { Avatar, AvatarFallback, AvatarImage } from "@components/avatar";
 import { Badge } from "@components/badge";
 import { Button } from "@components/button";
 import {
@@ -95,6 +97,10 @@ const alertSamples = [
   { variant: "destructive", icon: CircleX }
 ] as const;
 
+// A small inline image, so the sample needs no file or remote host
+const avatarSample =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%232f6bff'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23fff'/%3E%3Ccircle cx='20' cy='38' r='14' fill='%23fff'/%3E%3C/svg%3E";
+
 const sections = [
   "colors",
   "typography",
@@ -102,6 +108,7 @@ const sections = [
   "badges",
   "alerts",
   "cards",
+  "avatars",
   "icons",
   "layout"
 ];
@@ -398,6 +405,41 @@ export default function FoundationsPage() {
                 </a>
               </Card>
             </Grid>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="avatars">
+          <Stack>
+            <Heading as="h2" size="h3" id="avatars">
+              Avatars
+            </Heading>
+
+            <Stack direction="row" align="center" gap="4" wrap>
+              <Avatar size="sm">
+                <AvatarImage src={avatarSample} alt="Small sample person" />
+                <AvatarFallback>SP</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarImage src={avatarSample} alt="Sample person" />
+                <AvatarFallback>SP</AvatarFallback>
+              </Avatar>
+              <Avatar size="sm">
+                <AvatarFallback>MO</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarFallback>MO</AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarFallback>
+                  <Icon as={User} />
+                </AvatarFallback>
+              </Avatar>
+              <Avatar>
+                <AvatarFallback className="bg-accent text-accent-foreground">
+                  RX
+                </AvatarFallback>
+              </Avatar>
+            </Stack>
           </Stack>
         </Section>
 
