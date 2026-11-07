@@ -7,7 +7,9 @@ export const alertVariants = tv({
       // Icons inside follow the alert (see Icon). The tracks collapse without an icon or action
       "[--icon-size:1.25rem] [&>svg]:col-start-1 [&>svg]:row-span-2 [&>svg]:mt-0.5 [&>svg]:mr-3"
     ],
-    title: "col-start-2 text-base leading-6 font-semibold text-balance",
+    // A heading inside keeps this look: the base layer would size it as a page heading
+    title:
+      "col-start-2 text-base leading-6 font-semibold text-balance [&>*]:tracking-[inherit] [&>*]:[font:inherit]",
     // Links take the alert's color: the accent text color fails contrast on filled variants
     description:
       "col-start-2 text-sm leading-6 text-pretty [&_a]:text-inherit [&_a]:decoration-current",

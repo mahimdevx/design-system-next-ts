@@ -21,19 +21,14 @@ export function Alert({ variant = "primary", className, ...props }: AlertProps) 
   );
 }
 
-type AlertTitleProps = ComponentProps<"p"> & {
-  /** Plain text by default. Use a heading only if the alert belongs in the page outline. */
-  as?: "p" | "h2" | "h3" | "h4" | "h5" | "h6";
-};
-
-export function AlertTitle({
-  as: Component = "p",
-  className,
-  ...props
-}: AlertTitleProps) {
+/*
+ * Plain text, so alerts stay out of the page outline. If one belongs there, put a heading
+ * of the right level inside: <AlertTitle><h2>Payment failed</h2></AlertTitle>.
+ */
+export function AlertTitle({ className, ...props }: ComponentProps<"div">) {
   const titleClasses = title({ className });
 
-  return <Component data-slot="alert-title" className={titleClasses} {...props} />;
+  return <div data-slot="alert-title" className={titleClasses} {...props} />;
 }
 
 export function AlertDescription({ className, ...props }: ComponentProps<"div">) {

@@ -3,14 +3,14 @@
 import { Alert, AlertTitle } from "./alert";
 
 export const status = <Alert variant="success">Saved</Alert>;
-export const heading = <AlertTitle as="h3">Saved</AlertTitle>;
+export const title = <AlertTitle>Saved</AlertTitle>;
 
 export const unknownVariant = (
   // @ts-expect-error -- only the variants in alert.styles.ts
   <Alert variant="info">Info</Alert>
 );
 
-export const pageTitle = (
-  // @ts-expect-error -- an alert never holds the page's h1
-  <AlertTitle as="h1">Saved</AlertTitle>
+export const headingProp = (
+  // @ts-expect-error -- no `as`: a heading goes inside the title
+  <AlertTitle as="h3">Saved</AlertTitle>
 );
