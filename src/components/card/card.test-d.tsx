@@ -7,7 +7,7 @@ export const title = <CardTitle>Pricing</CardTitle>;
 
 export const unknownSize = (
   // @ts-expect-error -- only the sizes in card.styles.ts
-  <Card size="xl">Content</Card>
+  <Card size="lg">Content</Card>
 );
 
 export const headingProp = (

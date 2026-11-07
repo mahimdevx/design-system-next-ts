@@ -9,7 +9,7 @@ export const alertVariants = tv({
     ],
     // A heading inside keeps this look: the base layer would size it as a page heading
     title:
-      "col-start-2 text-base leading-6 font-semibold text-balance [&>*]:tracking-[inherit] [&>*]:[font:inherit]",
+      "col-start-2 text-base leading-6 font-semibold text-balance *:tracking-[inherit] *:[font:inherit]",
     // Links take the alert's color: the accent text color fails contrast on filled variants
     description:
       "col-start-2 text-sm leading-6 text-pretty [&_a]:text-inherit [&_a]:decoration-current",

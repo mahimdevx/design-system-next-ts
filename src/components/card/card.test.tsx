@@ -23,7 +23,7 @@ describe("Card", () => {
     expect(card).toHaveAttribute("data-size", "md");
   });
 
-  test.each(["sm", "md", "lg"] as const)("size=%s is exposed as data-size", (size) => {
+  test.each(["sm", "md"] as const)("size=%s is exposed as data-size", (size) => {
     render(<Card size={size}>Content</Card>);
 
     expect(screen.getByText("Content")).toHaveAttribute("data-size", size);

@@ -378,13 +378,6 @@ export default function FoundationsPage() {
                 </CardContent>
               </Card>
 
-              <Card size="lg">
-                <CardHeader>
-                  <CardTitle>Large</CardTitle>
-                  <CardDescription>More room for feature tiles.</CardDescription>
-                </CardHeader>
-              </Card>
-
               <Card>
                 <CardHeader>
                   <CardTitle>
