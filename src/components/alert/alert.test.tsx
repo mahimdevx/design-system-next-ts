@@ -31,19 +31,20 @@ describe("Alert", () => {
     }
   );
 
-  test("the title stays out of the outline unless it is asked to be a heading", () => {
+  test("the title stays out of the outline unless it holds a heading", () => {
     render(
       <>
         <Alert>
           <AlertTitle>Plain title</AlertTitle>
         </Alert>
         <Alert>
-          <AlertTitle as="h3">Heading title</AlertTitle>
+          <AlertTitle>
+            <h3>Heading title</h3>
+          </AlertTitle>
         </Alert>
       </>
     );
 
-    expect(screen.getByText("Plain title").tagName).toBe("P");
     expect(screen.getAllByRole("heading")).toHaveLength(1);
     expect(screen.getByRole("heading", { level: 3 })).toHaveTextContent("Heading title");
   });

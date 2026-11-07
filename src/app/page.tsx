@@ -309,6 +309,16 @@ export default function FoundationsPage() {
                 </AlertAction>
               </Alert>
 
+              <Alert variant="outline">
+                <Icon as={Info} />
+                <AlertTitle>
+                  <h3>Heading in the title</h3>
+                </AlertTitle>
+                <AlertDescription>
+                  In the page outline, with the same look as any other title.
+                </AlertDescription>
+              </Alert>
+
               <Alert variant="muted">
                 <AlertDescription>
                   Just a description: no icon, no title, no action.

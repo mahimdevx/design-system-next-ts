@@ -124,3 +124,13 @@ test.describe("store demo", () => {
     expect(pageWidth).toBeLessThanOrEqual(320);
   });
 });
+
+test("a heading inside an alert title looks like a plain title", async ({ page }) => {
+  await page.goto("/");
+
+  const heading = page.getByRole("heading", { level: 3, name: "Heading in the title" });
+
+  await expect(heading).toHaveCSS("font-size", "16px");
+  await expect(heading).toHaveCSS("line-height", "24px");
+  await expect(heading).toHaveCSS("font-weight", "600");
+});
