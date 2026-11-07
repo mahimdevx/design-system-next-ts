@@ -134,3 +134,22 @@ test("a heading inside an alert title looks like a plain title", async ({ page }
   await expect(heading).toHaveCSS("line-height", "24px");
   await expect(heading).toHaveCSS("font-weight", "600");
 });
+
+test("a heading inside a card title looks like a plain title", async ({ page }) => {
+  await page.goto("/");
+
+  const heading = page.getByRole("heading", {
+    level: 3,
+    name: "Heading in a card title"
+  });
+  const plain = page.getByText("Every part", { exact: true });
+
+  for (const property of ["font-size", "line-height", "font-weight"]) {
+    const expected = await plain.evaluate(
+      (element, name) => getComputedStyle(element).getPropertyValue(name),
+      property
+    );
+
+    await expect(heading).toHaveCSS(property, expected);
+  }
+});

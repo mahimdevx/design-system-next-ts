@@ -13,6 +13,15 @@ import {
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@components/alert";
 import { Badge } from "@components/badge";
 import { Button } from "@components/button";
+import {
+  Card,
+  CardAction,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@components/card";
 import { Container } from "@components/container";
 import { Grid } from "@components/grid";
 import { Heading, headingElements, headingVariants } from "@components/heading";
@@ -92,6 +101,7 @@ const sections = [
   "buttons",
   "badges",
   "alerts",
+  "cards",
   "icons",
   "layout"
 ];
@@ -325,6 +335,76 @@ export default function FoundationsPage() {
                 </AlertDescription>
               </Alert>
             </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="cards">
+          <Stack>
+            <Heading as="h2" size="h3" id="cards">
+              Cards
+            </Heading>
+
+            <Grid minItemWidth="18rem" gap="4">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Every part</CardTitle>
+                  <CardDescription>Header, action, content and footer.</CardDescription>
+                  <CardAction>
+                    <Button variant="outline" size="xs">
+                      Edit
+                    </Button>
+                  </CardAction>
+                </CardHeader>
+                <CardContent>
+                  <Text variant="small">
+                    Every part is optional, so use only what you need.
+                  </Text>
+                </CardContent>
+                <CardFooter>
+                  <Button size="xs">Save</Button>
+                  <Button variant="outline" size="xs">
+                    Cancel
+                  </Button>
+                </CardFooter>
+              </Card>
+
+              <Card size="sm">
+                <CardHeader>
+                  <CardTitle>Small</CardTitle>
+                  <CardDescription>Tighter padding on every part.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Text variant="small">One size prop on the card.</Text>
+                </CardContent>
+              </Card>
+
+              <Card size="lg">
+                <CardHeader>
+                  <CardTitle>Large</CardTitle>
+                  <CardDescription>More room for feature tiles.</CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>
+                    <h3>Heading in a card title</h3>
+                  </CardTitle>
+                  <CardDescription>
+                    In the page outline, with the same look.
+                  </CardDescription>
+                </CardHeader>
+              </Card>
+
+              <Card asChild>
+                <a href="#cards">
+                  <CardHeader>
+                    <CardTitle>Link card</CardTitle>
+                    <CardDescription>The whole card is clickable.</CardDescription>
+                  </CardHeader>
+                </a>
+              </Card>
+            </Grid>
           </Stack>
         </Section>
 
