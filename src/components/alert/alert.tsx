@@ -2,12 +2,9 @@ import type { ComponentProps } from "react";
 
 import type { VariantProps } from "@utils/tv";
 
-import {
-  alertActionVariants,
-  alertDescriptionVariants,
-  alertTitleVariants,
-  alertVariants
-} from "./alert.styles";
+import { alertVariants } from "./alert.styles";
+
+const { root, title, description, action } = alertVariants();
 
 type AlertProps = ComponentProps<"div"> & VariantProps<typeof alertVariants>;
 
@@ -17,7 +14,7 @@ type AlertProps = ComponentProps<"div"> & VariantProps<typeof alertVariants>;
  * enough to interrupt a screen reader.
  */
 export function Alert({ variant = "primary", className, ...props }: AlertProps) {
-  const alertClasses = alertVariants({ variant, className });
+  const alertClasses = root({ variant, className });
 
   return (
     <div data-slot="alert" data-variant={variant} className={alertClasses} {...props} />
@@ -34,19 +31,19 @@ export function AlertTitle({
   className,
   ...props
 }: AlertTitleProps) {
-  const titleClasses = alertTitleVariants({ className });
+  const titleClasses = title({ className });
 
   return <Component data-slot="alert-title" className={titleClasses} {...props} />;
 }
 
 export function AlertDescription({ className, ...props }: ComponentProps<"div">) {
-  const descriptionClasses = alertDescriptionVariants({ className });
+  const descriptionClasses = description({ className });
 
   return <div data-slot="alert-description" className={descriptionClasses} {...props} />;
 }
 
 export function AlertAction({ className, ...props }: ComponentProps<"div">) {
-  const actionClasses = alertActionVariants({ className });
+  const actionClasses = action({ className });
 
   return <div data-slot="alert-action" className={actionClasses} {...props} />;
 }
