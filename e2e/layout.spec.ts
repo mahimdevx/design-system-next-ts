@@ -176,3 +176,12 @@ test.describe("card examples demo", () => {
       .toBeGreaterThan(0);
   });
 });
+
+test("an avatar image replaces the fallback in the browser", async ({ page }) => {
+  await page.goto("/");
+
+  const image = page.getByRole("img", { name: "Sample person", exact: true });
+
+  await expect(image).toBeVisible();
+  await expect(image).toHaveCSS("width", "40px");
+});
