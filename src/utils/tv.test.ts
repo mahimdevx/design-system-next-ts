@@ -2,7 +2,7 @@ import { describe, expect, test } from "vitest";
 
 import { tv } from "./tv";
 
-// tv() from @utils/tv carries twMergeConfig, so recipes know the custom scales too
+// tv() from @utils/tv carries the configured tailwind-merge, so recipes know the custom scales
 describe("tv", () => {
   test("keeps a custom text size next to a text color passed as className", () => {
     const title = tv({ base: "text-h1" });

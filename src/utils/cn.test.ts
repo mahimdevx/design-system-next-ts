@@ -15,7 +15,7 @@ describe("cn", () => {
     expect(cn("px-2 text-sm", "px-4")).toBe("text-sm px-4");
   });
 
-  // Without twMergeConfig, the merger reads text-h1 as a color and drops one of them
+  // Without the custom config, tailwind-merge reads text-h1 as a color and drops one of them
   test("keeps a custom text size next to a text color", () => {
     expect(cn("text-h1", "text-accent-text")).toBe("text-h1 text-accent-text");
   });
