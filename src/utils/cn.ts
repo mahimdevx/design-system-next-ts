@@ -1,4 +1,4 @@
-import { cnMerge } from "tailwind-variants";
+import { cnMerge } from "tailwind-variants/config";
 
 import { twMergeConfig } from "@utils/tv";
 

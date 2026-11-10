@@ -52,6 +52,11 @@ const eslintConfig = defineConfig([
               name: "tailwind-variants",
               importNames: ["tv", "cn", "cnMerge", "createTV"],
               message: "Import tv from @utils/tv and cn from @utils/cn."
+            },
+            {
+              name: "tailwind-variants/config",
+              importNames: ["tv", "cn", "cnMerge", "createTV"],
+              message: "Import tv from @utils/tv and cn from @utils/cn."
             }
           ],
           // Components are imported through their folder's index, never their internal

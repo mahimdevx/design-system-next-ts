@@ -1,4 +1,5 @@
-import { createTV, type TWMergeConfig } from "tailwind-variants";
+// The config entry is the one that accepts twMergeConfig (the default entry throws on it)
+import { createTV, type TWMergeConfig } from "tailwind-variants/config";
 
 /*
  * Teach tailwind-merge about the custom tokens in globals.css. Without this, it reads
@@ -18,4 +19,4 @@ export const twMergeConfig = {
 // Use this tv() everywhere instead of importing it from tailwind-variants
 export const tv = createTV({ twMergeConfig });
 
-export type { VariantProps } from "tailwind-variants";
+export type { VariantProps } from "tailwind-variants/config";
