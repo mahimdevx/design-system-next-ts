@@ -1,6 +1,6 @@
-import { cnMerge } from "tailwind-variants";
+import { createCN } from "tailwind-variants/lite";
 
-import { twMergeConfig } from "@utils/tv";
+import { twMerge } from "@utils/tv";
 
 /**
  * Join class names and resolve Tailwind conflicts (the last class wins).
@@ -8,6 +8,4 @@ import { twMergeConfig } from "@utils/tv";
  *
  * cn("px-2 text-sm", isLarge && "px-4") // => "text-sm px-4"
  */
-export function cn(...classes: Parameters<typeof cnMerge>) {
-  return cnMerge(...classes)({ twMergeConfig });
-}
+export const cn = createCN({ twMerge });

@@ -48,10 +48,18 @@ const eslintConfig = defineConfig([
         "error",
         {
           paths: [
-            {
-              name: "tailwind-variants",
-              importNames: ["tv", "cn", "cnMerge", "createTV"],
+            ...[
+              "tailwind-variants",
+              "tailwind-variants/lite",
+              "tailwind-variants/config"
+            ].map((name) => ({
+              name,
+              importNames: ["tv", "cn", "cnMerge", "createTV", "createCN"],
               message: "Import tv from @utils/tv and cn from @utils/cn."
+            })),
+            {
+              name: "tailwind-merge",
+              message: "Use cn from @utils/cn: it carries the custom token config."
             }
           ],
           // Components are imported through their folder's index, never their internal
