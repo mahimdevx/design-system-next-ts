@@ -185,3 +185,30 @@ test("an avatar image replaces the fallback in the browser", async ({ page }) =>
   await expect(image).toBeVisible();
   await expect(image).toHaveCSS("width", "40px");
 });
+
+test.describe("calendar", () => {
+  test("a day is picked from the keyboard", async ({ page }) => {
+    await page.goto("/");
+    const calendar = page
+      .getByRole("region", { name: "Calendars" })
+      .locator("[data-slot=calendar]")
+      .first();
+
+    // Day buttons are named "Sunday, November 1, 2026"
+    await calendar.getByRole("button", { name: /\s1, \d{4}$/ }).focus();
+    await page.keyboard.press("ArrowRight");
+    await page.keyboard.press("Enter");
+
+    await expect(calendar.getByRole("gridcell", { selected: true })).toHaveText("2");
+    await expect(calendar.getByText(/^Selected:/)).toBeVisible();
+  });
+
+  test("fits a phone without horizontal scroll", async ({ page }) => {
+    await page.setViewportSize({ width: 320, height: 700 });
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    const pageWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+    expect(pageWidth).toBeLessThanOrEqual(320);
+  });
+});
