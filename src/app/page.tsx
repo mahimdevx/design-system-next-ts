@@ -35,6 +35,8 @@ import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
 import { LogoMark } from "@assets/icons/logo-mark";
 
+import { CalendarSamples } from "./calendar-samples";
+
 const buttonVariantNames = [
   "primary",
   "secondary",
@@ -109,6 +111,7 @@ const sections = [
   "alerts",
   "cards",
   "avatars",
+  "calendars",
   "icons",
   "layout"
 ];
@@ -440,6 +443,16 @@ export default function FoundationsPage() {
                 </AvatarFallback>
               </Avatar>
             </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="calendars">
+          <Stack>
+            <Heading as="h2" size="h3" id="calendars">
+              Calendars
+            </Heading>
+
+            <CalendarSamples />
           </Stack>
         </Section>
 
