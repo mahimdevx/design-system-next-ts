@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import type { DateRange } from "@daypicker/react";
+import { de } from "@daypicker/react/locale";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
@@ -78,6 +79,14 @@ describe("Calendar", () => {
     await user.click(screen.getByRole("button", { name: /next month/i }));
 
     expect(screen.getByRole("grid", { name: "February 2026" })).toBeInTheDocument();
+  });
+
+  test("names each day in the calendar's locale, with the visible number", () => {
+    render(<Calendar mode="single" defaultMonth={january} locale={de} />);
+
+    expect(
+      screen.getByRole("button", { name: "Donnerstag, 15. Januar 2026" })
+    ).toBeInTheDocument();
   });
 
   // Documented contract: data-selection is what the range styles hook into

@@ -3,7 +3,6 @@
 import { useSyncExternalStore, type ComponentProps } from "react";
 
 import {
-  DateLib,
   DayPicker,
   type ChevronProps,
   type DayProps,
@@ -69,11 +68,15 @@ function CalendarDay({ day: _day, modifiers, ...props }: DayProps) {
 }
 
 /*
- * DayPicker's label without the ordinal ("Sunday, November 1, 2026", not "1st"), so the
- * visible number is a whole word in the button's name (WCAG 2.5.3, Label in Name)
+ * The day's full date in the calendar's locale ("Sunday, November 1, 2026",
+ * "Sonntag, 1. November 2026"). DayPicker's English default says "1st", which keeps the
+ * visible number out of the button's name (WCAG 2.5.3, Label in Name).
  */
-const labelDayButton: Labels["labelDayButton"] = (date, modifiers, options, dateLib) => {
-  let label = (dateLib ?? new DateLib(options)).format(date, "EEEE, MMMM d, yyyy");
+const labelDayButton: Labels["labelDayButton"] = (date, modifiers, options) => {
+  let label = new Intl.DateTimeFormat(options?.locale?.code ?? "en-US", {
+    dateStyle: "full",
+    timeZone: options?.timeZone
+  }).format(date);
   if (modifiers.today) label = `Today, ${label}`;
   if (modifiers.selected) label = `${label}, selected`;
   return label;
@@ -81,7 +84,14 @@ const labelDayButton: Labels["labelDayButton"] = (date, modifiers, options, date
 
 const subscribe = () => () => {};
 
-type CalendarProps = ComponentProps<typeof DayPicker>;
+// navLayout is fixed to "around": the styles place those buttons and no other layout
+// (Omit per mode: DayPicker's props are a union over `mode`, which a plain Omit would merge)
+type CalendarProps =
+  ComponentProps<typeof DayPicker> extends infer Props
+    ? Props extends unknown
+      ? Omit<Props, "navLayout">
+      : never
+    : never;
 
 /*
  * A month grid for picking a day, several days or a range, built on DayPicker (keyboard,
@@ -112,9 +122,6 @@ export function Calendar({
 
   return (
     <DayPicker
-      // Buttons beside each month's caption: no extra <nav> landmark per calendar, and the
-      // tab order follows the visual order
-      navLayout="around"
       className={root({ className })}
       classNames={{
         months: months(),
@@ -144,6 +151,9 @@ export function Calendar({
         ...components
       }}
       {...props}
+      // Buttons beside each month's caption: no extra <nav> landmark per calendar, and the
+      // tab order follows the visual order
+      navLayout="around"
     />
   );
 }
