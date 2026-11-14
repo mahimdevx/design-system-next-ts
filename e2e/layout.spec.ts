@@ -194,8 +194,11 @@ test.describe("calendar", () => {
       .locator("[data-slot=calendar]")
       .first();
 
-    // Day buttons are named "Sunday, November 1, 2026"
-    await calendar.getByRole("button", { name: /\s1, \d{4}$/ }).focus();
+    // Day buttons are named "Sunday, November 1, 2026"; outside days repeat a 1
+    await calendar
+      .getByRole("button", { name: /\s1, \d{4}$/ })
+      .first()
+      .focus();
     await page.keyboard.press("ArrowRight");
     await page.keyboard.press("Enter");
 

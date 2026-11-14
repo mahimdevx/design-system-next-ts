@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore, type ComponentProps } from "react";
 
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronUp } from "lucide-react";
 import {
   DayPicker,
   type ChevronProps,
@@ -9,8 +10,7 @@ import {
   type Labels,
   type Modifiers,
   type RootProps
-} from "@daypicker/react";
-import { ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
+} from "react-day-picker";
 
 import { Icon } from "@components/icon";
 
@@ -38,11 +38,12 @@ const {
   hidden
 } = calendarVariants();
 
+// Arrows for the month buttons, chevrons for the month and year menus
 const chevrons = {
   up: ChevronUp,
   down: ChevronDown,
-  left: ChevronLeft,
-  right: ChevronRight
+  left: ArrowLeft,
+  right: ArrowRight
 };
 
 function CalendarChevron({ orientation = "left", className }: ChevronProps) {
@@ -106,6 +107,7 @@ export function Calendar({
   classNames,
   components,
   labels,
+  showOutsideDays = true,
   ...props
 }: CalendarProps) {
   const isHydrated = useSyncExternalStore(
@@ -150,6 +152,7 @@ export function Calendar({
         Day: CalendarDay,
         ...components
       }}
+      showOutsideDays={showOutsideDays}
       {...props}
       // Buttons beside each month's caption: no extra <nav> landmark per calendar, and the
       // tab order follows the visual order
