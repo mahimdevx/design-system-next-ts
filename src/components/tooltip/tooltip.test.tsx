@@ -2,15 +2,21 @@ import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, test } from "vitest";
 
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipRoot,
+  TooltipTrigger
+} from "./tooltip";
 
 function renderTooltip() {
   return render(
     <TooltipProvider>
-      <Tooltip>
+      <TooltipRoot>
         <TooltipTrigger>Save</TooltipTrigger>
         <TooltipContent>Save the draft</TooltipContent>
-      </Tooltip>
+      </TooltipRoot>
     </TooltipProvider>
   );
 }

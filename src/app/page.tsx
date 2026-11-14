@@ -37,7 +37,12 @@ import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@components/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipRoot,
+  TooltipTrigger
+} from "@components/tooltip";
 import { LogoMark } from "@assets/icons/logo-mark";
 
 import { CalendarSamples } from "./calendar-samples";
@@ -480,28 +485,40 @@ export default function FoundationsPage() {
 
             <Stack direction="row" gap="1" role="toolbar" aria-label="Text formatting">
               {formatting.map(({ label, icon, keys }) => (
-                <Tooltip key={label}>
-                  <TooltipTrigger asChild>
-                    <Button variant="muted" size="sm" iconOnly aria-label={label}>
-                      <Icon as={icon} />
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    {label} <kbd>{keys}</kbd>
-                  </TooltipContent>
+                <Tooltip
+                  key={label}
+                  content={
+                    <>
+                      {label} <kbd>{keys}</kbd>
+                    </>
+                  }
+                  delayDuration={0}
+                >
+                  <Button variant="muted" size="sm" iconOnly aria-label={label}>
+                    <Icon as={icon} />
+                  </Button>
                 </Tooltip>
               ))}
             </Stack>
 
             <Stack direction="row" gap="3" wrap>
               {tooltipSides.map((side) => (
-                // The content shortcut: the child becomes the trigger
                 <Tooltip key={side} content={`Opens on the ${side}`} side={side}>
                   <Button variant="outline" size="sm">
                     {side}
                   </Button>
                 </Tooltip>
               ))}
+
+              {/* The parts, for what the shortcut doesn't cover (here: align) */}
+              <TooltipRoot>
+                <TooltipTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    top start
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent align="start">Aligned to the start edge</TooltipContent>
+              </TooltipRoot>
             </Stack>
           </Stack>
         </Section>
