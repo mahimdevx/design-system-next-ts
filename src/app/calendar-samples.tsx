@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 
-import type { DateRange } from "react-day-picker";
+import type { DateRange } from "@daypicker/react";
 
 import { Calendar } from "@components/calendar";
 import { Grid } from "@components/grid";

@@ -1,9 +1,9 @@
 import { useState } from "react";
 
+import type { DateRange } from "@daypicker/react";
+import { de } from "@daypicker/react/locale";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { DateRange } from "react-day-picker";
-import { de } from "react-day-picker/locale";
 import { describe, expect, test } from "vitest";
 
 import { Calendar } from "./calendar";
