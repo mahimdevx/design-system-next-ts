@@ -16,6 +16,24 @@ function renderTooltip() {
 }
 
 describe("Tooltip", () => {
+  test("the content shortcut makes its child the trigger", async () => {
+    const user = userEvent.setup();
+    render(
+      <TooltipProvider>
+        <Tooltip content="Save the draft">
+          <button type="button">Save</button>
+        </Tooltip>
+      </TooltipProvider>
+    );
+
+    await user.tab();
+
+    expect(screen.getByRole("tooltip")).toHaveTextContent("Save the draft");
+    expect(screen.getByRole("button", { name: "Save" })).toHaveAccessibleDescription(
+      "Save the draft"
+    );
+  });
+
   test("is hidden until the trigger gets focus", () => {
     renderTooltip();
 
