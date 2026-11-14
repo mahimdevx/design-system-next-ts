@@ -495,13 +495,11 @@ export default function FoundationsPage() {
 
             <Stack direction="row" gap="3" wrap>
               {tooltipSides.map((side) => (
-                <Tooltip key={side}>
-                  <TooltipTrigger asChild>
-                    <Button variant="outline" size="sm">
-                      {side}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent side={side}>Opens on the {side}</TooltipContent>
+                // The content shortcut: the child becomes the trigger
+                <Tooltip key={side} content={`Opens on the ${side}`} side={side}>
+                  <Button variant="outline" size="sm">
+                    {side}
+                  </Button>
                 </Tooltip>
               ))}
             </Stack>

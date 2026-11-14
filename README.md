@@ -30,7 +30,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Card`                         | Content surface with header, action, content and footer. 2 sizes, `asChild`        |
 | `Avatar`                       | A person or brand's image with a fallback for loading and errors. 2 sizes          |
 | `Calendar`                     | Pick a day, several days or a range (DayPicker). Keyboard and screen-reader ready  |
-| `Tooltip`                      | Short label on hover and focus (Radix). `TooltipProvider` wraps the app once       |
+| `Tooltip`                      | Short label on hover and focus (Radix): `content` shortcut or parts. 300ms delay   |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
