@@ -9,6 +9,7 @@ import {
   Italic,
   Plus,
   Search,
+  Slash,
   Strikethrough,
   TriangleAlert,
   Underline,
@@ -18,6 +19,7 @@ import {
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@components/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/avatar";
 import { Badge } from "@components/badge";
+import { Breadcrumb } from "@components/breadcrumb";
 import { Button } from "@components/button";
 import {
   Card,
@@ -133,6 +135,7 @@ const sections = [
   "avatars",
   "calendars",
   "tooltips",
+  "breadcrumbs",
   "icons",
   "layout"
 ];
@@ -520,6 +523,35 @@ export default function FoundationsPage() {
                 <TooltipContent align="start">Aligned to the start edge</TooltipContent>
               </TooltipRoot>
             </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="breadcrumbs">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="breadcrumbs">
+              Breadcrumbs
+            </Heading>
+
+            <Breadcrumb
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Demos", href: "/demo" },
+                { label: "Store" }
+              ]}
+            />
+
+            <Breadcrumb
+              aria-label="Breadcrumb with slashes"
+              separator={<Icon as={Slash} />}
+              items={[
+                { label: "Home", href: "/" },
+                { label: "Demos", href: "/demo" },
+                { label: "Card examples", href: "/demo/cards" },
+                {
+                  label: "A page title long enough to wrap onto the next line on a phone"
+                }
+              ]}
+            />
           </Stack>
         </Section>
 
