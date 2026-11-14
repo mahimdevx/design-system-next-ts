@@ -5,6 +5,7 @@ import { cn } from "@utils/cn";
 import { firaCode, poppins } from "@styles/fonts";
 
 import { ThemeProvider } from "@components/theme-provider";
+import { TooltipProvider } from "@components/tooltip";
 
 import "@styles/globals.css";
 
@@ -31,7 +32,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     // next-themes sets the theme class on <html> before React hydrates
     <html lang="en" className={fontClasses} suppressHydrationWarning>
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <TooltipProvider>{children}</TooltipProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

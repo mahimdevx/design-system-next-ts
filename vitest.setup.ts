@@ -9,3 +9,10 @@ import "@testing-library/jest-dom/vitest";
 afterEach(() => {
   cleanup();
 });
+
+// jsdom has no ResizeObserver; Radix's floating parts (Tooltip, Popover…) measure with it
+globalThis.ResizeObserver ??= class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};

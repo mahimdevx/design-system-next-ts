@@ -215,3 +215,49 @@ test.describe("calendar", () => {
     expect(pageWidth).toBeLessThanOrEqual(320);
   });
 });
+
+// Radix closes a tooltip when the page scrolls, and focus() scrolls (smoothly) to an
+// off-screen button. Scroll first and let it settle, so the scroll can't close the tooltip.
+async function focusInView(locator: Locator) {
+  await locator.evaluate((element) =>
+    element.scrollIntoView({ block: "center", behavior: "instant" })
+  );
+  await locator.evaluate(
+    () =>
+      new Promise((resolve) =>
+        requestAnimationFrame(() => requestAnimationFrame(resolve))
+      )
+  );
+  await locator.focus();
+}
+
+test.describe("tooltip", () => {
+  test("opens on hover, stays while hovered, and Escape closes it", async ({ page }) => {
+    await page.goto("/");
+    const bold = page.getByRole("button", { name: "Bold" });
+
+    await bold.hover();
+    const tooltip = page.locator("[data-slot=tooltip-content]");
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toContainText("Bold");
+
+    // WCAG 1.4.13: the pointer can move onto the tooltip without it closing
+    await tooltip.hover();
+    await expect(tooltip).toBeVisible();
+
+    await page.keyboard.press("Escape");
+    await expect(tooltip).toBeHidden();
+  });
+
+  test("opens on keyboard focus and describes the button", async ({ page }) => {
+    await page.goto("/");
+    const bold = page.getByRole("button", { name: "Bold" });
+    // Calendars render after hydration: once one shows, React handles focus
+    await page.getByRole("grid").first().waitFor();
+
+    await focusInView(bold);
+
+    await expect(page.getByRole("tooltip")).toContainText("Bold");
+    await expect(bold).toHaveAccessibleDescription(/Bold/);
+  });
+});
