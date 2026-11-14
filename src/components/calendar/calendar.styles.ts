@@ -61,7 +61,7 @@ export const calendarVariants = tv({
     day_button: [
       "relative inline-flex size-full items-center justify-center rounded-md",
       "font-mono font-semibold outline-hidden transition-colors duration-200 ease-in-out",
-      "not-group-data-[selection]/day:hover:bg-muted",
+      "not-group-data-selection/day:hover:bg-muted",
       "focus-visible:z-10 focus-visible:ring-3 focus-visible:ring-ring/50",
       "disabled:pointer-events-none disabled:opacity-50",
       // Today: a muted fill, unless it is selected
