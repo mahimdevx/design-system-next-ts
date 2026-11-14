@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from "react";
+import type { ComponentProps, ReactElement, ReactNode } from "react";
 
 import { Tooltip as TooltipPrimitive } from "radix-ui";
 
@@ -47,34 +47,35 @@ export function TooltipContent({
   );
 }
 
-// `side` only applies to the shortcut; with the parts, set it on TooltipContent
-type TooltipProps = ComponentProps<typeof TooltipPrimitive.Root> &
-  (
-    | {
-        content: ReactNode;
-        side?: ComponentProps<typeof TooltipPrimitive.Content>["side"];
-      }
-    | { content?: never; side?: never }
-  );
+/*
+ * The parts, for anything the shortcut doesn't cover (align, offsets, className, controlled
+ * open): <TooltipRoot><TooltipTrigger asChild>…</TooltipTrigger>
+ * <TooltipContent>…</TooltipContent></TooltipRoot>
+ * (Radix's Root renders no element of its own, so it needs no wrapper.)
+ */
+export const TooltipRoot = TooltipPrimitive.Root;
+
+type TooltipProps = Omit<ComponentProps<typeof TooltipPrimitive.Root>, "children"> & {
+  /** The tooltip's text: a string, or a short node such as `<>Bold <kbd>Ctrl B</kbd></>` */
+  content: ReactNode;
+  side?: ComponentProps<typeof TooltipPrimitive.Content>["side"];
+  /** The trigger: one focusable element, such as a Button */
+  children: ReactElement;
+};
 
 /*
  * A short label for the element it points at, shown on hover and keyboard focus. Escape
  * closes it, and the pointer can move onto it without it closing (WCAG 1.4.13).
  * Text only: a tooltip never takes focus, so links or buttons inside can't be reached.
  *
- * Shortcut: <Tooltip content="Save"><Button>…</Button></Tooltip> (the child is the trigger).
- * Parts, for full control: <Tooltip><TooltipTrigger asChild>…</TooltipTrigger>
- * <TooltipContent>…</TooltipContent></Tooltip>
+ * <Tooltip content="Save"><Button>…</Button></Tooltip>: the child becomes the trigger.
+ * One element only, so passing the parts here is a type error (use TooltipRoot for those).
  */
 export function Tooltip({ content, side, children, ...props }: TooltipProps) {
-  if (content === undefined) {
-    return <TooltipPrimitive.Root {...props}>{children}</TooltipPrimitive.Root>;
-  }
-
   return (
-    <TooltipPrimitive.Root {...props}>
+    <TooltipRoot {...props}>
       <TooltipTrigger asChild>{children}</TooltipTrigger>
       <TooltipContent side={side}>{content}</TooltipContent>
-    </TooltipPrimitive.Root>
+    </TooltipRoot>
   );
 }
