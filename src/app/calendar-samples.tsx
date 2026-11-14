@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 
-import type { DateRange } from "@daypicker/react";
+import type { DateRange } from "react-day-picker";
 
 import { Calendar } from "@components/calendar";
 import { Grid } from "@components/grid";
@@ -17,7 +17,7 @@ function Sample({ title, children, className }: SampleProps) {
       <Heading as="h3" size="h6">
         {title}
       </Heading>
-      <div className="w-fit rounded-xl border">{children}</div>
+      {children}
     </Stack>
   );
 }
