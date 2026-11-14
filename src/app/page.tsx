@@ -1,13 +1,17 @@
 import {
   ArrowRight,
   Bell,
+  Bold,
   Check,
   CircleCheck,
   CircleX,
   Info,
+  Italic,
   Plus,
   Search,
+  Strikethrough,
   TriangleAlert,
+  Underline,
   User
 } from "lucide-react";
 
@@ -33,6 +37,7 @@ import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@components/tooltip";
 import { LogoMark } from "@assets/icons/logo-mark";
 
 import { CalendarSamples } from "./calendar-samples";
@@ -103,6 +108,16 @@ const alertSamples = [
 const avatarSample =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%232f6bff'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23fff'/%3E%3Ccircle cx='20' cy='38' r='14' fill='%23fff'/%3E%3C/svg%3E";
 
+// Icon buttons named by aria-label, with the tooltip as the sighted label plus a shortcut
+const formatting = [
+  { label: "Bold", icon: Bold, keys: "Ctrl B" },
+  { label: "Italic", icon: Italic, keys: "Ctrl I" },
+  { label: "Underline", icon: Underline, keys: "Ctrl U" },
+  { label: "Strikethrough", icon: Strikethrough, keys: "Ctrl Shift X" }
+];
+
+const tooltipSides = ["top", "right", "bottom", "left"] as const;
+
 const sections = [
   "colors",
   "typography",
@@ -112,6 +127,7 @@ const sections = [
   "cards",
   "avatars",
   "calendars",
+  "tooltips",
   "icons",
   "layout"
 ];
@@ -453,6 +469,42 @@ export default function FoundationsPage() {
             </Heading>
 
             <CalendarSamples />
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="tooltips">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="tooltips">
+              Tooltips
+            </Heading>
+
+            <Stack direction="row" gap="1" role="toolbar" aria-label="Text formatting">
+              {formatting.map(({ label, icon, keys }) => (
+                <Tooltip key={label}>
+                  <TooltipTrigger asChild>
+                    <Button variant="muted" size="sm" iconOnly aria-label={label}>
+                      <Icon as={icon} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    {label} <kbd>{keys}</kbd>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </Stack>
+
+            <Stack direction="row" gap="3" wrap>
+              {tooltipSides.map((side) => (
+                <Tooltip key={side}>
+                  <TooltipTrigger asChild>
+                    <Button variant="outline" size="sm">
+                      {side}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent side={side}>Opens on the {side}</TooltipContent>
+                </Tooltip>
+              ))}
+            </Stack>
           </Stack>
         </Section>
 

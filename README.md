@@ -30,6 +30,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Card`                         | Content surface with header, action, content and footer. 2 sizes, `asChild`        |
 | `Avatar`                       | A person or brand's image with a fallback for loading and errors. 2 sizes          |
 | `Calendar`                     | Pick a day, several days or a range (DayPicker). Keyboard and screen-reader ready  |
+| `Tooltip`                      | Short label on hover and focus (Radix). `TooltipProvider` wraps the app once       |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
@@ -106,7 +107,7 @@ src/
 │   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
 │   └── …                   # alert, avatar, badge, calendar, card, container, grid, heading, icon, link, section,
-│                           # stack, text, theme-toggle, theme-provider
+│                           # stack, text, theme-toggle, theme-provider, tooltip
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
