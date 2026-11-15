@@ -9,11 +9,11 @@ import { Breadcrumb } from "./breadcrumb";
 function renderTrail() {
   return render(
     <Breadcrumb
-      items={[
+      links={[
         { label: "Home", href: "/" },
-        { label: "Demos", href: "/demo" },
-        { label: "Store" }
+        { label: "Demos", href: "/demo" }
       ]}
+      current="Store"
     />
   );
 }
@@ -33,7 +33,7 @@ describe("Breadcrumb", () => {
     expect(screen.getByRole("link", { name: "Demos" })).toHaveAttribute("href", "/demo");
   });
 
-  test("marks the last item as the current page, not as a link", () => {
+  test("shows the current page last, not as a link", () => {
     renderTrail();
 
     expect(screen.getByText("Store")).toHaveAttribute("aria-current", "page");
@@ -56,7 +56,8 @@ describe("Breadcrumb", () => {
     render(
       <Breadcrumb
         separator={<Icon as={Slash} data-testid="slash" />}
-        items={[{ label: "Home", href: "/" }, { label: "Store" }]}
+        links={[{ label: "Home", href: "/" }]}
+        current="Store"
       />
     );
 

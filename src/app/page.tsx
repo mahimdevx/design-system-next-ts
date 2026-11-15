@@ -533,24 +533,22 @@ export default function FoundationsPage() {
             </Heading>
 
             <Breadcrumb
-              items={[
+              links={[
                 { label: "Home", href: "/" },
-                { label: "Demos", href: "/demo" },
-                { label: "Store" }
+                { label: "Demos", href: "/demo" }
               ]}
+              current="Store"
             />
 
             <Breadcrumb
               aria-label="Breadcrumb with slashes"
               separator={<Icon as={Slash} />}
-              items={[
+              links={[
                 { label: "Home", href: "/" },
                 { label: "Demos", href: "/demo" },
-                { label: "Card examples", href: "/demo/cards" },
-                {
-                  label: "A page title long enough to wrap onto the next line on a phone"
-                }
+                { label: "Card examples", href: "/demo/cards" }
               ]}
+              current="A page title long enough to wrap onto the next line on a phone"
             />
           </Stack>
         </Section>
