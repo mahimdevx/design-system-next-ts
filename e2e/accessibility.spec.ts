@@ -91,7 +91,9 @@ for (const colorScheme of ["light", "dark"] as const) {
       await expect(page.locator("html")).toHaveCSS("color-scheme", colorScheme);
       await page.getByRole("grid").first().waitFor();
       await page.getByRole("button", { name: "Share" }).click();
-      await page.getByRole("dialog", { name: "Share this page" }).waitFor();
+      // Not getByRole("dialog", { name }): computing the name and then axe's
+      // aria-dialog-name rule crashes Playwright's Firefox. The name is checked in layout.spec.
+      await page.locator("[data-slot=popover-content]").waitFor();
 
       const results = await new AxeBuilder({ page })
         .include("[data-slot=popover-content]")
