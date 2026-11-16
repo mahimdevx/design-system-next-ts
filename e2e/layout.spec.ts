@@ -309,3 +309,36 @@ test.describe("dropdown menu", () => {
     await expect(page.getByRole("menu")).toBeVisible();
   });
 });
+
+test.describe("popover", () => {
+  test("opens from the keyboard, focus moves inside, Escape returns it", async ({
+    page
+  }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+    const trigger = page.getByRole("button", { name: "Share" });
+
+    await focusInView(trigger);
+    await page.keyboard.press("Enter");
+
+    const dialog = page.getByRole("dialog", { name: "Share this page" });
+    await expect(dialog).toBeVisible();
+    await expect(dialog.getByRole("button", { name: "Cancel" })).toBeFocused();
+
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(trigger).toBeFocused();
+  });
+
+  test("a click outside closes it", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    await page.getByRole("button", { name: "About weekly active users" }).click();
+    const dialog = page.getByRole("dialog", { name: "Weekly active users" });
+    await expect(dialog).toBeVisible();
+
+    await page.getByRole("heading", { level: 2, name: "Popovers" }).click();
+    await expect(dialog).toBeHidden();
+  });
+});

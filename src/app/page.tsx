@@ -9,6 +9,7 @@ import {
   Italic,
   Plus,
   Search,
+  Share2,
   Strikethrough,
   TriangleAlert,
   Underline,
@@ -41,6 +42,15 @@ import { Grid } from "@components/grid";
 import { Heading, headingElements, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
 import { Link } from "@components/link";
+import {
+  Popover,
+  PopoverClose,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger
+} from "@components/popover";
 import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Text } from "@components/text";
@@ -540,6 +550,68 @@ export default function FoundationsPage() {
             </Heading>
 
             <DropdownMenuSamples />
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="popovers">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="popovers">
+              Popovers
+            </Heading>
+
+            <Stack direction="row" gap="3" align="center" wrap>
+              {/* Controls inside: focus moves to the first one */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    <Icon as={Share2} />
+                    Share
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="start">
+                  <PopoverHeader>
+                    <PopoverTitle>Share this page</PopoverTitle>
+                    <PopoverDescription>
+                      Anyone with the link can view it. Links expire after 30 days.
+                    </PopoverDescription>
+                  </PopoverHeader>
+                  <Stack direction="row" gap="2" justify="end">
+                    <PopoverClose asChild>
+                      <Button variant="outline" size="xs">
+                        Cancel
+                      </Button>
+                    </PopoverClose>
+                    <PopoverClose asChild>
+                      <Button size="xs">Copy link</Button>
+                    </PopoverClose>
+                  </Stack>
+                </PopoverContent>
+              </Popover>
+
+              {/* Text only: the panel itself takes focus, so screen readers read it */}
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="muted"
+                    size="sm"
+                    iconOnly
+                    rounded
+                    aria-label="About weekly active users"
+                  >
+                    <Icon as={Info} />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent align="start">
+                  <PopoverHeader>
+                    <PopoverTitle>Weekly active users</PopoverTitle>
+                    <PopoverDescription>
+                      People who signed in at least once in the last seven days. Updated
+                      every hour; bots and internal accounts are left out.
+                    </PopoverDescription>
+                  </PopoverHeader>
+                </PopoverContent>
+              </Popover>
+            </Stack>
           </Stack>
         </Section>
 
