@@ -342,3 +342,44 @@ test.describe("popover", () => {
     await expect(dialog).toBeHidden();
   });
 });
+
+test.describe("dialog", () => {
+  test("traps focus while open; Escape closes it and returns focus", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+    const trigger = page.getByRole("button", { name: "Keyboard shortcuts" });
+
+    await focusInView(trigger);
+    await page.keyboard.press("Enter");
+
+    const dialog = page.getByRole("dialog", { name: "Keyboard shortcuts" });
+    const close = dialog.getByRole("button", { name: "Close" });
+    // The only control: focus lands on it and Tab can't leave the dialog
+    await expect(close).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(close).toBeFocused();
+
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+    await expect(trigger).toBeFocused();
+  });
+
+  test("a dialog taller than a phone scrolls in the backdrop, not the page", async ({
+    page
+  }) => {
+    await page.setViewportSize({ width: 360, height: 640 });
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    await page.getByRole("button", { name: "Terms of service" }).click();
+    const accept = page.getByRole("button", { name: "Accept" });
+    await expect(accept).not.toBeInViewport();
+    const pageScroll = await page.evaluate(() => window.scrollY);
+
+    await accept.scrollIntoViewIfNeeded();
+
+    await expect(accept).toBeInViewport();
+    expect(await page.evaluate(() => window.scrollY)).toBe(pageScroll);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360);
+  });
+});

@@ -102,5 +102,22 @@ for (const colorScheme of ["light", "dark"] as const) {
 
       expect(results.violations).toEqual([]);
     });
+
+    test("an open dialog has no accessibility violations", async ({ page }) => {
+      await page.goto("/");
+      await expect(page.locator("html")).toHaveCSS("color-scheme", colorScheme);
+      await page.getByRole("grid").first().waitFor();
+      await page.getByRole("button", { name: "Terms of service" }).click();
+      // By data-slot, like the popover test (getByRole with a name, then axe, crashes
+      // Playwright's Firefox)
+      await page.locator("[data-slot=dialog-content]").waitFor();
+
+      const results = await new AxeBuilder({ page })
+        .include("[data-slot=dialog-overlay]")
+        .withTags(axeTags)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
   });
 }

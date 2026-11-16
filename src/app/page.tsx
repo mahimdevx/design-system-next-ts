@@ -38,6 +38,16 @@ import {
   CardTitle
 } from "@components/card";
 import { Container } from "@components/container";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from "@components/dialog";
 import { Grid } from "@components/grid";
 import { Heading, headingElements, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
@@ -133,6 +143,38 @@ const avatarSample =
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' fill='%232f6bff'/%3E%3Ccircle cx='20' cy='16' r='7' fill='%23fff'/%3E%3Ccircle cx='20' cy='38' r='14' fill='%23fff'/%3E%3C/svg%3E";
 
 // Icon buttons named by aria-label, with the tooltip as the sighted label plus a shortcut
+// Dummy terms, long enough to scroll on a phone
+const terms = [
+  [
+    "Using the service",
+    "You may use the service for personal and business projects. Accounts are for one person; teams invite each member."
+  ],
+  [
+    "Your content",
+    "You keep the rights to what you upload. You give us permission to store and display it so the service can work."
+  ],
+  [
+    "Payments",
+    "Paid plans renew each month until cancelled. Cancelling stops the next renewal; the current month stays active."
+  ],
+  [
+    "Acceptable use",
+    "No spam, malware or content that breaks the law. We may suspend accounts that put other people at risk."
+  ],
+  [
+    "Availability",
+    "We aim for the service to be available at all times, but maintenance and outages can happen."
+  ],
+  [
+    "Changes",
+    "We announce changes to these terms 30 days before they apply. Continuing to use the service means accepting them."
+  ],
+  [
+    "Contact",
+    "Questions about these terms go to the support page. We answer within two working days."
+  ]
+] as const;
+
 const formatting = [
   { label: "Bold", icon: Bold, keys: "Ctrl B" },
   { label: "Italic", icon: Italic, keys: "Ctrl I" },
@@ -611,6 +653,75 @@ export default function FoundationsPage() {
                   </PopoverHeader>
                 </PopoverContent>
               </Popover>
+            </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="dialogs">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="dialogs">
+              Dialogs
+            </Heading>
+
+            <Stack direction="row" gap="3" align="center" wrap>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    Keyboard shortcuts
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm">
+                  <DialogHeader>
+                    <DialogTitle>Keyboard shortcuts</DialogTitle>
+                    <DialogDescription>Work faster in the editor.</DialogDescription>
+                  </DialogHeader>
+                  <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-sm">
+                    {formatting.map(({ label, keys }) => (
+                      <div key={label} className="contents">
+                        <dt>{label}</dt>
+                        <dd>
+                          <kbd>{keys}</kbd>
+                        </dd>
+                      </div>
+                    ))}
+                  </dl>
+                </DialogContent>
+              </Dialog>
+
+              {/* Taller than a phone screen: the whole dialog scrolls in the backdrop */}
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" size="sm">
+                    Terms of service
+                  </Button>
+                </DialogTrigger>
+                <DialogContent showCloseButton={false}>
+                  <DialogHeader className="pr-0">
+                    <DialogTitle>Terms of service</DialogTitle>
+                    <DialogDescription>Last updated on March 1.</DialogDescription>
+                  </DialogHeader>
+                  <Stack gap="4" className="text-sm">
+                    {terms.map(([heading, text]) => (
+                      <div key={heading}>
+                        <h3 className="text-sm font-semibold tracking-normal">
+                          {heading}
+                        </h3>
+                        <p className="text-muted-foreground">{text}</p>
+                      </div>
+                    ))}
+                  </Stack>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                      <Button variant="outline" size="sm">
+                        Decline
+                      </Button>
+                    </DialogClose>
+                    <DialogClose asChild>
+                      <Button size="sm">Accept</Button>
+                    </DialogClose>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </Stack>
           </Stack>
         </Section>
