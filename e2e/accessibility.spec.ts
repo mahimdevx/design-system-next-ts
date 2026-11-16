@@ -30,6 +30,17 @@ async function focusInView(locator: Locator) {
   await locator.focus();
 }
 
+// Overlays fade and zoom in. Wait for the element and its animations to finish, so axe
+// doesn't measure half-transparent colors (it reported ~1:1 contrast mid-fade in WebKit).
+async function settled(locator: Locator) {
+  await locator.waitFor();
+  await locator.evaluate((element) =>
+    Promise.all(
+      element.getAnimations({ subtree: true }).map((animation) => animation.finished)
+    )
+  );
+}
+
 for (const colorScheme of ["light", "dark"] as const) {
   test.describe(`${colorScheme} theme`, () => {
     test.use({ colorScheme });
@@ -58,7 +69,7 @@ for (const colorScheme of ["light", "dark"] as const) {
       // Calendars render after hydration: once one shows, React handles focus
       await page.getByRole("grid").first().waitFor();
       await focusInView(page.getByRole("button", { name: "Strikethrough" }));
-      await page.locator("[data-slot=tooltip-content]").waitFor();
+      await settled(page.locator("[data-slot=tooltip-content]"));
 
       const results = await new AxeBuilder({ page })
         .include("[data-slot=tooltip-content]")
@@ -75,7 +86,8 @@ for (const colorScheme of ["light", "dark"] as const) {
       await page.getByRole("grid").first().waitFor();
       await page.getByRole("button", { name: "Account" }).click();
       await page.getByRole("menuitem", { name: "Invite people" }).hover();
-      await page.getByRole("menuitem", { name: "Email" }).waitFor();
+      await settled(page.locator("[data-slot=dropdown-menu-content]"));
+      await settled(page.locator("[data-slot=dropdown-menu-sub-content]"));
 
       const results = await new AxeBuilder({ page })
         .include("[data-slot=dropdown-menu-content]")
@@ -93,10 +105,27 @@ for (const colorScheme of ["light", "dark"] as const) {
       await page.getByRole("button", { name: "Share" }).click();
       // Not getByRole("dialog", { name }): computing the name and then axe's
       // aria-dialog-name rule crashes Playwright's Firefox. The name is checked in layout.spec.
-      await page.locator("[data-slot=popover-content]").waitFor();
+      await settled(page.locator("[data-slot=popover-content]"));
 
       const results = await new AxeBuilder({ page })
         .include("[data-slot=popover-content]")
+        .withTags(axeTags)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
+
+    test("an open dialog has no accessibility violations", async ({ page }) => {
+      await page.goto("/");
+      await expect(page.locator("html")).toHaveCSS("color-scheme", colorScheme);
+      await page.getByRole("grid").first().waitFor();
+      await page.getByRole("button", { name: "Terms of service" }).click();
+      // By data-slot, like the popover test (getByRole with a name, then axe, crashes
+      // Playwright's Firefox). The overlay's subtree includes the content's animation.
+      await settled(page.locator("[data-slot=dialog-overlay]"));
+
+      const results = await new AxeBuilder({ page })
+        .include("[data-slot=dialog-overlay]")
         .withTags(axeTags)
         .analyze();
 
