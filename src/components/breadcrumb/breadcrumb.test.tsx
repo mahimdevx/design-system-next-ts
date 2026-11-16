@@ -20,12 +20,12 @@ function renderTrail() {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbSeparator />
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink href="/demo">Demos</BreadcrumbLink>
+          <BreadcrumbSeparator />
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbPage>Store</BreadcrumbPage>
         </BreadcrumbItem>
@@ -39,7 +39,7 @@ describe("Breadcrumb", () => {
     renderTrail();
 
     const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
-    // Separators are hidden, so only the three pages are list items
+    // One list item per page; the separators sit inside them, hidden
     expect(within(nav).getAllByRole("listitem")).toHaveLength(3);
   });
 
@@ -59,9 +59,14 @@ describe("Breadcrumb", () => {
 
   test("a separator takes another icon", () => {
     render(
-      <BreadcrumbSeparator>
-        <Icon as={Slash} data-testid="slash" />
-      </BreadcrumbSeparator>
+      <ol>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+          <BreadcrumbSeparator>
+            <Icon as={Slash} data-testid="slash" />
+          </BreadcrumbSeparator>
+        </BreadcrumbItem>
+      </ol>
     );
 
     expect(screen.getByTestId("slash")).toBeInTheDocument();

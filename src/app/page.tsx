@@ -544,12 +544,12 @@ export default function FoundationsPage() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                  <BreadcrumbSeparator />
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/demo">Demos</BreadcrumbLink>
+                  <BreadcrumbSeparator />
                 </BreadcrumbItem>
-                <BreadcrumbSeparator />
                 <BreadcrumbItem>
                   <BreadcrumbPage>Store</BreadcrumbPage>
                 </BreadcrumbItem>
@@ -560,22 +560,22 @@ export default function FoundationsPage() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                  <BreadcrumbSeparator>
+                    <Icon as={Slash} />
+                  </BreadcrumbSeparator>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Icon as={Slash} />
-                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbEllipsis />
+                  <BreadcrumbSeparator>
+                    <Icon as={Slash} />
+                  </BreadcrumbSeparator>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Icon as={Slash} />
-                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/demo/cards">Card examples</BreadcrumbLink>
+                  <BreadcrumbSeparator>
+                    <Icon as={Slash} />
+                  </BreadcrumbSeparator>
                 </BreadcrumbItem>
-                <BreadcrumbSeparator>
-                  <Icon as={Slash} />
-                </BreadcrumbSeparator>
                 <BreadcrumbItem>
                   <BreadcrumbPage>
                     A page title long enough to wrap onto the next line on a phone

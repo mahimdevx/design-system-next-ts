@@ -14,9 +14,13 @@ const { list, item, page, separator, ellipsis } = breadcrumbVariants();
  *
  * <Breadcrumb>
  *   <BreadcrumbList>
- *     <BreadcrumbItem><BreadcrumbLink href="/">Home</BreadcrumbLink></BreadcrumbItem>
- *     <BreadcrumbSeparator />
- *     <BreadcrumbItem><BreadcrumbPage>Store</BreadcrumbPage></BreadcrumbItem>
+ *     <BreadcrumbItem>
+ *       <BreadcrumbLink href="/">Home</BreadcrumbLink>
+ *       <BreadcrumbSeparator />
+ *     </BreadcrumbItem>
+ *     <BreadcrumbItem>
+ *       <BreadcrumbPage>Store</BreadcrumbPage>
+ *     </BreadcrumbItem>
  *   </BreadcrumbList>
  * </Breadcrumb>
  *
@@ -55,22 +59,25 @@ export function BreadcrumbPage({ className, ...props }: ComponentProps<"span">) 
   );
 }
 
-// Hidden from screen readers. Default: a chevron; pass children for another one
+/*
+ * Goes inside a BreadcrumbItem, after its link: the item doesn't wrap, so the separator
+ * stays with its link and never starts a line on its own. Hidden from screen readers.
+ * Default: a chevron; pass children for another one.
+ */
 export function BreadcrumbSeparator({
   children = <Icon as={ChevronRight} />,
   className,
   ...props
-}: ComponentProps<"li">) {
+}: ComponentProps<"span">) {
   return (
-    <li
+    <span
       data-slot="breadcrumb-separator"
-      role="presentation"
       aria-hidden
       className={separator({ className })}
       {...props}
     >
       {children}
-    </li>
+    </span>
   );
 }
 
