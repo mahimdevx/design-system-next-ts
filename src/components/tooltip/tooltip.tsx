@@ -4,7 +4,7 @@ import { Tooltip as TooltipPrimitive } from "radix-ui";
 
 import { tooltipVariants } from "./tooltip.styles";
 
-const { content: contentStyles, arrow: arrowStyles } = tooltipVariants();
+const { content, arrow } = tooltipVariants();
 
 /*
  * Wrap the app once (src/app/layout.tsx). Tooltips open after `delayDuration` (300ms here,
@@ -29,7 +29,7 @@ export function TooltipContent({
   children,
   ...props
 }: ComponentProps<typeof TooltipPrimitive.Content>) {
-  const contentClasses = contentStyles({ className });
+  const contentClasses = content({ className });
 
   return (
     // Rendered in <body>, so a parent's overflow or stacking can't clip it
@@ -41,7 +41,7 @@ export function TooltipContent({
         {...props}
       >
         {children}
-        <TooltipPrimitive.Arrow className={arrowStyles()} />
+        <TooltipPrimitive.Arrow className={arrow()} />
       </TooltipPrimitive.Content>
     </TooltipPrimitive.Portal>
   );

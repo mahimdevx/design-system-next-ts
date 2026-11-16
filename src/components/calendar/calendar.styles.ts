@@ -25,7 +25,7 @@ export const calendarVariants = tv({
       cellSize,
       "h-[calc(var(--cell-size)*7+1rem)] w-[calc(var(--cell-size)*7)]"
     ],
-    months: "relative flex flex-col gap-4 sm:flex-row",
+    months: "relative flex flex-col items-start gap-4 sm:flex-row",
     // navLayout="around": previous button, caption, next button, then the grid
     month: "grid grid-cols-[auto_minmax(0,1fr)_auto] items-center gap-y-4",
     button_previous: [navButton, "col-start-1 row-start-1"],
@@ -65,7 +65,7 @@ export const calendarVariants = tv({
       "focus-visible:z-10 focus-visible:ring-3 focus-visible:ring-ring/50",
       "disabled:pointer-events-none disabled:opacity-50",
       // Today: a muted fill, unless it is selected
-      "group-data-today/day:not-group-data-[selection]/day:bg-muted",
+      "group-data-today/day:not-group-data-selection/day:bg-muted",
       "group-data-[selection=end]/day:bg-primary group-data-[selection=end]/day:text-primary-foreground",
       "group-data-[selection=single]/day:bg-primary group-data-[selection=single]/day:text-primary-foreground",
       "group-data-[selection=start]/day:bg-primary group-data-[selection=start]/day:text-primary-foreground"
