@@ -54,6 +54,7 @@ import {
 import { LogoMark } from "@assets/icons/logo-mark";
 
 import { CalendarSamples } from "./calendar-samples";
+import { DropdownMenuSamples } from "./dropdown-menu-samples";
 
 const buttonVariantNames = [
   "primary",
@@ -529,6 +530,16 @@ export default function FoundationsPage() {
                 <TooltipContent align="start">Aligned to the start edge</TooltipContent>
               </TooltipRoot>
             </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="dropdown-menus">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="dropdown-menus">
+              Dropdown menus
+            </Heading>
+
+            <DropdownMenuSamples />
           </Stack>
         </Section>
 
