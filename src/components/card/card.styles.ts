@@ -14,7 +14,7 @@ export const cardVariants = tv({
       "has-data-[slot=card-action]:grid-cols-[minmax(0,1fr)_auto]"
     ],
     // A heading inside keeps this look: the base layer would size it as a page heading
-    title: "text-h6 text-balance *:tracking-[inherit] *:[font:inherit]",
+    title: "text-lg text-balance *:tracking-[inherit] *:[font:inherit]",
     description: "text-sm leading-6 text-pretty text-muted-foreground",
     action: "col-start-2 row-span-2 row-start-1 self-start",
     content: "px-(--card-padding)",

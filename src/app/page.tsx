@@ -9,7 +9,6 @@ import {
   Italic,
   Plus,
   Search,
-  Slash,
   Strikethrough,
   TriangleAlert,
   Underline,
@@ -19,7 +18,14 @@ import {
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@components/alert";
 import { Avatar, AvatarFallback, AvatarImage } from "@components/avatar";
 import { Badge } from "@components/badge";
-import { Breadcrumb } from "@components/breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage
+} from "@components/breadcrumb";
 import { Button } from "@components/button";
 import {
   Card,
@@ -532,24 +538,38 @@ export default function FoundationsPage() {
               Breadcrumbs
             </Heading>
 
-            <Breadcrumb
-              links={[
-                { label: "Home", href: "/" },
-                { label: "Demos", href: "/demo" }
-              ]}
-              current="Store"
-            />
+            <Breadcrumb>
+              <BreadcrumbList>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/demo">Demos</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>Store</BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
 
-            <Breadcrumb
-              aria-label="Breadcrumb with slashes"
-              separator={<Icon as={Slash} />}
-              links={[
-                { label: "Home", href: "/" },
-                { label: "Demos", href: "/demo" },
-                { label: "Card examples", href: "/demo/cards" }
-              ]}
-              current="A page title long enough to wrap onto the next line on a phone"
-            />
+            <Breadcrumb aria-label="Breadcrumb with slashes">
+              <BreadcrumbList separator="slash">
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/">Home</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbEllipsis />
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbLink href="/demo/cards">Card examples</BreadcrumbLink>
+                </BreadcrumbItem>
+                <BreadcrumbItem>
+                  <BreadcrumbPage>
+                    A page title long enough to wrap onto the next line on a phone
+                  </BreadcrumbPage>
+                </BreadcrumbItem>
+              </BreadcrumbList>
+            </Breadcrumb>
           </Stack>
         </Section>
 

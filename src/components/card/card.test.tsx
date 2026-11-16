@@ -115,7 +115,7 @@ describe("Card", () => {
     expect(screen.getByTestId("card")).toHaveClass("rounded-none");
     expect(screen.getByTestId("card")).not.toHaveClass("rounded-xl");
     expect(screen.getByText("Header")).not.toHaveClass("gap-y-1");
-    expect(screen.getByText("Title")).not.toHaveClass("text-h6");
+    expect(screen.getByText("Title")).not.toHaveClass("text-lg");
     expect(screen.getByText("Description")).not.toHaveClass("text-sm");
     expect(screen.getByText("Action")).not.toHaveClass("self-start");
     expect(screen.getByText("Content")).not.toHaveClass("px-(--card-padding)");
