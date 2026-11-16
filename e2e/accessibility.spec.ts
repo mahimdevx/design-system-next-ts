@@ -67,5 +67,23 @@ for (const colorScheme of ["light", "dark"] as const) {
 
       expect(results.violations).toEqual([]);
     });
+
+    // Menus live in a portal and only exist while open; this one shows a submenu too
+    test("an open dropdown menu has no accessibility violations", async ({ page }) => {
+      await page.goto("/");
+      await expect(page.locator("html")).toHaveCSS("color-scheme", colorScheme);
+      await page.getByRole("grid").first().waitFor();
+      await page.getByRole("button", { name: "Account" }).click();
+      await page.getByRole("menuitem", { name: "Invite people" }).hover();
+      await page.getByRole("menuitem", { name: "Email" }).waitFor();
+
+      const results = await new AxeBuilder({ page })
+        .include("[data-slot=dropdown-menu-content]")
+        .include("[data-slot=dropdown-menu-sub-content]")
+        .withTags(axeTags)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
   });
 }

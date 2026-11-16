@@ -261,3 +261,51 @@ test.describe("tooltip", () => {
     await expect(bold).toHaveAccessibleDescription(/Bold/);
   });
 });
+
+// Radix moves focus a tick after each key, so each step waits for it, as a person would
+test.describe("dropdown menu", () => {
+  test("works from the keyboard: arrows, submenu, Escape returns focus", async ({
+    page
+  }) => {
+    // Eight steps, each waiting for focus: Firefox under parallel load needs >30s
+    test.slow();
+
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+    const trigger = page.getByRole("button", { name: "Account" });
+
+    await focusInView(trigger);
+    await page.keyboard.press("Enter");
+    await expect(page.getByRole("menuitem", { name: "Profile" })).toBeFocused();
+
+    await page.keyboard.press("ArrowDown");
+    await expect(page.getByRole("menuitem", { name: "Settings" })).toBeFocused();
+    await page.keyboard.press("ArrowDown");
+    const invite = page.getByRole("menuitem", { name: "Invite people" });
+    await expect(invite).toBeFocused();
+
+    await page.keyboard.press("ArrowRight");
+    await expect(page.getByRole("menuitem", { name: "Email" })).toBeFocused();
+    await page.keyboard.press("ArrowLeft");
+    await expect(invite).toBeFocused();
+
+    await page.keyboard.press("Escape");
+    // Escape closes the whole menu, submenu included
+    await expect(page.getByRole("menu")).toHaveCount(0);
+    await expect(trigger).toBeFocused();
+  });
+
+  test("checkbox items toggle without closing the menu", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    await page.getByRole("button", { name: "View" }).click();
+    const statusBar = page.getByRole("menuitemcheckbox", { name: "Status bar" });
+    await expect(statusBar).not.toBeChecked();
+
+    await statusBar.click();
+
+    await expect(statusBar).toBeChecked();
+    await expect(page.getByRole("menu")).toBeVisible();
+  });
+});

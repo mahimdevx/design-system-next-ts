@@ -32,6 +32,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Calendar`                     | Pick a day, several days or a range (DayPicker). Keyboard and screen-reader ready  |
 | `Breadcrumb`                   | Where the page sits: link, page, ellipsis parts; CSS separator (chevron, slash)    |
 | `Tooltip`                      | Short label on hover and focus (Radix): `content` shortcut; `TooltipRoot` parts    |
+| `DropdownMenu`                 | Menu of actions from a button (Radix): icons, shortcuts, checkbox/radio, submenus  |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
@@ -107,9 +108,9 @@ src/
 │   │   ├── button.test.tsx #   behavior tests (Vitest)
 │   │   ├── button.test-d.tsx#  type tests (pnpm typecheck)
 │   │   └── index.ts        #   public exports
-│   └── …                   # alert, avatar, badge, breadcrumb, calendar, card, container, grid,
-│                           # heading, icon, link, section, stack, text, theme-toggle,
-│                           # theme-provider, tooltip
+│   └── …                   # alert, avatar, badge, breadcrumb, calendar, card, container,
+│                           # dropdown-menu, grid, heading, icon, link, section, stack, text,
+│                           # theme-toggle, theme-provider, tooltip
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts
