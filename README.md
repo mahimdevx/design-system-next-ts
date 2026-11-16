@@ -30,7 +30,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Card`                         | Content surface with header, action, content and footer. 2 sizes, `asChild`        |
 | `Avatar`                       | A person or brand's image with a fallback for loading and errors. 2 sizes          |
 | `Calendar`                     | Pick a day, several days or a range (DayPicker). Keyboard and screen-reader ready  |
-| `Breadcrumb`                   | Where the page sits: list, link, page, separator, ellipsis parts (typedRoutes)     |
+| `Breadcrumb`                   | Where the page sits: link, page, ellipsis parts; CSS separator (chevron, slash)    |
 | `Tooltip`                      | Short label on hover and focus (Radix): `content` shortcut; `TooltipRoot` parts    |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |

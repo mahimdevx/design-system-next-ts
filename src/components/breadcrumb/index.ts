@@ -4,7 +4,6 @@ export {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
+  BreadcrumbPage
 } from "./breadcrumb";
 export { breadcrumbVariants } from "./breadcrumb.styles";

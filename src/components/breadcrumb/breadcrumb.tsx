@@ -1,30 +1,18 @@
 import type { ComponentProps } from "react";
 
-import { ChevronRight, Ellipsis } from "lucide-react";
+import { Ellipsis } from "lucide-react";
+
+import type { VariantProps } from "@utils/tv";
 
 import { Icon } from "@components/icon";
 import { Link } from "@components/link";
 
 import { breadcrumbVariants } from "./breadcrumb.styles";
 
-const { list, item, page, separator, ellipsis } = breadcrumbVariants();
+const { list, item, page, ellipsis } = breadcrumbVariants();
 
 /*
- * Where the current page sits in the site, following the WAI-ARIA breadcrumb pattern:
- *
- * <Breadcrumb>
- *   <BreadcrumbList>
- *     <BreadcrumbItem>
- *       <BreadcrumbLink href="/">Home</BreadcrumbLink>
- *       <BreadcrumbSeparator />
- *     </BreadcrumbItem>
- *     <BreadcrumbItem>
- *       <BreadcrumbPage>Store</BreadcrumbPage>
- *     </BreadcrumbItem>
- *   </BreadcrumbList>
- * </Breadcrumb>
- *
- * Server components: no client JavaScript.
+ * Where the current page sits in the site, following the WAI-ARIA breadcrumb pattern
  */
 export function Breadcrumb({
   "aria-label": ariaLabel = "Breadcrumb",
@@ -34,15 +22,29 @@ export function Breadcrumb({
   return <nav data-slot="breadcrumb" aria-label={ariaLabel} {...props} />;
 }
 
-export function BreadcrumbList({ className, ...props }: ComponentProps<"ol">) {
-  return <ol data-slot="breadcrumb-list" className={list({ className })} {...props} />;
+/*
+ * The items' separator is drawn by CSS between them, never after the last one:
+ * `separator` picks the shape ("chevron" by default, or "slash").
+ */
+export function BreadcrumbList({
+  separator,
+  className,
+  ...props
+}: ComponentProps<"ol"> & VariantProps<typeof breadcrumbVariants>) {
+  return (
+    <ol
+      data-slot="breadcrumb-list"
+      className={list({ separator, className })}
+      {...props}
+    />
+  );
 }
 
 export function BreadcrumbItem({ className, ...props }: ComponentProps<"li">) {
   return <li data-slot="breadcrumb-item" className={item({ className })} {...props} />;
 }
 
-// Our Link (next/link), so `href` is checked by typedRoutes and routing stays client-side
+// Link (next/link), so `href` is checked by typedRoutes and routing stays client-side
 export function BreadcrumbLink<RouteType>(props: ComponentProps<typeof Link<RouteType>>) {
   return <Link data-slot="breadcrumb-link" variant="subtle" {...props} />;
 }
@@ -56,28 +58,6 @@ export function BreadcrumbPage({ className, ...props }: ComponentProps<"span">) 
       className={page({ className })}
       {...props}
     />
-  );
-}
-
-/*
- * Goes inside a BreadcrumbItem, after its link: the item doesn't wrap, so the separator
- * stays with its link and never starts a line on its own. Hidden from screen readers.
- * Default: a chevron; pass children for another one.
- */
-export function BreadcrumbSeparator({
-  children = <Icon as={ChevronRight} />,
-  className,
-  ...props
-}: ComponentProps<"span">) {
-  return (
-    <span
-      data-slot="breadcrumb-separator"
-      aria-hidden
-      className={separator({ className })}
-      {...props}
-    >
-      {children}
-    </span>
   );
 }
 
