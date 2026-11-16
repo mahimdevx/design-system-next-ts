@@ -9,7 +9,6 @@ import {
   Italic,
   Plus,
   Search,
-  Slash,
   Strikethrough,
   TriangleAlert,
   Underline,
@@ -25,8 +24,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
+  BreadcrumbPage
 } from "@components/breadcrumb";
 import { Button } from "@components/button";
 import {
@@ -544,11 +542,9 @@ export default function FoundationsPage() {
               <BreadcrumbList>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                  <BreadcrumbSeparator />
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/demo">Demos</BreadcrumbLink>
-                  <BreadcrumbSeparator />
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   <BreadcrumbPage>Store</BreadcrumbPage>
@@ -557,24 +553,15 @@ export default function FoundationsPage() {
             </Breadcrumb>
 
             <Breadcrumb aria-label="Breadcrumb with slashes">
-              <BreadcrumbList>
+              <BreadcrumbList separator="slash">
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/">Home</BreadcrumbLink>
-                  <BreadcrumbSeparator>
-                    <Icon as={Slash} />
-                  </BreadcrumbSeparator>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   <BreadcrumbEllipsis />
-                  <BreadcrumbSeparator>
-                    <Icon as={Slash} />
-                  </BreadcrumbSeparator>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   <BreadcrumbLink href="/demo/cards">Card examples</BreadcrumbLink>
-                  <BreadcrumbSeparator>
-                    <Icon as={Slash} />
-                  </BreadcrumbSeparator>
                 </BreadcrumbItem>
                 <BreadcrumbItem>
                   <BreadcrumbPage>

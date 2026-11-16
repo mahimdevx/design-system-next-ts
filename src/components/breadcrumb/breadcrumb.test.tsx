@@ -1,8 +1,5 @@
 import { render, screen, within } from "@testing-library/react";
-import { Slash } from "lucide-react";
 import { describe, expect, test } from "vitest";
-
-import { Icon } from "@components/icon";
 
 import {
   Breadcrumb,
@@ -10,8 +7,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
-  BreadcrumbPage,
-  BreadcrumbSeparator
+  BreadcrumbPage
 } from "./breadcrumb";
 
 function renderTrail() {
@@ -20,11 +16,9 @@ function renderTrail() {
       <BreadcrumbList>
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          <BreadcrumbSeparator />
         </BreadcrumbItem>
         <BreadcrumbItem>
           <BreadcrumbLink href="/demo">Demos</BreadcrumbLink>
-          <BreadcrumbSeparator />
         </BreadcrumbItem>
         <BreadcrumbItem>
           <BreadcrumbPage>Store</BreadcrumbPage>
@@ -39,7 +33,7 @@ describe("Breadcrumb", () => {
     renderTrail();
 
     const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
-    // One list item per page; the separators sit inside them, hidden
+    // One list item per page; separators are CSS, so nothing else is in the tree
     expect(within(nav).getAllByRole("listitem")).toHaveLength(3);
   });
 
@@ -57,19 +51,10 @@ describe("Breadcrumb", () => {
     expect(screen.queryByRole("link", { name: "Store" })).not.toBeInTheDocument();
   });
 
-  test("a separator takes another icon", () => {
-    render(
-      <ol>
-        <BreadcrumbItem>
-          <BreadcrumbLink href="/">Home</BreadcrumbLink>
-          <BreadcrumbSeparator>
-            <Icon as={Slash} data-testid="slash" />
-          </BreadcrumbSeparator>
-        </BreadcrumbItem>
-      </ol>
-    );
+  test("the separator is CSS only: no text between the pages", () => {
+    renderTrail();
 
-    expect(screen.getByTestId("slash")).toBeInTheDocument();
+    expect(screen.getByRole("navigation")).toHaveTextContent(/^HomeDemosStore$/);
   });
 
   test("the ellipsis is announced as More", () => {
