@@ -26,6 +26,7 @@ import { Stack } from "@components/stack";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
 
+import { RaphixLogo } from "../store/raphix-logo";
 import { artwork, podcasts, showtimes } from "./data";
 
 export const metadata: Metadata = {
@@ -458,6 +459,64 @@ function Adaptive() {
   );
 }
 
+function TeamStoreCard({ name }: { name: string }) {
+  return (
+    <Card className="w-full min-w-0 gap-0 py-0">
+      <Link
+        href="#team-stores"
+        variant="subtle"
+        className="grid grid-cols-4 gap-0.5 p-0.5"
+      >
+        <span className="sr-only">{name}</span>
+        <Media tone={0} className="col-span-3 aspect-square" />
+
+        <div className="col-span-1 grid gap-0.5">
+          {[1, 2, 3].map((tone) => (
+            <Media key={tone} tone={tone} className="aspect-square" />
+          ))}
+        </div>
+      </Link>
+
+      <CardContent className="flex items-center justify-between gap-4 px-4 py-3 sm:gap-8">
+        <div className="flex min-w-0 items-center gap-2">
+          <span className="flex shrink-0 items-center justify-center rounded-full bg-accent p-2 text-accent-foreground">
+            <RaphixLogo className="size-5" />
+          </span>
+
+          <div className="min-w-0">
+            <CardTitle className="line-clamp-1 text-xs font-semibold sm:text-sm">
+              {name}
+            </CardTitle>
+            <CardDescription className="text-xs leading-5">
+              200 items · 4.0★
+            </CardDescription>
+          </div>
+        </div>
+
+        <Button asChild variant="soft" size="xs" rounded className="px-4 font-medium">
+          <a href="#team-stores">Shop now</a>
+        </Button>
+      </CardContent>
+    </Card>
+  );
+}
+
+function TeamStores() {
+  return (
+    <Example
+      id="team-stores"
+      title="Team store card"
+      text="An image collage and a store summary, built from the Card parts."
+    >
+      <Grid columns="1" gap="4" className="sm:grid-cols-2 lg:grid-cols-3">
+        <TeamStoreCard name="Riverside Gaming" />
+        <TeamStoreCard name="Northwind Esports" />
+        <TeamStoreCard name="A team with a much longer name than usual" />
+      </Grid>
+    </Example>
+  );
+}
+
 function DoAndDont() {
   return (
     <Example
@@ -525,6 +584,7 @@ export default function CardsDemoPage() {
           </Stack>
         </Section>
 
+        <TeamStores />
         <Variants />
         <Anatomy />
         <TextOnImage />

@@ -1,28 +1,39 @@
 import { render, screen, within } from "@testing-library/react";
-import { Slash } from "lucide-react";
 import { describe, expect, test } from "vitest";
 
-import { Icon } from "@components/icon";
-
-import { Breadcrumb } from "./breadcrumb";
+import {
+  Breadcrumb,
+  BreadcrumbEllipsis,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage
+} from "./breadcrumb";
 
 function renderTrail() {
   return render(
-    <Breadcrumb
-      links={[
-        { label: "Home", href: "/" },
-        { label: "Demos", href: "/demo" }
-      ]}
-      current="Store"
-    />
+    <Breadcrumb>
+      <BreadcrumbList>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/">Home</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink href="/demo">Demos</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbPage>Store</BreadcrumbPage>
+        </BreadcrumbItem>
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 }
 
 describe("Breadcrumb", () => {
-  test("is a navigation landmark named Breadcrumb, with an ordered list", () => {
+  test("is a navigation landmark named Breadcrumb, with the pages as list items", () => {
     renderTrail();
 
     const nav = screen.getByRole("navigation", { name: "Breadcrumb" });
+    // One list item per page; separators are CSS, so nothing else is in the tree
     expect(within(nav).getAllByRole("listitem")).toHaveLength(3);
   });
 
@@ -33,34 +44,28 @@ describe("Breadcrumb", () => {
     expect(screen.getByRole("link", { name: "Demos" })).toHaveAttribute("href", "/demo");
   });
 
-  test("shows the current page last, not as a link", () => {
+  test("marks the current page, and it is not a link", () => {
     renderTrail();
 
     expect(screen.getByText("Store")).toHaveAttribute("aria-current", "page");
     expect(screen.queryByRole("link", { name: "Store" })).not.toBeInTheDocument();
   });
 
-  test("separators are not read out", () => {
+  test("the separator is CSS only: no text between the pages", () => {
     renderTrail();
 
-    // Each list item's accessible text is only its label
-    const items = screen.getAllByRole("listitem");
-    expect(items.map((listItem) => listItem.textContent)).toEqual([
-      "Home",
-      "Demos",
-      "Store"
-    ]);
+    expect(screen.getByRole("navigation")).toHaveTextContent(/^HomeDemosStore$/);
   });
 
-  test("takes a custom separator", () => {
+  test("the ellipsis is announced as More", () => {
     render(
-      <Breadcrumb
-        separator={<Icon as={Slash} data-testid="slash" />}
-        links={[{ label: "Home", href: "/" }]}
-        current="Store"
-      />
+      <ol>
+        <BreadcrumbItem>
+          <BreadcrumbEllipsis />
+        </BreadcrumbItem>
+      </ol>
     );
 
-    expect(screen.getByTestId("slash")).toBeInTheDocument();
+    expect(screen.getByRole("listitem")).toHaveTextContent("More");
   });
 });
