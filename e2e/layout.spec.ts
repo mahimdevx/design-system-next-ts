@@ -383,3 +383,42 @@ test.describe("dialog", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360);
   });
 });
+
+test.describe("toaster", () => {
+  test("Alt+T reaches a toast's action from the keyboard", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    await page.getByRole("button", { name: "With action" }).click();
+    const toast = page.getByRole("listitem").filter({ hasText: "Message archived" });
+    await expect(toast).toBeVisible();
+
+    // Alt+T focuses the list of toasts (and pauses them); Tab moves to the toast, then into it
+    await page.keyboard.press("Alt+T");
+    await page.keyboard.press("Tab");
+    await expect(toast).toBeFocused();
+    await page.keyboard.press("Tab");
+    await expect(toast.getByRole("button", { name: "Undo" })).toBeFocused();
+
+    await page.keyboard.press("Enter");
+    await expect(toast).toBeHidden();
+    await expect(page.getByText("Message restored")).toBeVisible();
+  });
+
+  test("toasts fit a phone screen", async ({ page }) => {
+    await page.setViewportSize({ width: 360, height: 640 });
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    await page.getByRole("button", { name: "Error" }).click();
+    const toast = page.getByRole("listitem").filter({ hasText: "Upload failed" });
+    await expect(toast).toBeVisible();
+    // Alt+T expands and pauses the toasts, so this one can't close between the checks
+    await page.keyboard.press("Alt+T");
+
+    // sonner's phone layout: full width minus a 16px gutter on each side
+    await expect(toast).toBeInViewport({ ratio: 1 });
+    expect((await toast.boundingBox())?.width).toBe(360 - 2 * 16);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360);
+  });
+});

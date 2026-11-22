@@ -5,6 +5,7 @@ import { cn } from "@utils/cn";
 import { firaCode, poppins } from "@styles/fonts";
 
 import { ThemeProvider } from "@components/theme-provider";
+import { Toaster } from "@components/toaster";
 import { TooltipProvider } from "@components/tooltip";
 
 import "@styles/globals.css";
@@ -34,6 +35,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body>
         <ThemeProvider>
           <TooltipProvider>{children}</TooltipProvider>
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

@@ -75,6 +75,7 @@ import { LogoMark } from "@assets/icons/logo-mark";
 
 import { CalendarSamples } from "./calendar-samples";
 import { DropdownMenuSamples } from "./dropdown-menu-samples";
+import { ToasterSamples } from "./toaster-samples";
 
 const buttonVariantNames = [
   "primary",
@@ -723,6 +724,16 @@ export default function FoundationsPage() {
                 </DialogContent>
               </Dialog>
             </Stack>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="toasts">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="toasts">
+              Toasts
+            </Heading>
+
+            <ToasterSamples />
           </Stack>
         </Section>
 
