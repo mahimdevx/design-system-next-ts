@@ -131,5 +131,50 @@ for (const colorScheme of ["light", "dark"] as const) {
 
       expect(results.violations).toEqual([]);
     });
+
+    test("open toasts have no accessibility violations", async ({ page }) => {
+      // Five toasts make a slow scan in Firefox under load, like the page scans: 3× timeout
+      test.slow();
+
+      // Toasts close after 4s, and five clicks can take longer than that under load
+      // (Firefox lost the first one). With the clock paused, time only moves when the
+      // test says so: enough for sonner to add each toast, never enough to close one.
+      await page.clock.install();
+      await page.goto("/");
+      await expect(page.locator("html")).toHaveCSS("color-scheme", colorScheme);
+      await page.getByRole("grid").first().waitFor();
+      await page.clock.pauseAt(await page.evaluate(() => Date.now() + 1000));
+      for (const name of [
+        "Success",
+        "Warning",
+        "Error",
+        "With action",
+        "With close button"
+      ]) {
+        await page.getByRole("button", { name, exact: true }).click();
+        await page.clock.runFor(100);
+      }
+      // Alt+T focuses the toasts: the stack expands, so axe sees each toast on its own, and
+      // sonner pauses their timers. Hovering would too, but the toasts move from the pointer.
+      // Then real time again: axe waits on timers too
+      await page.keyboard.press("Alt+T");
+      await expect(page.locator("[data-sonner-toast]").first()).toHaveAttribute(
+        "data-expanded",
+        "true"
+      );
+      await page.clock.resume();
+      // Each toast, not the list: its toasts are absolutely positioned, so it has no height
+      await expect(page.locator("[data-sonner-toast]")).toHaveCount(5);
+      for (const toast of await page.locator("[data-sonner-toast]").all()) {
+        await settled(toast);
+      }
+
+      const results = await new AxeBuilder({ page })
+        .include("[data-sonner-toaster]")
+        .withTags(axeTags)
+        .analyze();
+
+      expect(results.violations).toEqual([]);
+    });
   });
 }

@@ -16,3 +16,6 @@ globalThis.ResizeObserver ??= class {
   unobserve() {}
   disconnect() {}
 };
+
+// jsdom has no pointer capture; sonner captures the pointer to track swipes on toasts
+Element.prototype.setPointerCapture ??= () => {};
