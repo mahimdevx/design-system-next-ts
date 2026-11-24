@@ -4,7 +4,9 @@ import {
   Bold,
   Check,
   CircleCheck,
+  CircleDot,
   CircleX,
+  Code,
   Info,
   Italic,
   Plus,
@@ -13,7 +15,8 @@ import {
   Strikethrough,
   TriangleAlert,
   Underline,
-  User
+  User,
+  Users
 } from "lucide-react";
 
 import { Alert, AlertAction, AlertDescription, AlertTitle } from "@components/alert";
@@ -63,6 +66,7 @@ import {
 } from "@components/popover";
 import { Section } from "@components/section";
 import { Stack } from "@components/stack";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/tabs";
 import { Text } from "@components/text";
 import { ThemeToggle } from "@components/theme-toggle";
 import {
@@ -195,6 +199,7 @@ const sections = [
   "avatars",
   "calendars",
   "tooltips",
+  "tabs",
   "breadcrumbs",
   "icons",
   "layout"
@@ -734,6 +739,82 @@ export default function FoundationsPage() {
             </Heading>
 
             <ToasterSamples />
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="tabs">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="tabs">
+              Tabs
+            </Heading>
+
+            <Grid minItemWidth="20rem" gap="8">
+              <Tabs defaultValue="account">
+                <TabsList aria-label="Account settings">
+                  <TabsTrigger value="account">Account</TabsTrigger>
+                  <TabsTrigger value="password">Password</TabsTrigger>
+                  <TabsTrigger value="billing" disabled>
+                    Billing
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="account">
+                  <Text variant="small">Update your name, email and profile photo.</Text>
+                </TabsContent>
+                <TabsContent value="password">
+                  <Text variant="small">
+                    Change your password and sign out other devices.
+                  </Text>
+                </TabsContent>
+                <TabsContent value="billing">
+                  <Text variant="small">Manage your plan and invoices.</Text>
+                </TabsContent>
+              </Tabs>
+
+              <Tabs defaultValue="code">
+                <TabsList variant="line" aria-label="Project">
+                  <TabsTrigger value="code">
+                    <Icon as={Code} />
+                    Code
+                  </TabsTrigger>
+                  <TabsTrigger value="issues">
+                    <Icon as={CircleDot} />
+                    Issues
+                  </TabsTrigger>
+                  <TabsTrigger value="team">
+                    <Icon as={Users} />
+                    Team
+                  </TabsTrigger>
+                </TabsList>
+                <TabsContent value="code" className="pt-2">
+                  <Text variant="small">Browse the files and the latest commits.</Text>
+                </TabsContent>
+                <TabsContent value="issues" className="pt-2">
+                  <Text variant="small">Open bugs and requests, newest first.</Text>
+                </TabsContent>
+                <TabsContent value="team" className="pt-2">
+                  <Text variant="small">
+                    Invite people or change who can see the project.
+                  </Text>
+                </TabsContent>
+              </Tabs>
+
+              <Tabs defaultValue="general" orientation="vertical" className="gap-6">
+                <TabsList variant="line" aria-label="Preferences">
+                  <TabsTrigger value="general">General</TabsTrigger>
+                  <TabsTrigger value="appearance">Appearance</TabsTrigger>
+                  <TabsTrigger value="privacy">Privacy</TabsTrigger>
+                </TabsList>
+                <TabsContent value="general">
+                  <Text variant="small">Language, region and time zone.</Text>
+                </TabsContent>
+                <TabsContent value="appearance">
+                  <Text variant="small">Theme, font size and reduced motion.</Text>
+                </TabsContent>
+                <TabsContent value="privacy">
+                  <Text variant="small">Who can find you and what others can see.</Text>
+                </TabsContent>
+              </Tabs>
+            </Grid>
           </Stack>
         </Section>
 

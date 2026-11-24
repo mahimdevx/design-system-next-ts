@@ -36,6 +36,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Popover`                      | Rich content from a button (Radix): title and description name it, focus moves in  |
 | `Dialog`                       | Modal window (Radix): traps focus, scrolls in the backdrop when tall, close button |
 | `Toaster`, `toast()`           | Brief notices (sonner): `<Toaster />` once in the layout, `toast()` from anywhere  |
+| `Tabs`                         | Panels shown one at a time (Radix): pill or line look, horizontal or vertical      |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
@@ -113,8 +114,8 @@ src/
 │   │   └── index.ts        #   public exports
 │   └── …                   # alert, avatar, badge, breadcrumb, calendar, card, container,
 │                           # dialog, dropdown-menu, grid, heading, icon, link, popover,
-│                           # section, stack, text, theme-toggle, theme-provider, toaster,
-│                           # tooltip
+│                           # section, stack, tabs, text, theme-toggle, theme-provider,
+│                           # toaster, tooltip
 ├── assets/
 │   └── icons/              # Custom SVG icons as React components (imported per file)
 ├── styles/                 # Global foundations: globals.css, tokens.css, fonts.ts

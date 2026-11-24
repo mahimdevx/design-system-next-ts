@@ -109,7 +109,9 @@ const eslintConfig = defineConfig([
     extends: [playwright.configs["flat/recommended"]],
     rules: {
       // Helpers named expect… assert too (expectHeadingBelowHeader)
-      "playwright/expect-expect": ["warn", { assertFunctionPatterns: ["^expect[A-Z]"] }]
+      "playwright/expect-expect": ["warn", { assertFunctionPatterns: ["^expect[A-Z]"] }],
+      // test.skip(browserName !== "chromium", reason) is a browser limit, not a parked test
+      "playwright/no-skipped-test": ["warn", { allowConditional: { skip: true } }]
     }
   },
 
