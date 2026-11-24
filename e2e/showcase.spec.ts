@@ -17,6 +17,8 @@ test("loads without errors or hydration mismatches", async ({ page }) => {
 
 test("in-page navigation links move to their section", async ({ page }) => {
   await page.goto("/");
+  // A click during hydration can be lost (seen in Firefox): wait until the calendars render
+  await page.getByRole("grid").first().waitFor();
 
   await page
     .getByRole("navigation", { name: "Showcase sections" })

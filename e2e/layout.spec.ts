@@ -432,3 +432,53 @@ test.describe("toaster", () => {
     expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(360);
   });
 });
+
+test.describe("tabs", () => {
+  test("arrow keys move between tabs and select them; Tab moves into the panel", async ({
+    page
+  }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+    const list = page.getByRole("tablist", { name: "Project" });
+    const code = list.getByRole("tab", { name: "Code" });
+    const issues = list.getByRole("tab", { name: "Issues" });
+
+    await focusInView(code);
+    await page.keyboard.press("ArrowRight");
+    await expect(issues).toBeFocused();
+    await expect(issues).toHaveAttribute("aria-selected", "true");
+
+    // End jumps to the last tab, and the arrows wrap around. Radix moves focus a tick
+    // after each key, so wait for it before the next press
+    await page.keyboard.press("End");
+    await expect(list.getByRole("tab", { name: "Team" })).toBeFocused();
+    await page.keyboard.press("ArrowRight");
+    await expect(code).toBeFocused();
+
+    await page.keyboard.press("Tab");
+    await expect(page.getByRole("tabpanel", { name: "Code" })).toBeFocused();
+  });
+
+  test("the active tab keeps a fill of its own in forced colors", async ({
+    page,
+    browserName
+  }) => {
+    test.skip(browserName !== "chromium", "Only Chromium emulates forced colors");
+    await page.emulateMedia({ forcedColors: "active" });
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    // Both looks lose their own marks (fill, shadow, bar) in forced colors
+    for (const name of ["Account settings", "Project"]) {
+      const tabs = page.getByRole("tablist", { name }).getByRole("tab");
+      const fills = await tabs.evaluateAll((elements) =>
+        elements.map((element) => getComputedStyle(element).backgroundColor)
+      );
+      const selected = await tabs.evaluateAll((elements) =>
+        elements.map((element) => element.getAttribute("aria-selected") === "true")
+      );
+      const active = fills[selected.indexOf(true)];
+      expect(fills.filter((fill) => fill === active)).toHaveLength(1);
+    }
+  });
+});
