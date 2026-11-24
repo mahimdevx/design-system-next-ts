@@ -106,7 +106,11 @@ const eslintConfig = defineConfig([
   // Browser tests: awaited assertions, web-first matchers, no fixed waits
   {
     files: ["e2e/**/*.ts"],
-    extends: [playwright.configs["flat/recommended"]]
+    extends: [playwright.configs["flat/recommended"]],
+    rules: {
+      // Helpers named expect… assert too (expectHeadingBelowHeader)
+      "playwright/expect-expect": ["warn", { assertFunctionPatterns: ["^expect[A-Z]"] }]
+    }
   },
 
   // Must be last: turns off every rule that would fight Prettier's formatting

@@ -11,6 +11,10 @@ export default defineConfig({
   // covered faster by the Vitest tests in src/.
   testDir: "./e2e",
   fullyParallel: true,
+  // Locally, three browsers plus the server on half the cores (Playwright's default)
+  // starved Firefox: it hung and failed random tests, and the suite took 5–10 minutes.
+  // A third of the cores passes in about 2. CI keeps the default
+  workers: isCI ? undefined : "33%",
   forbidOnly: isCI,
   // Retries only on CI, where a retry also records a trace for the report
   retries: isCI ? 2 : 0,

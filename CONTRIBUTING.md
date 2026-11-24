@@ -44,9 +44,11 @@ Tests live next to the code they test: `button.tsx` has `button.test.tsx`.
   in `e2e/` and runs in Playwright against the production build, in Chromium, Firefox and
   WebKit: accessibility scans with axe (WCAG 2.2 AA, including contrast) in light and dark
   mode, keyboard operation, theming.
-- `pnpm test:e2e` builds the app and runs them. The first time, install the browsers:
-  `pnpm exec playwright install`. Add `--ui` to debug, `--project=chromium` for one
-  browser.
+- `pnpm test:e2e` builds the app and runs them. The first time, and after each Playwright
+  update, install the browsers: `pnpm exec playwright install`. Add `--ui` to debug,
+  `--project=chromium` for one browser.
+- Locally the suite uses a third of the CPU cores: with all three browsers on half of
+  them, Firefox ran out of resources and failed random tests. CI keeps Playwright's default.
 - Tests run with the React Compiler, like the app. Keep `@babel/core` on 7: the compiler
   silently skips components under Babel 8.
 

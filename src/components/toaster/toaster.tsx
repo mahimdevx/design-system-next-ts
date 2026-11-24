@@ -33,6 +33,10 @@ const icons = {
  * root layout. sonner announces them in a polite live region and lets them be swiped away.
  * Hovering or Alt+T expands the stack and pauses them (Alt+T also focuses them), and so
  * does hiding the tab. A server component: sonner's Toaster is the client part.
+ *
+ * Toasts close after 4 seconds. One with an action gets a longer `duration` (10 seconds),
+ * so people can read it and reach the button (WCAG 2.2.1), and the action must also be
+ * possible elsewhere: a toast is never the only way to undo or retry.
  */
 export function Toaster({ toastOptions, ...props }: ToasterProps) {
   return (

@@ -1,6 +1,10 @@
 import AxeBuilder from "@axe-core/playwright";
 import { expect, test, type Locator } from "@playwright/test";
 
+// Every test here runs an axe scan, the heaviest step in the suite: Firefox under parallel
+// load needed more than the default 30s for pages and for open overlays alike
+test.describe.configure({ timeout: 90_000 });
+
 // WCAG 2.2 A and AA, plus axe's best practices (heading order, landmarks...).
 // Runs in a real browser, so color contrast is checked against the rendered tokens.
 const axeTags = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa", "best-practice"];
@@ -47,9 +51,6 @@ for (const colorScheme of ["light", "dark"] as const) {
 
     for (const { name, path, ready } of pages) {
       test(`the ${name} page has no accessibility violations`, async ({ page }) => {
-        // A full axe scan is the heaviest step in the suite (slowest in Firefox): 3× timeout
-        test.slow();
-
         await page.goto(path);
 
         // next-themes follows the system theme; make sure it is applied before scanning
@@ -133,9 +134,6 @@ for (const colorScheme of ["light", "dark"] as const) {
     });
 
     test("open toasts have no accessibility violations", async ({ page }) => {
-      // Five toasts make a slow scan in Firefox under load, like the page scans: 3× timeout
-      test.slow();
-
       // Toasts close after 4s, and five clicks can take longer than that under load
       // (Firefox lost the first one). With the clock paused, time only moves when the
       // test says so: enough for sonner to add each toast, never enough to close one.

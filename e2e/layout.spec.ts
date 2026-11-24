@@ -1,4 +1,4 @@
-import { expect, test, type Locator } from "@playwright/test";
+import { expect, test, type Locator, type Page } from "@playwright/test";
 
 // Number of tracks the browser actually laid out, e.g. "192px 192px 192px" -> 3
 async function columnCount(grid: Locator) {
@@ -60,6 +60,24 @@ test("section spacing is fluid: more room on wide screens", async ({ page }) => 
   expect(wide).toBeGreaterThan(narrow);
 });
 
+// After an anchor link: the jump can land after click() returns, so keep measuring until
+// the sticky header is back at the top and the heading sits below it, not under it
+async function expectHeadingBelowHeader(page: Page, name: string) {
+  const header = page.getByRole("banner");
+  const heading = page.getByRole("heading", { level: 2, name });
+
+  await expect.poll(async () => (await header.boundingBox())?.y).toBe(0);
+  await expect
+    .poll(async () => {
+      const [headerBox, headingBox] = await Promise.all([
+        header.boundingBox(),
+        heading.boundingBox()
+      ]);
+      return headerBox && headingBox ? headingBox.y - headerBox.height : -1;
+    })
+    .toBeGreaterThanOrEqual(0);
+}
+
 test.describe("portfolio demo", () => {
   test("keeps the header in view while scrolling, and anchors land below it", async ({
     page
@@ -74,14 +92,8 @@ test.describe("portfolio demo", () => {
       .getByRole("link", { name: "Experience" })
       .click();
 
-    const header = await page.getByRole("banner").boundingBox();
-    const heading = await page
-      .getByRole("heading", { level: 2, name: "Experience" })
-      .boundingBox();
-
     // Sticky header still at the top; the section heading is not hidden under it
-    expect(header?.y).toBe(0);
-    expect(heading && header && heading.y >= header.height).toBe(true);
+    await expectHeadingBelowHeader(page, "Experience");
   });
 
   test("stacks on a phone without horizontal scroll", async ({ page }) => {
@@ -106,14 +118,8 @@ test.describe("store demo", () => {
       .getByRole("link", { name: "How it works" })
       .click();
 
-    const header = await page.getByRole("banner").boundingBox();
-    const heading = await page
-      .getByRole("heading", { level: 2, name: "How it works" })
-      .boundingBox();
-
     // The announcement bar scrolls away; the header sticks and doesn't cover the heading
-    expect(header?.y).toBe(0);
-    expect(heading && header && heading.y >= header.height).toBe(true);
+    await expectHeadingBelowHeader(page, "How it works");
   });
 
   test("stacks on a phone without horizontal scroll", async ({ page }) => {
@@ -179,6 +185,8 @@ test.describe("card examples demo", () => {
 
 test("an avatar image replaces the fallback in the browser", async ({ page }) => {
   await page.goto("/");
+  // The image renders on the client once loaded: wait for hydration (calendars render then)
+  await page.getByRole("grid").first().waitFor();
 
   const image = page.getByRole("img", { name: "Sample person", exact: true });
 
@@ -234,6 +242,8 @@ async function focusInView(locator: Locator) {
 test.describe("tooltip", () => {
   test("opens on hover, stays while hovered, and Escape closes it", async ({ page }) => {
     await page.goto("/");
+    // Hovering before hydration does nothing: the tooltip has no handlers yet
+    await page.getByRole("grid").first().waitFor();
     const bold = page.getByRole("button", { name: "Bold" });
 
     await bold.hover();

@@ -69,7 +69,9 @@ export function ToasterSamples() {
         size="sm"
         onClick={() =>
           toast("Message archived", {
-            action: { label: "Undo", onClick: () => toast("Message restored") }
+            action: { label: "Undo", onClick: () => toast("Message restored") },
+            // Time to read it and reach Undo (WCAG 2.2.1); the default is 4 seconds
+            duration: 10_000
           })
         }
       >
