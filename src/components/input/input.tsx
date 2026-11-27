@@ -12,7 +12,7 @@ type InputProps = Omit<ComponentProps<"input">, "size"> &
  * A plain <input> with the system's look. It needs a name: a Label (htmlFor + id) or
  * aria-label. For a label, help text and an error wired up for you, use TextField.
  */
-export function Input({ size, className, ...props }: InputProps) {
+export function Input({ size = "base", className, ...props }: InputProps) {
   return (
     <input
       data-slot="input"

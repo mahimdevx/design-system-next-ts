@@ -76,8 +76,9 @@ classes, and ESLint enforces the rest. Beyond that:
   labels. Test them with the keyboard only.
 - Every component works in light and dark mode and uses design tokens, never raw colors.
 - Text tokens meet 4.5:1 against their surface; borders that identify a control (the
-  `--input` token) meet 3:1. axe checks text contrast only, so measure a new or changed
-  border token in both themes.
+  `--input` token) meet 3:1 on the background and on card/popover surfaces (not on
+  `--muted`: keep fields off muted surfaces). axe checks text contrast only, so measure a
+  new or changed border token in both themes.
 - Add `"use client"` only to components that use hooks, context or event handlers.
 - Disable a lint rule only for one line, and give the reason:
   `// eslint-disable-next-line rule-name -- reason`.

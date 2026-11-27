@@ -482,3 +482,42 @@ test.describe("tabs", () => {
     }
   });
 });
+
+test.describe("forms", () => {
+  // Focus has no outer ring: a 1px inset ring doubles the border inside the field
+  async function focusStyle(input: Locator) {
+    const read = () =>
+      input.evaluate((element) => {
+        const { boxShadow, borderTopColor } = getComputedStyle(element);
+        return { inset: boxShadow.includes("inset"), border: borderTopColor };
+      });
+    const before = await read();
+    await focusInView(input);
+    await expect.poll(async () => (await read()).inset).toBe(true);
+    return { before, after: await read() };
+  }
+
+  test("a focused input darkens and doubles its border", async ({ page }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    const { before, after } = await focusStyle(
+      page.getByRole("textbox", { name: "Email" })
+    );
+
+    expect(after.border).not.toBe(before.border);
+  });
+
+  test("an invalid input stays red when focused and doubles its border too", async ({
+    page
+  }) => {
+    await page.goto("/");
+    await page.getByRole("grid").first().waitFor();
+
+    const { before, after } = await focusStyle(
+      page.getByRole("textbox", { name: "Username" })
+    );
+
+    expect(after.border).toBe(before.border);
+  });
+});
