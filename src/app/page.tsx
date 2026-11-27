@@ -1,3 +1,5 @@
+import type { ComponentProps } from "react";
+
 import {
   ArrowRight,
   Bell,
@@ -54,7 +56,7 @@ import {
 import { Grid } from "@components/grid";
 import { Heading, headingElements, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
-import { Input } from "@components/input";
+import { Input, inputTypes } from "@components/input";
 import { Label } from "@components/label";
 import { Link } from "@components/link";
 import {
@@ -193,6 +195,55 @@ const formatting = [
 const tooltipSides = ["top", "right", "bottom", "left"] as const;
 
 const inputSizes = ["sm", "base", "lg", "xl"] as const;
+
+// One sample per input type. Keyed by inputTypes, so a new type fails the typecheck here
+// until it gets a sample
+const inputTypeSamples: Record<
+  (typeof inputTypes)[number],
+  Pick<ComponentProps<typeof TextField>, "label" | "description" | "autoComplete">
+> = {
+  text: { label: "Full name", description: "Any characters.", autoComplete: "name" },
+  email: {
+    label: "Work email",
+    description: "Email keyboard on phones; checks for an @ on submit.",
+    autoComplete: "email"
+  },
+  password: {
+    label: "Password",
+    description: "Hides what you type; password managers fill it.",
+    autoComplete: "current-password"
+  },
+  search: { label: "Search", description: "Search key on the phone keyboard." },
+  tel: {
+    label: "Phone",
+    description: "Number pad on phones; any format is accepted.",
+    autoComplete: "tel"
+  },
+  url: {
+    label: "Website",
+    description: "URL keyboard on phones; checks for a full address on submit.",
+    autoComplete: "url"
+  },
+  number: {
+    label: "Quantity",
+    description: "Numbers only; the arrow keys step the value."
+  },
+  date: { label: "Start date", description: "A date picker in the user's date format." },
+  time: { label: "Reminder", description: "A time picker, 12- or 24-hour by locale." },
+  "datetime-local": {
+    label: "Meeting",
+    description: "Date and time together, without a time zone."
+  },
+  month: {
+    label: "Billing month",
+    description: "A month and year. Firefox and Safari show a plain text field."
+  },
+  week: {
+    label: "Sprint",
+    description: "A week of the year. Firefox and Safari show a plain text field."
+  },
+  file: { label: "Attachment", description: "Opens the file picker." }
+};
 
 const sections = [
   "colors",
@@ -854,6 +905,20 @@ export default function FoundationsPage() {
                 defaultValue="Analytical Engines"
                 disabled
               />
+            </Grid>
+
+            <Heading as="h3" size="h5">
+              Types
+            </Heading>
+            <Grid minItemWidth="16rem" gap="6">
+              {inputTypes.map((type) => (
+                <TextField
+                  key={type}
+                  type={type}
+                  name={`sample-${type}`}
+                  {...inputTypeSamples[type]}
+                />
+              ))}
             </Grid>
 
             <Heading as="h3" size="h5">

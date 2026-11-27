@@ -12,7 +12,8 @@ export const inputVariants = tv({
     // It stays red on focus and doubles like a valid field, so focus is still visible
     "aria-invalid:border-destructive-text aria-invalid:focus-visible:inset-ring-destructive-text",
     "disabled:cursor-not-allowed disabled:opacity-50",
-    "file:me-3 file:border-0 file:bg-transparent file:font-medium file:text-foreground"
+    // The file button fills the height, so its text centers like the rest of the field
+    "file:me-3 file:h-full file:border-0 file:bg-transparent file:font-medium file:text-foreground"
   ],
   variants: {
     // Same heights as Button's sm-xl, so a field and a button line up in a row.
