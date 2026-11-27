@@ -13,3 +13,8 @@ export const nativeSize = (
   // @ts-expect-error -- size is the look (sm-xl), not the native character width
   <TextField label="Code" size={6} />
 );
+
+export const notATextField = (
+  // @ts-expect-error -- the same types as Input: a checkbox isn't a text field
+  <TextField label="Remember me" type="checkbox" />
+);

@@ -1,2 +1,2 @@
-export { Input } from "./input";
+export { Input, inputTypes } from "./input";
 export { inputVariants } from "./input.styles";

@@ -38,7 +38,7 @@ built with Tailwind CSS v4 and Radix UI.
 | `Toaster`, `toast()`           | Brief notices (sonner): `<Toaster />` once in the layout, `toast()` from anywhere  |
 | `Tabs`                         | Panels shown one at a time (Radix): pill or line look, horizontal or vertical      |
 | `TextField`                    | Labelled text input with help text and error, wired for screen readers; 4 sizes    |
-| `Label`, `Input`               | Building blocks for custom field layouts: Input sizes match Button heights         |
+| `Label`, `Input`               | Building blocks for custom layouts: text-entry `type`s only, sizes match Button    |
 | `Icon`                         | Lucide or custom SVG icons; decorative by default, labelled with `aria-label`      |
 | `Heading`                      | Headings: `as` sets the level (h1–h6), `size` the look                             |
 | `Text`                         | Running text: lead, p, small, caption, overline, label                             |
