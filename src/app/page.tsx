@@ -54,6 +54,8 @@ import {
 import { Grid } from "@components/grid";
 import { Heading, headingElements, headingVariants } from "@components/heading";
 import { Icon } from "@components/icon";
+import { Input } from "@components/input";
+import { Label } from "@components/label";
 import { Link } from "@components/link";
 import {
   Popover,
@@ -68,6 +70,7 @@ import { Section } from "@components/section";
 import { Stack } from "@components/stack";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/tabs";
 import { Text } from "@components/text";
+import { TextField } from "@components/text-field";
 import { ThemeToggle } from "@components/theme-toggle";
 import {
   Tooltip,
@@ -189,6 +192,8 @@ const formatting = [
 
 const tooltipSides = ["top", "right", "bottom", "left"] as const;
 
+const inputSizes = ["sm", "base", "lg", "xl"] as const;
+
 const sections = [
   "colors",
   "typography",
@@ -200,6 +205,7 @@ const sections = [
   "calendars",
   "tooltips",
   "tabs",
+  "forms",
   "breadcrumbs",
   "icons",
   "layout"
@@ -815,6 +821,64 @@ export default function FoundationsPage() {
                 </TabsContent>
               </Tabs>
             </Grid>
+          </Stack>
+        </Section>
+
+        <Section spacing="sm" aria-labelledby="forms">
+          <Stack gap="6">
+            <Heading as="h2" size="h3" id="forms">
+              Forms
+            </Heading>
+
+            <Grid minItemWidth="16rem" gap="6">
+              <TextField
+                label="Email"
+                type="email"
+                name="email"
+                autoComplete="email"
+                placeholder="name@example.com"
+                description="We send the receipt here."
+              />
+              <TextField
+                label="Username"
+                name="username"
+                defaultValue="ada lovelace"
+                description="Letters, numbers and dashes."
+                error="Use letters, numbers and dashes only, like ada-lovelace"
+              />
+              <TextField
+                label="Company"
+                name="company"
+                defaultValue="Analytical Engines"
+                disabled
+              />
+            </Grid>
+
+            <Heading as="h3" size="h5">
+              Sizes
+            </Heading>
+            {/* Inputs and buttons share heights, so a field and its button line up */}
+            <Stack gap="3">
+              {inputSizes.map((size) => (
+                <Stack key={size} direction="row" gap="2" className="max-w-md">
+                  <Input
+                    size={size}
+                    type="search"
+                    aria-label={`Search, ${size} size`}
+                    placeholder="Search"
+                  />
+                  <Button size={size}>Go</Button>
+                </Stack>
+              ))}
+            </Stack>
+
+            <Heading as="h3" size="h5">
+              Label and Input
+            </Heading>
+            <Stack gap="2" className="max-w-xs">
+              <Label htmlFor="promo-code">Promo code</Label>
+              <Input id="promo-code" name="promo" autoComplete="off" />
+            </Stack>
           </Stack>
         </Section>
 
