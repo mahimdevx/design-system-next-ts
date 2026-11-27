@@ -502,7 +502,7 @@ test.describe("forms", () => {
     await page.getByRole("grid").first().waitFor();
 
     const { before, after } = await focusStyle(
-      page.getByRole("textbox", { name: "Email" })
+      page.getByRole("textbox", { name: "Email", exact: true })
     );
 
     expect(after.border).not.toBe(before.border);
@@ -515,7 +515,7 @@ test.describe("forms", () => {
     await page.getByRole("grid").first().waitFor();
 
     const { before, after } = await focusStyle(
-      page.getByRole("textbox", { name: "Username" })
+      page.getByRole("textbox", { name: "Username", exact: true })
     );
 
     expect(after.border).toBe(before.border);
