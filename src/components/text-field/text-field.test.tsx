@@ -54,6 +54,38 @@ describe("TextField", () => {
     );
   });
 
+  test("an error wins over aria-invalid=false; without an error aria-invalid passes through", () => {
+    render(
+      <>
+        <TextField label="Email" aria-invalid="false" error="Enter an email address" />
+        <TextField label="Phone" aria-invalid="true" />
+      </>
+    );
+
+    expect(screen.getByRole("textbox", { name: "Email" })).toBeInvalid();
+    expect(screen.getByRole("textbox", { name: "Phone" })).toBeInvalid();
+  });
+
+  test("a caller's aria-describedby is read after the description and the error", () => {
+    render(
+      <>
+        <p id="rules">Use 12 or more characters.</p>
+        <TextField
+          label="Passphrase"
+          aria-describedby="rules"
+          description="Words work well."
+          error="Too short"
+        />
+      </>
+    );
+
+    expect(
+      screen.getByRole("textbox", { name: "Passphrase" })
+    ).toHaveAccessibleDescription(
+      "Words work well. Too short Use 12 or more characters."
+    );
+  });
+
   test("passes the other props to the input", () => {
     render(
       <TextField

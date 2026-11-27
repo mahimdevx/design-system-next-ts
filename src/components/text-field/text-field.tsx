@@ -22,6 +22,9 @@ type TextFieldProps = ComponentProps<typeof Input> & {
  * names the input, the description and error describe it (aria-describedby), and an error
  * sets aria-invalid. A server component: useId works without "use client".
  * className styles the wrapper (width, placement); the other props go to the input.
+ *
+ * Pass an id for a field in a layout: server useId ids restart at each client-side
+ * navigation, so a layout field and one on the next page could get the same id.
  */
 export function TextField({
   label,

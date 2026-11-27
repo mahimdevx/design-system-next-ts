@@ -842,6 +842,7 @@ export default function FoundationsPage() {
               <TextField
                 label="Username"
                 name="username"
+                autoComplete="username"
                 defaultValue="ada lovelace"
                 description="Letters, numbers and dashes."
                 error="Use letters, numbers and dashes only, like ada-lovelace"
@@ -849,6 +850,7 @@ export default function FoundationsPage() {
               <TextField
                 label="Company"
                 name="company"
+                autoComplete="organization"
                 defaultValue="Analytical Engines"
                 disabled
               />
@@ -867,7 +869,10 @@ export default function FoundationsPage() {
                     aria-label={`Search, ${size} size`}
                     placeholder="Search"
                   />
-                  <Button size={size}>Go</Button>
+                  {/* The name starts with the visible text (WCAG 2.5.3) and tells the buttons apart */}
+                  <Button size={size} aria-label={`Go, ${size} size`}>
+                    Go
+                  </Button>
                 </Stack>
               ))}
             </Stack>

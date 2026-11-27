@@ -47,7 +47,10 @@
   --warning-text: oklch(0.555 0.163 48.998);
 
   --border: oklch(0.9197 0.004 286.32);
-  /* Form control borders: 3:1 against the background (WCAG 1.4.11), unlike --border */
+  /*
+   * Form control borders: 3:1 (WCAG 1.4.11) against the background and card/popover,
+   * unlike --border. Not against --muted (2.8:1): keep fields off muted surfaces
+   */
   --input: oklch(0.66 0.0055 286);
   --ring: oklch(0.1408 0.0044 285.82);
 
@@ -95,8 +98,8 @@
   --warning-text: oklch(0.828 0.189 84.429);
 
   --border: oklch(0.2739 0.0055 286.03);
-  /* 3:1 against the dark background (WCAG 1.4.11) */
-  --input: oklch(0.49 0.0055 286);
+  /* 3:1 against the dark background (3.46:1) and the lighter card/popover (3.08:1) */
+  --input: oklch(0.51 0.0055 286);
   --ring: oklch(0.8711 0.0055 286.29);
 
   --chart-1: oklch(0.5298 0.1932 262.05);
