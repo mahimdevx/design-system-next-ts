@@ -4,11 +4,10 @@ import { Input } from "./input";
 
 export const textTypes = (
   <>
-    <Input aria-label="Email" type="email" />
-    <Input aria-label="Search" type="search" />
-    <Input aria-label="Date" type="date" />
-    <Input aria-label="Attachment" type="file" />
     <Input aria-label="Name" />
+    <Input aria-label="Email" type="email" maxLength={254} />
+    <Input aria-label="Code" inputMode="numeric" pattern="[0-9]{6}" maxLength={6} />
+    <Input aria-label="Quantity" type="number" min={1} max={10} step={1} />
   </>
 );
 
@@ -17,12 +16,27 @@ export const checkbox = (
   <Input aria-label="Agree" type="checkbox" />
 );
 
-export const submit = (
-  // @ts-expect-error -- a submit is a Button, not a text field
-  <Input type="submit" value="Send" />
+export const date = (
+  // @ts-expect-error -- date and time pickers aren't text fields here
+  <Input aria-label="Start" type="date" />
 );
 
 export const typo = (
   // @ts-expect-error -- only the types in inputTypes
   <Input aria-label="Email" type="emial" />
+);
+
+export const rangeOnText = (
+  // @ts-expect-error -- min, max and step only apply to type="number"
+  <Input aria-label="Email" type="email" min={1} />
+);
+
+export const rangeWithoutType = (
+  // @ts-expect-error -- without a type the field is text: no min
+  <Input aria-label="Name" max={10} />
+);
+
+export const lengthOnNumber = (
+  // @ts-expect-error -- maxLength and pattern don't apply to type="number"
+  <Input aria-label="Quantity" type="number" maxLength={2} />
 );

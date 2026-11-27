@@ -18,3 +18,10 @@ export const notATextField = (
   // @ts-expect-error -- the same types as Input: a checkbox isn't a text field
   <TextField label="Remember me" type="checkbox" />
 );
+
+export const quantity = <TextField label="Seats" type="number" min={1} max={8} />;
+
+export const rangeOnText = (
+  // @ts-expect-error -- the same per-type attributes as Input: min needs type="number"
+  <TextField label="Email" type="email" min={1} />
+);
