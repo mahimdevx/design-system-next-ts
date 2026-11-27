@@ -196,53 +196,58 @@ const tooltipSides = ["top", "right", "bottom", "left"] as const;
 
 const inputSizes = ["sm", "base", "lg", "xl"] as const;
 
-// One sample per input type. Keyed by inputTypes, so a new type fails the typecheck here
-// until it gets a sample
-const inputTypeSamples: Record<
-  (typeof inputTypes)[number],
-  Pick<ComponentProps<typeof TextField>, "label" | "description" | "autoComplete">
-> = {
-  text: { label: "Full name", description: "Any characters.", autoComplete: "name" },
+// One sample per input type, each with its own type and the attributes that type takes.
+// Keyed by inputTypes, so a new type fails the typecheck here until it gets a sample
+const inputTypeSamples: {
+  [Type in (typeof inputTypes)[number]]: ComponentProps<typeof TextField> & {
+    type: Type;
+  };
+} = {
+  text: {
+    type: "text",
+    label: "Full name",
+    description: "Any characters.",
+    autoComplete: "name"
+  },
   email: {
+    type: "email",
     label: "Work email",
     description: "Email keyboard on phones; checks for an @ on submit.",
     autoComplete: "email"
   },
   password: {
+    type: "password",
     label: "Password",
-    description: "Hides what you type; password managers fill it.",
-    autoComplete: "current-password"
+    description: "At least 12 characters; password managers fill it.",
+    autoComplete: "new-password",
+    minLength: 12
   },
-  search: { label: "Search", description: "Search key on the phone keyboard." },
+  search: {
+    type: "search",
+    label: "Search",
+    description: "Search key on the phone keyboard."
+  },
   tel: {
+    type: "tel",
     label: "Phone",
-    description: "Number pad on phones; any format is accepted.",
+    description: "Number pad on phones; spaces, dashes and + are fine.",
     autoComplete: "tel"
   },
   url: {
+    type: "url",
     label: "Website",
     description: "URL keyboard on phones; checks for a full address on submit.",
     autoComplete: "url"
   },
   number: {
+    type: "number",
     label: "Quantity",
-    description: "Numbers only; the arrow keys step the value."
-  },
-  date: { label: "Start date", description: "A date picker in the user's date format." },
-  time: { label: "Reminder", description: "A time picker, 12- or 24-hour by locale." },
-  "datetime-local": {
-    label: "Meeting",
-    description: "Date and time together, without a time zone."
-  },
-  month: {
-    label: "Billing month",
-    description: "A month and year. Firefox and Safari show a plain text field."
-  },
-  week: {
-    label: "Sprint",
-    description: "A week of the year. Firefox and Safari show a plain text field."
-  },
-  file: { label: "Attachment", description: "Opens the file picker." }
+    description: "A quantity from 1 to 10; the arrow keys step it by 1.",
+    min: 1,
+    max: 10,
+    step: 1,
+    defaultValue: 1
+  }
 };
 
 const sections = [
@@ -914,11 +919,20 @@ export default function FoundationsPage() {
               {inputTypes.map((type) => (
                 <TextField
                   key={type}
-                  type={type}
                   name={`sample-${type}`}
                   {...inputTypeSamples[type]}
                 />
               ))}
+              {/* Digits that aren't a quantity: text with a number keyboard keeps leading zeros */}
+              <TextField
+                label="Verification code"
+                name="sample-code"
+                inputMode="numeric"
+                autoComplete="one-time-code"
+                maxLength={6}
+                pattern="[0-9]{6}"
+                description="6 digits: a text field with the number keyboard, not type=number."
+              />
             </Grid>
 
             <Heading as="h3" size="h5">
